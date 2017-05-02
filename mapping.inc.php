@@ -8,6 +8,7 @@
  * <br/> buat    2015-10-30
  * <br/> rev     2017-04-27
  * <br/> sifat   open source
+ * <br/> <a href="https://pdsi.unisayogya.ac.id/wordpress_bpti/wp-content/uploads/2017/04/mapdb.ppt">Dokumentasi MapDB</a>
  * <br/> <img src="mapdb2.png" />
  * <br/> <img src="mapdb.png" />
  * <br/> * Pada peta["inject"], jika terdapat indeks "jenisfilter" berisi "internalfilter", maka tabel berisi query yang terdapat [internalfilter], misal: select * from A where where [internalfilter]
