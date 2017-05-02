@@ -9,3 +9,7 @@ Salin dan ekstrak berkas konfigurasi https://pdsi.unisayogya.ac.id/wordpress_bpt
 Documentation: https://basit-adhi.github.io/ws_pddikti/
 
 Dokumentasi: https://basit-adhi.github.io/ws_pddikti/
+
+Release note: https://pdsi.unisayogya.ac.id/tag/injector/
+
+Catatan rilis: https://pdsi.unisayogya.ac.id/tag/injector/
