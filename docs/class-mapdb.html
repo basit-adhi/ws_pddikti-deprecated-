@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class mapdb | ws_pddikti</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+		</div>
+
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-mapdb.html">mapdb</a></li>
+				<li><a href="class-readme.html">readme</a></li>
+				<li><a href="class-webservice.html">webservice</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class mapdb</h1>
+
+
+	<div class="description">
+	<p>mapping.inc.php
+<br/> untuk melakukan pemetaan antara basis data Institusi dengan basis data PDDIKTI
+<br/> profil  https://id.linkedin.com/in/basitadhi
+<br/> buat    2015-10-30
+<br/> rev     2017-04-27
+<br/> sifat   open source
+<br/> <img src="mapdb2.png" />
+<br/> <img src="mapdb.png" />
+<br/> * Pada peta["inject"], jika terdapat indeks "jenisfilter" berisi "internalfilter", maka tabel berisi query yang terdapat [internalfilter], misal: select * from A where where [internalfilter]
+<br/> catatan:
+<br/> 1. rule nama kolom PDDIKTI:
+<br/> --- dengan raw.  -> nama kolom akan ditampilkan tanpa alias, contoh: raw.kolom1 akan ditampilkan kolom1
+<br/> --- tanpa  raw.  -> diberikan fungsi trim pada nama kolom,   contoh: kolom1     akan ditampilkan trim(kolom1)
+<br/> --- dengan alias -> nama kolom akan ditampilkan apa adanya,  contoh: p.kolom1   akan ditampilkan p.kolom1
+<br/> 2. yang dimaksud tabel institusi dapat berupa tabel, view atau query
+<br/> 3. peta yang harus diisi:
+<br/> -- a. webservice::cek_tabel()------------ : field, table, pk
+<br/> -- b. webservice::pddikti_sinkron_guid()- : guid, pk
+<br/> -- c. webservice::pddikti_injek()-------- : field, inject, lihat 2. Sync GUID
+<br/> -- d. webservice::pddikti_ekstrak()------ : field, extract</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Author:</b>
+				Basit Adhi Prabowo, S.T. <a href="&#x6d;&#97;i&#x6c;&#116;&#111;&#x3a;&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d">&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d</a><br>
+			<b>Located at</b> <a href="source-class-mapdb.html#4-786" title="Go to source code">mapping.inc.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="peta_kolom" id="_peta_kolom">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_kolom">#</a>
+		<code><a href="source-class-mapdb.html#40-91" title="Go to source code">peta_kolom</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan kolom PDDIKTI dan Institusi
+<br/> indeks:
+<br/> - field
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array(field1.1_pddikti => field1.1_institusi, field1.2_pddikti => field1.2_institusi, ...),
+<br/> nama_tabel_pddikti2 => array(field2.1_pddikti => field2.1_institusi, field2.2_pddikti => field2.2_institusi, ...),
+<br/> ...
+<br/> catatan:
+<br/> - primary key harus di kolom pertama</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan kolom PDDIKTI dan Institusi
+<br/> indeks:
+<br/> - field
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array(field1.1_pddikti => field1.1_institusi, field1.2_pddikti => field1.2_institusi, ...),
+<br/> nama_tabel_pddikti2 => array(field2.1_pddikti => field2.1_institusi, field2.2_pddikti => field2.2_institusi, ...),
+<br/> ...
+<br/> catatan:
+<br/> - primary key harus di kolom pertama</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_tabel" id="_peta_tabel">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_tabel">#</a>
+		<code><a href="source-class-mapdb.html#93-127" title="Go to source code">peta_tabel</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan tabel PDDIKTI dan Institusi
+<br/> indeks:
+<br/> - table
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("nama" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1),
+<br/> - atau -
+<br/> nama_tabel_pddikti2 => array("nama" => "", "filter" => "", "data" => array(indeks2.1=>data2.1, indeks2.2=>data2.2, ...)),
+<br/> ...
+<br/> dimana:
+<br/> - nama-- : nama tabel institusi
+<br/> - filter : filter data untuk tabel institusi
+<br/> - data-- : OPSIONAL - membuat data sendiri, tidak mengambil dari tabel. jika diisi, maka "nama" dan "filter" akan diabaikan. berupa array()</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan tabel PDDIKTI dan Institusi
+<br/> indeks:
+<br/> - table
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("nama" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1),
+<br/> - atau -
+<br/> nama_tabel_pddikti2 => array("nama" => "", "filter" => "", "data" => array(indeks2.1=>data2.1, indeks2.2=>data2.2, ...)),
+<br/> ...
+<br/> dimana:
+<br/> - nama-- : nama tabel institusi
+<br/> - filter : filter data untuk tabel institusi
+<br/> - data-- : OPSIONAL - membuat data sendiri, tidak mengambil dari tabel. jika diisi, maka "nama" dan "filter" akan diabaikan. berupa array()</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_injek" id="_peta_injek">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_injek">#</a>
+		<code><a href="source-class-mapdb.html#129-310" title="Go to source code">peta_injek</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan untuk memasukkan data dari Institusi ke PDDIKTI<br/>pindah ke peta_injek_usang() jika sudah usang dan perbaiki data dengan peta_injek_perbaiki_usang()
+<br/> indeks:
+<br/> - inject
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1, "type" => type1, "ignoreinject" => ignoreinject1, "tahunakademik" => tahunakademik_tabel_institusi1, "tandatahunakademik" => tandatahunakademik_tabel_institusi1, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi1, "fieldupdate" => array(fieldupdate_tabel_pddikti1, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti1, ...), "jenisfilter" => jenisfilter1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "filter" => filter_tabel_institusi2, "type" => type2, "ignoreinject" => ignoreinject2, "tahunakademik" => tahunakademik_tabel_institusi2, "tandatahunakademik" => tandatahunakademik_tabel_institusi2, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi2, "fieldupdate" => array(fieldupdate_tabel_pddikti2, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti2, ...), "jenisfilter" => jenisfilter2),
+<br/> ...
+<br/> dimana:
+<br/> table-------------- : nama tabel institusi
+<br/> filter------------- : filter data untuk tabel institusi
+<br/> type--------------- : insert (memasukkan data ke PDDIKTI) atau update (memperbarui data yang ada di PDDIKTI)
+<br/> ignoreinject------- : true (diabaikan ketika injeksi massal) atau false (dijalankan ketika injeksi massal)
+<br/> tahunakademik------ : OPSIONAL - tahun akademik dari data yang akan diambil
+<br/> tandatahunakademik- : OPSIONAL - =, &lt;, &gt;, &lt;=, atau &gt;=
+<br/> istahunakademikkrs- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> fieldupdate-------- : OPSIONAL - digunakan ketika type="update", kolom-kolom di PDDIKTI yang akan diubah. berupa array()
+<br/> fieldwhere--------- : OPSIONAL - digunakan ketika type="update", filter data di PDDIKTI yang akan diubah. berupa array()
+<br/> jenisfilter-------- : OPSIONAL - internalfilter (mengganti [internalfilter] dengan "filter") atau string kosong
+<br/> catatan:
+<br/> - format nama tabel pddikti: [nama_tabel_pddikti] atau [nama_tabel_pddikti]<spasi>[keterangan]
+<br/> - Ingat! indeks "tahunakademik" pada "inject" harus bisa di-query-kan di this->peta["table"] pada this->peta["guid"], perhatikan alias tabel
+<br/> - "id" pada this->peta["field"] otomatis dibuat isnull()</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan untuk memasukkan data dari Institusi ke PDDIKTI<br/>pindah ke peta_injek_usang() jika sudah usang dan perbaiki data dengan peta_injek_perbaiki_usang()
+<br/> indeks:
+<br/> - inject
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1, "type" => type1, "ignoreinject" => ignoreinject1, "tahunakademik" => tahunakademik_tabel_institusi1, "tandatahunakademik" => tandatahunakademik_tabel_institusi1, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi1, "fieldupdate" => array(fieldupdate_tabel_pddikti1, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti1, ...), "jenisfilter" => jenisfilter1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "filter" => filter_tabel_institusi2, "type" => type2, "ignoreinject" => ignoreinject2, "tahunakademik" => tahunakademik_tabel_institusi2, "tandatahunakademik" => tandatahunakademik_tabel_institusi2, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi2, "fieldupdate" => array(fieldupdate_tabel_pddikti2, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti2, ...), "jenisfilter" => jenisfilter2),
+<br/> ...
+<br/> dimana:
+<br/> table-------------- : nama tabel institusi
+<br/> filter------------- : filter data untuk tabel institusi
+<br/> type--------------- : insert (memasukkan data ke PDDIKTI) atau update (memperbarui data yang ada di PDDIKTI)
+<br/> ignoreinject------- : true (diabaikan ketika injeksi massal) atau false (dijalankan ketika injeksi massal)
+<br/> tahunakademik------ : OPSIONAL - tahun akademik dari data yang akan diambil
+<br/> tandatahunakademik- : OPSIONAL - =, &lt;, &gt;, &lt;=, atau &gt;=
+<br/> istahunakademikkrs- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> fieldupdate-------- : OPSIONAL - digunakan ketika type="update", kolom-kolom di PDDIKTI yang akan diubah. berupa array()
+<br/> fieldwhere--------- : OPSIONAL - digunakan ketika type="update", filter data di PDDIKTI yang akan diubah. berupa array()
+<br/> jenisfilter-------- : OPSIONAL - internalfilter (mengganti [internalfilter] dengan "filter") atau string kosong
+<br/> catatan:
+<br/> - format nama tabel pddikti: [nama_tabel_pddikti] atau [nama_tabel_pddikti]<spasi>[keterangan]
+<br/> - Ingat! indeks "tahunakademik" pada "inject" harus bisa di-query-kan di this->peta["table"] pada this->peta["guid"], perhatikan alias tabel
+<br/> - "id" pada this->peta["field"] otomatis dibuat isnull()</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_injek_usang" id="_peta_injek_usang">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_injek_usang">#</a>
+		<code><a href="source-class-mapdb.html#312-351" title="Go to source code">peta_injek_usang</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan untuk memasukkan data dari Institusi ke PDDIKTI - sudah usang, dahulu digunakan, tetapi untuk versi berikutnya tidak digunakan
+<br/> indeks:
+<br/> - inject
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1, "type" => type1, "ignoreinject" => ignoreinject1, "tahunakademik" => tahunakademik_tabel_institusi1, "tandatahunakademik" => tandatahunakademik_tabel_institusi1, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi1, "fieldupdate" => array(fieldupdate_tabel_pddikti1, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti1, ...), "jenisfilter" => jenisfilter1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "filter" => filter_tabel_institusi2, "type" => type2, "ignoreinject" => ignoreinject2, "tahunakademik" => tahunakademik_tabel_institusi2, "tandatahunakademik" => tandatahunakademik_tabel_institusi2, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi2, "fieldupdate" => array(fieldupdate_tabel_pddikti2, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti2, ...), "jenisfilter" => jenisfilter2),
+<br/> ...
+<br/> dimana:
+<br/> table-------------- : nama tabel institusi
+<br/> filter------------- : filter data untuk tabel institusi
+<br/> type--------------- : insert (memasukkan data ke PDDIKTI) atau update (memperbarui data yang ada di PDDIKTI)
+<br/> ignoreinject------- : true (diabaikan ketika injeksi massal) atau false (dijalankan ketika injeksi massal)
+<br/> tahunakademik------ : OPSIONAL - tahun akademik dari data yang akan diambil
+<br/> tandatahunakademik- : OPSIONAL - =, &lt;, &gt;, &lt;=, atau &gt;=
+<br/> istahunakademikkrs- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> fieldupdate-------- : OPSIONAL - digunakan ketika type="update", kolom-kolom di PDDIKTI yang akan diubah. berupa array()
+<br/> fieldwhere--------- : OPSIONAL - digunakan ketika type="update", filter data di PDDIKTI yang akan diubah. berupa array()
+<br/> jenisfilter-------- : OPSIONAL - internalfilter (mengganti [internalfilter] dengan "filter") atau string kosong
+<br/> catatan:
+<br/> - format nama tabel pddikti: [nama_tabel_pddikti] atau [nama_tabel_pddikti]<spasi>[keterangan]
+<br/> - Ingat! indeks "tahunakademik" pada "inject" harus bisa di-query-kan di this->peta["table"] pada this->peta["guid"], perhatikan alias tabel
+<br/> - "id" pada this->peta["field"] otomatis dibuat isnull()</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan untuk memasukkan data dari Institusi ke PDDIKTI - sudah usang, dahulu digunakan, tetapi untuk versi berikutnya tidak digunakan
+<br/> indeks:
+<br/> - inject
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1, "type" => type1, "ignoreinject" => ignoreinject1, "tahunakademik" => tahunakademik_tabel_institusi1, "tandatahunakademik" => tandatahunakademik_tabel_institusi1, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi1, "fieldupdate" => array(fieldupdate_tabel_pddikti1, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti1, ...), "jenisfilter" => jenisfilter1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "filter" => filter_tabel_institusi2, "type" => type2, "ignoreinject" => ignoreinject2, "tahunakademik" => tahunakademik_tabel_institusi2, "tandatahunakademik" => tandatahunakademik_tabel_institusi2, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi2, "fieldupdate" => array(fieldupdate_tabel_pddikti2, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti2, ...), "jenisfilter" => jenisfilter2),
+<br/> ...
+<br/> dimana:
+<br/> table-------------- : nama tabel institusi
+<br/> filter------------- : filter data untuk tabel institusi
+<br/> type--------------- : insert (memasukkan data ke PDDIKTI) atau update (memperbarui data yang ada di PDDIKTI)
+<br/> ignoreinject------- : true (diabaikan ketika injeksi massal) atau false (dijalankan ketika injeksi massal)
+<br/> tahunakademik------ : OPSIONAL - tahun akademik dari data yang akan diambil
+<br/> tandatahunakademik- : OPSIONAL - =, &lt;, &gt;, &lt;=, atau &gt;=
+<br/> istahunakademikkrs- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> fieldupdate-------- : OPSIONAL - digunakan ketika type="update", kolom-kolom di PDDIKTI yang akan diubah. berupa array()
+<br/> fieldwhere--------- : OPSIONAL - digunakan ketika type="update", filter data di PDDIKTI yang akan diubah. berupa array()
+<br/> jenisfilter-------- : OPSIONAL - internalfilter (mengganti [internalfilter] dengan "filter") atau string kosong
+<br/> catatan:
+<br/> - format nama tabel pddikti: [nama_tabel_pddikti] atau [nama_tabel_pddikti]<spasi>[keterangan]
+<br/> - Ingat! indeks "tahunakademik" pada "inject" harus bisa di-query-kan di this->peta["table"] pada this->peta["guid"], perhatikan alias tabel
+<br/> - "id" pada this->peta["field"] otomatis dibuat isnull()</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_injek_perbaiki_usang" id="_peta_injek_perbaiki_usang">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_injek_perbaiki_usang">#</a>
+		<code><a href="source-class-mapdb.html#353-392" title="Go to source code">peta_injek_perbaiki_usang</a>( )</code>
+
+		<div class="description short">
+			<p>memperbaiki data pemetaan untuk memasukkan data dari Institusi ke PDDIKTI karena ada yang sudah usang seperti pada peta_injek_usang()
+<br/> indeks:
+<br/> - inject
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1, "type" => type1, "ignoreinject" => ignoreinject1, "tahunakademik" => tahunakademik_tabel_institusi1, "tandatahunakademik" => tandatahunakademik_tabel_institusi1, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi1, "fieldupdate" => array(fieldupdate_tabel_pddikti1, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti1, ...), "jenisfilter" => jenisfilter1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "filter" => filter_tabel_institusi2, "type" => type2, "ignoreinject" => ignoreinject2, "tahunakademik" => tahunakademik_tabel_institusi2, "tandatahunakademik" => tandatahunakademik_tabel_institusi2, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi2, "fieldupdate" => array(fieldupdate_tabel_pddikti2, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti2, ...), "jenisfilter" => jenisfilter2),
+<br/> ...
+<br/> dimana:
+<br/> table-------------- : nama tabel institusi
+<br/> filter------------- : filter data untuk tabel institusi
+<br/> type--------------- : insert (memasukkan data ke PDDIKTI) atau update (memperbarui data yang ada di PDDIKTI)
+<br/> ignoreinject------- : true (diabaikan ketika injeksi massal) atau false (dijalankan ketika injeksi massal)
+<br/> tahunakademik------ : OPSIONAL - tahun akademik dari data yang akan diambil
+<br/> tandatahunakademik- : OPSIONAL - =, &lt;, &gt;, &lt;=, atau &gt;=
+<br/> istahunakademikkrs- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> fieldupdate-------- : OPSIONAL - digunakan ketika type="update", kolom-kolom di PDDIKTI yang akan diubah. berupa array()
+<br/> fieldwhere--------- : OPSIONAL - digunakan ketika type="update", filter data di PDDIKTI yang akan diubah. berupa array()
+<br/> jenisfilter-------- : OPSIONAL - internalfilter (mengganti [internalfilter] dengan "filter") atau string kosong
+<br/> catatan:
+<br/> - format nama tabel pddikti: [nama_tabel_pddikti] atau [nama_tabel_pddikti]<spasi>[keterangan]
+<br/> - Ingat! indeks "tahunakademik" pada "inject" harus bisa di-query-kan di this->peta["table"] pada this->peta["guid"], perhatikan alias tabel
+<br/> - "id" pada this->peta["field"] otomatis dibuat isnull()</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memperbaiki data pemetaan untuk memasukkan data dari Institusi ke PDDIKTI karena ada yang sudah usang seperti pada peta_injek_usang()
+<br/> indeks:
+<br/> - inject
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "filter" => filter_tabel_institusi1, "type" => type1, "ignoreinject" => ignoreinject1, "tahunakademik" => tahunakademik_tabel_institusi1, "tandatahunakademik" => tandatahunakademik_tabel_institusi1, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi1, "fieldupdate" => array(fieldupdate_tabel_pddikti1, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti1, ...), "jenisfilter" => jenisfilter1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "filter" => filter_tabel_institusi2, "type" => type2, "ignoreinject" => ignoreinject2, "tahunakademik" => tahunakademik_tabel_institusi2, "tandatahunakademik" => tandatahunakademik_tabel_institusi2, "istahunakademikkrs" => istahunakademikkrs_tabel_institusi2, "fieldupdate" => array(fieldupdate_tabel_pddikti2, ...), "fieldwhere" => array(fieldwhere_tabel_pddikti2, ...), "jenisfilter" => jenisfilter2),
+<br/> ...
+<br/> dimana:
+<br/> table-------------- : nama tabel institusi
+<br/> filter------------- : filter data untuk tabel institusi
+<br/> type--------------- : insert (memasukkan data ke PDDIKTI) atau update (memperbarui data yang ada di PDDIKTI)
+<br/> ignoreinject------- : true (diabaikan ketika injeksi massal) atau false (dijalankan ketika injeksi massal)
+<br/> tahunakademik------ : OPSIONAL - tahun akademik dari data yang akan diambil
+<br/> tandatahunakademik- : OPSIONAL - =, &lt;, &gt;, &lt;=, atau &gt;=
+<br/> istahunakademikkrs- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> fieldupdate-------- : OPSIONAL - digunakan ketika type="update", kolom-kolom di PDDIKTI yang akan diubah. berupa array()
+<br/> fieldwhere--------- : OPSIONAL - digunakan ketika type="update", filter data di PDDIKTI yang akan diubah. berupa array()
+<br/> jenisfilter-------- : OPSIONAL - internalfilter (mengganti [internalfilter] dengan "filter") atau string kosong
+<br/> catatan:
+<br/> - format nama tabel pddikti: [nama_tabel_pddikti] atau [nama_tabel_pddikti]<spasi>[keterangan]
+<br/> - Ingat! indeks "tahunakademik" pada "inject" harus bisa di-query-kan di this->peta["table"] pada this->peta["guid"], perhatikan alias tabel
+<br/> - "id" pada this->peta["field"] otomatis dibuat isnull()</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_ekstrak" id="_peta_ekstrak">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_ekstrak">#</a>
+		<code><a href="source-class-mapdb.html#394-416" title="Go to source code">peta_ekstrak</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan untuk mengambil data dari PDDIKTI ke Institusi
+<br/> indeks:
+<br/> - extract
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "uniquefield" => uniquefield_tabel_pddikti1, "istahunakademikkrs" => istahunakademikkrs1, "filtertahunakademik" => filtertahunakademik_tabel_pddikti1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "uniquefield" => uniquefield_tabel_pddikti2, "istahunakademikkrs" => istahunakademikkrs2, "filtertahunakademik" => filtertahunakademik_tabel_pddikti2),
+<br/> ...
+<br/> dimana:
+<br/> table--------------- : nama tabel institusi
+<br/> uniquefield--------- : kolom-kolom sebagai parameter data akan diambil dari PDDIKTI ke Institusi
+<br/> istahunakademikkrs-- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> filtertahunakademik- : filter data untuk tabel PDDIKTI berdasarkan tahun akademik; menggunakan [tahunakademik], atau [tahun]</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan untuk mengambil data dari PDDIKTI ke Institusi
+<br/> indeks:
+<br/> - extract
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array("table" => nama_tabel_institusi1, "uniquefield" => uniquefield_tabel_pddikti1, "istahunakademikkrs" => istahunakademikkrs1, "filtertahunakademik" => filtertahunakademik_tabel_pddikti1),
+<br/> nama_tabel_pddikti2 => array("table" => nama_tabel_institusi2, "uniquefield" => uniquefield_tabel_pddikti2, "istahunakademikkrs" => istahunakademikkrs2, "filtertahunakademik" => filtertahunakademik_tabel_pddikti2),
+<br/> ...
+<br/> dimana:
+<br/> table--------------- : nama tabel institusi
+<br/> uniquefield--------- : kolom-kolom sebagai parameter data akan diambil dari PDDIKTI ke Institusi
+<br/> istahunakademikkrs-- : OPSIONAL - tahunakademikkrs adalah tahun akademik aktif, di mana pada saat itu mahasiswa melakukan KRS. true (tahun akademik tidak berubah) atau false (tahun akademik menjadi tahun akademik sebelumnya)
+<br/> filtertahunakademik- : filter data untuk tabel PDDIKTI berdasarkan tahun akademik; menggunakan [tahunakademik], atau [tahun]</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_pk" id="_peta_pk">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_pk">#</a>
+		<code><a href="source-class-mapdb.html#418-481" title="Go to source code">peta_pk</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan kunci primer PDDIKTI dan Institusi.
+<br/> indeks:
+<br/> - pk
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array(kunciprimer1_pddikti => kunciprimer1_institusi),
+<br/> nama_tabel_pddikti2 => array(kunciprimer2_pddikti => kunciprimer2_institusi),
+<br/> ...
+<br/> catatan:
+<br/> - semua tabel di FEEDER PDDIKTI dengan tipe REF harus dimasukkan, tampilkan dengan $ws->ListTable()</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan kunci primer PDDIKTI dan Institusi.
+<br/> indeks:
+<br/> - pk
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array(kunciprimer1_pddikti => kunciprimer1_institusi),
+<br/> nama_tabel_pddikti2 => array(kunciprimer2_pddikti => kunciprimer2_institusi),
+<br/> ...
+<br/> catatan:
+<br/> - semua tabel di FEEDER PDDIKTI dengan tipe REF harus dimasukkan, tampilkan dengan $ws->ListTable()</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_guid" id="_peta_guid">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_guid">#</a>
+		<code><a href="source-class-mapdb.html#483-740" title="Go to source code">peta_guid</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan guid PDDIKTI dan Institusi
+<br/> indeks:
+<br/> - guid
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array ( array("guid" => array(field_guid_pddikti1, field_guid_institusi1), "variable" => array(field_pddikti1, field_institusi1), "table" => array("check" => tabel_institusi_untuk_cek1, "update" => tabel_institusi_untuk_update1), "prerequisite" => parameter_yang_harus_ada_pada_tabel_pddikti1, "filter" => filter_tabel_institusi1, "infotambahanerror" => field_tambahan_ketika_error1, "order by" => parameter_pengurutan1, "forcedouble" => perilaku_ketika_ada_data_rangkap1, "tahunakademikinjectdipakai" => tahunakademikinjectdipakai1), array(...), ... ),
+<br/> nama_tabel_pddikti2 => array ( array("guid" => array(field_guid_pddikti2, field_guid_institusi2), "variable" => array(field_pddikti2, field_institusi2), "table" => array("check" => tabel_institusi_untuk_cek2, "update" => tabel_institusi_untuk_update2), "prerequisite" => parameter_yang_harus_ada_pada_tabel_pddikti2, "filter" => filter_tabel_institusi2, "infotambahanerror" => field_tambahan_ketika_error2, "order by" => parameter_pengurutan2, "forcedouble" => perilaku_ketika_ada_data_rangkap2, "tahunakademikinjectdipakai" => tahunakademikinjectdipakai2), array(...), ... ),
+<br/> ...
+<br/> dimana:
+<br/> guid------------------------ : nama kolom PDDIKTI yang terdapat kunci primer untuk PDDIKTI dan Institusi
+<br/> variable-------------------- : kolom yang digunakan untuk menyamakan data
+<br/> table----------------------- : tabel yang dicek di institusi, tabel yang diupdate di institusi
+<br/> prerequisite---------------- : kolom yang PDDIKTI yang harus ada isinya
+<br/> filter---------------------- : filter untuk tabel institusi
+<br/> infotambahanerror----------- : info tambahan ketika ada kesalahan
+<br/> order by-------------------- : parameter pengurutan tabel institusi
+<br/> forcedouble----------------- : perilaku ketika ada data rangkap
+<br/> tahunakademikinjectdipakai-- : berapa banyak parameter tahunakademik yang dipakai dari peta["inject"][namatabel], -1 berarti semua</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan guid PDDIKTI dan Institusi
+<br/> indeks:
+<br/> - guid
+<br/> isi:
+<br/> nama_tabel_pddikti1 => array ( array("guid" => array(field_guid_pddikti1, field_guid_institusi1), "variable" => array(field_pddikti1, field_institusi1), "table" => array("check" => tabel_institusi_untuk_cek1, "update" => tabel_institusi_untuk_update1), "prerequisite" => parameter_yang_harus_ada_pada_tabel_pddikti1, "filter" => filter_tabel_institusi1, "infotambahanerror" => field_tambahan_ketika_error1, "order by" => parameter_pengurutan1, "forcedouble" => perilaku_ketika_ada_data_rangkap1, "tahunakademikinjectdipakai" => tahunakademikinjectdipakai1), array(...), ... ),
+<br/> nama_tabel_pddikti2 => array ( array("guid" => array(field_guid_pddikti2, field_guid_institusi2), "variable" => array(field_pddikti2, field_institusi2), "table" => array("check" => tabel_institusi_untuk_cek2, "update" => tabel_institusi_untuk_update2), "prerequisite" => parameter_yang_harus_ada_pada_tabel_pddikti2, "filter" => filter_tabel_institusi2, "infotambahanerror" => field_tambahan_ketika_error2, "order by" => parameter_pengurutan2, "forcedouble" => perilaku_ketika_ada_data_rangkap2, "tahunakademikinjectdipakai" => tahunakademikinjectdipakai2), array(...), ... ),
+<br/> ...
+<br/> dimana:
+<br/> guid------------------------ : nama kolom PDDIKTI yang terdapat kunci primer untuk PDDIKTI dan Institusi
+<br/> variable-------------------- : kolom yang digunakan untuk menyamakan data
+<br/> table----------------------- : tabel yang dicek di institusi, tabel yang diupdate di institusi
+<br/> prerequisite---------------- : kolom yang PDDIKTI yang harus ada isinya
+<br/> filter---------------------- : filter untuk tabel institusi
+<br/> infotambahanerror----------- : info tambahan ketika ada kesalahan
+<br/> order by-------------------- : parameter pengurutan tabel institusi
+<br/> forcedouble----------------- : perilaku ketika ada data rangkap
+<br/> tahunakademikinjectdipakai-- : berapa banyak parameter tahunakademik yang dipakai dari peta["inject"][namatabel], -1 berarti semua</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta_updatenidn" id="_peta_updatenidn">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta_updatenidn">#</a>
+		<code><a href="source-class-mapdb.html#742-763" title="Go to source code">peta_updatenidn</a>( )</code>
+
+		<div class="description short">
+			<p>pemetaan update NIDN di Institusi, mengambil data dari PDDIKTI
+<br/> indeks:
+<br/> - updatenidn
+<br/> isi:
+<br/> array("table" => array(nama_tabel_institusi, nama_tabel_pddikti), "nidn" => array(nama_kolom_nidn_institusi, nama_kolom_nidn_pddikti), "guid" => guid, "filter" => filter)
+<br/> dimana:
+<br/> table--- : nama tabel institusi dan PDDIKTI. berupa array()
+<br/> nidn---- : nama kolom nidn institusi dan PDDIKTI. berupa array()
+<br/> guid---- : nama kolom PDDIKTI yang terdapat kunci primer dari dosen
+<br/> filter-- : filter untuk tabel institusi
+<br/> catatan:
+<br/> - hanya 1 array</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>pemetaan update NIDN di Institusi, mengambil data dari PDDIKTI
+<br/> indeks:
+<br/> - updatenidn
+<br/> isi:
+<br/> array("table" => array(nama_tabel_institusi, nama_tabel_pddikti), "nidn" => array(nama_kolom_nidn_institusi, nama_kolom_nidn_pddikti), "guid" => guid, "filter" => filter)
+<br/> dimana:
+<br/> table--- : nama tabel institusi dan PDDIKTI. berupa array()
+<br/> nidn---- : nama kolom nidn institusi dan PDDIKTI. berupa array()
+<br/> guid---- : nama kolom PDDIKTI yang terdapat kunci primer dari dosen
+<br/> filter-- : filter untuk tabel institusi
+<br/> catatan:
+<br/> - hanya 1 array</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="peta" id="_peta">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_peta">#</a>
+		<code><a href="source-class-mapdb.html#765-785" title="Go to source code">peta</a>( )</code>
+
+		<div class="description short">
+			<p>mengembalikan pemetaan antara tabel dan kolom PDDIKTI dengan Institusi untuk keperluan pengecekan, sinkronisasi, injeksi dan ekstraksi data</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengembalikan pemetaan antara tabel dan kolom PDDIKTI dengan Institusi untuk keperluan pengecekan, sinkronisasi, injeksi dan ekstraksi data</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br><ul>
+<li>pemetaan antara tabel dan kolom PDDIKTI dengan Institusi</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="peta" id="$peta">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-mapdb.html#31-34" title="Go to source code"><var>$peta</var></a>
+
+			<div class="description short">
+				<p>pemetaaan tabel dan kolom Institusi dengan PDDIKTI</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>pemetaaan tabel dan kolom Institusi dengan PDDIKTI</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$peta" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="isdipetakan" id="$isdipetakan">
+		<td class="attributes"><code>
+			public  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-mapdb.html#35-38" title="Go to source code"><var>$isdipetakan</var></a>
+
+			<div class="description short">
+				<p>apakah pemetaan sudah dipetakan?</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>apakah pemetaan sudah dipetakan?</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$isdipetakan" class="anchor">#</a>
+				<code><span class="php-keyword1">false</span></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		ws_pddikti API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

@@ -1,0 +1,3055 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class webservice | ws_pddikti</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+		</div>
+
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-mapdb.html">mapdb</a></li>
+				<li><a href="class-readme.html">readme</a></li>
+				<li class="active"><a href="class-webservice.html">webservice</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class webservice</h1>
+
+
+	<div class="description">
+	<p>webservice.inc.php
+<br/> kelas webservice: untuk mengambil data dari PDDIKTI atau menyimpan data ke PDDIKTI, disinkronkan dengan database institusi
+<br/> profil  https://id.linkedin.com/in/basitadhi
+<br/> buat    2015-10-30
+<br/> rev     2017-05-02
+<br/> sifat   open source</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		
+
+				<b>Author:</b>
+				Basit Adhi Prabowo, S.T. <a href="&#x6d;&#97;i&#x6c;&#116;&#111;&#x3a;&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d">&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d</a><br>
+			<b>Located at</b> <a href="source-class-webservice.html#10-2245" title="Go to source code">webservice.inc.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="webservice" id="_webservice">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_webservice">#</a>
+		<code><a href="source-class-webservice.html#65-96" title="Go to source code">webservice</a>( <span>type <var>$pddikti</var></span>, <span>type <var>$institusi</var></span>, <span>type <var>$debug</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			<p>konstruktor kelas webservice, dieksekusi ketika objek dibuat</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>konstruktor kelas webservice, dieksekusi ketika objek dibuat</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$pddikti</var></dt>
+					<dd><ul>
+<li>setting webservice PDDIKTI (config.ini.php)</li>
+</ul></dd>
+					<dt><var>$institusi</var></dt>
+					<dd><ul>
+<li>setting basis data institusi (config.ini.php)</li>
+</ul></dd>
+					<dt><var>$debug</var></dt>
+					<dd><p>jika ya, maka akan lebih banyak pesan yang akan ditampilkan
+- mode debug?</p></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__destruct" id="___destruct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___destruct">#</a>
+		<code><a href="source-class-webservice.html#98-121" title="Go to source code">__destruct</a>( )</code>
+
+		<div class="description short">
+			<p>destruktor kelas webservice, dieksekusi ketika objek dihancurkan</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>destruktor kelas webservice, dieksekusi ketika objek dihancurkan</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="kirim_buffer" id="_kirim_buffer">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_kirim_buffer">#</a>
+		<code><a href="source-class-webservice.html#123-130" title="Go to source code">kirim_buffer</a>( )</code>
+
+		<div class="description short">
+			<p>mengirimkan buffer terakhir ke browser, kemudian membersihkan buffer</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengirimkan buffer terakhir ke browser, kemudian membersihkan buffer</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="persiapan" id="_persiapan">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_persiapan">#</a>
+		<code><a href="source-class-webservice.html#132-141" title="Go to source code">persiapan</a>( )</code>
+
+		<div class="description short">
+			<p>persiapan proses</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>persiapan proses</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ping" id="_ping">
+
+		<td class="attributes"><code>
+			 public 
+
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_ping">#</a>
+		<code><a href="source-class-webservice.html#143-171" title="Go to source code">ping</a>( <span>type <var>$host</var></span>, <span>type <var>$port</var> = <span class="php-num">80</span></span>, <span>type <var>$waktutunggu</var> = <span class="php-num">6</span></span> )</code>
+
+		<div class="description short">
+			<p>memeriksa apakah server error atau tidak.
+<br/> sumber: http://www.thecave.info/php-ping-script-to-check-remote-server-or-website/</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memeriksa apakah server error atau tidak.
+<br/> sumber: http://www.thecave.info/php-ping-script-to-check-remote-server-or-website/</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$host</var></dt>
+					<dd><ul>
+<li>alamat host yang akan di ping</li>
+</ul></dd>
+					<dt><var>$port</var></dt>
+					<dd><ul>
+<li>port yang akan di ping - OPTIONAL, default: 80</li>
+</ul></dd>
+					<dt><var>$waktutunggu</var></dt>
+					<dd><ul>
+<li>waktu yang diberikan untuk menandai bahwa server error (dalam detik) - OPSIONAL, default: 6</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					boolean<br><ul>
+<li>true: terkoneksi, false: error</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="terhubung_proxy" id="_terhubung_proxy">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_terhubung_proxy">#</a>
+		<code><a href="source-class-webservice.html#173-192" title="Go to source code">terhubung_proxy</a>( )</code>
+
+		<div class="description short">
+			<p>koneksi ke webservice PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>koneksi ke webservice PDDIKTI</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mode" id="_mode">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mode">#</a>
+		<code><a href="source-class-webservice.html#194-204" title="Go to source code">mode</a>( )</code>
+
+		<div class="description short">
+			<p>menampilkan mode FEEDER PDDIKTI ke browser</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menampilkan mode FEEDER PDDIKTI ke browser</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>mode</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="penokenan" id="_penokenan">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_penokenan">#</a>
+		<code><a href="source-class-webservice.html#206-233" title="Go to source code">penokenan</a>( )</code>
+
+		<div class="description short">
+			<p>menjamin keberadaan token, meminta token kembali apabila sudah expire</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menjamin keberadaan token, meminta token kembali apabila sudah expire</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="token" id="_token">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_token">#</a>
+		<code><a href="source-class-webservice.html#235-244" title="Go to source code">token</a>( )</code>
+
+		<div class="description short">
+			<p>mendapatkan token webservice PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan token webservice PDDIKTI</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>token PDDIKTI</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="status_periksa" id="_status_periksa">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_status_periksa">#</a>
+		<code><a href="source-class-webservice.html#246-258" title="Go to source code">status_periksa</a>( )</code>
+
+		<div class="description short">
+			<p>memeriksa status koneksi FEEDER DIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memeriksa status koneksi FEEDER DIKTI</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>true: terkoneksi, false: error</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="periksa" id="_periksa">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_periksa">#</a>
+		<code><a href="source-class-webservice.html#260-282" title="Go to source code">periksa</a>( )</code>
+
+		<div class="description short">
+			<p>memeriksa status webservice PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memeriksa status webservice PDDIKTI</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setMapdb" id="_setMapdb">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setMapdb">#</a>
+		<code><a href="source-class-webservice.html#284-297" title="Go to source code">setMapdb</a>( <span>type <var>$mapdb</var></span> )</code>
+
+		<div class="description short">
+			<p>set nilai pada mapdb (mapping.inc.php)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>set nilai pada mapdb (mapping.inc.php)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$mapdb</var></dt>
+					<dd><ul>
+<li>mapdb pada mapping.inc.php</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setIssinkron_injek" id="_setIssinkron_injek">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setIssinkron_injek">#</a>
+		<code><a href="source-class-webservice.html#299-307" title="Go to source code">setIssinkron_injek</a>( <span>type <var>$issinkron_injek</var></span> )</code>
+
+		<div class="description short">
+			<p>set nilai untuk issinkron_injek</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>set nilai untuk issinkron_injek</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$issinkron_injek</var></dt>
+					<dd><ul>
+<li>apakah perlu memanggil fungsi pddikti_sinkron_guid()? mengingat sudah ada proses sinkronisasi bersamaan dengan data diinjek</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetDictionary_SemuaTabel" id="_GetDictionary_SemuaTabel">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetDictionary_SemuaTabel">#</a>
+		<code><a href="source-class-webservice.html#313-358" title="Go to source code">GetDictionary_SemuaTabel</a>( )</code>
+
+		<div class="description short">
+			<p>mendapatkan deskripsi tabel dari webservice PDDIKTI (equal: desc [table]) yang terdaftar di dalam ListTable()</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan deskripsi tabel dari webservice PDDIKTI (equal: desc [table]) yang terdaftar di dalam ListTable()</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ListTable" id="_ListTable">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_ListTable">#</a>
+		<code><a href="source-class-webservice.html#360-371" title="Go to source code">ListTable</a>( )</code>
+
+		<div class="description short">
+			<p>mendapatkan daftar tabel dari webservice PDDIKTI (equal: show [table])</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan daftar tabel dari webservice PDDIKTI (equal: show [table])</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>daftar tabel</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetDictionary" id="_GetDictionary">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetDictionary">#</a>
+		<code><a href="source-class-webservice.html#373-390" title="Go to source code">GetDictionary</a>( <span>type <var>$tabel</var></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan deskripsi tabel dari webservice PDDIKTI (equal: desc [table])</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan deskripsi tabel dari webservice PDDIKTI (equal: desc [table])</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel yang akan dilihat deskripsinya</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>deskripsi tabel</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetRecord" id="_GetRecord">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetRecord">#</a>
+		<code><a href="source-class-webservice.html#392-412" title="Go to source code">GetRecord</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan satu baris data dari webservice PDDIKTI (equal: select * from [table] where [filter] limit 0, 1).
+<br/> catatan: jika tidak muncul, tambahkan alias pada field di filter, misal: p.field atau gunakan nama_tabel.raw</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan satu baris data dari webservice PDDIKTI (equal: select * from [table] where [filter] limit 0, 1).
+<br/> catatan: jika tidak muncul, tambahkan alias pada field di filter, misal: p.field atau gunakan nama_tabel.raw</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil - OPSIONAL, default: ""</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>satu baris data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetRecordset" id="_GetRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetRecordset">#</a>
+		<code><a href="source-class-webservice.html#414-440" title="Go to source code">GetRecordset</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>type <var>$order</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>type <var>$batas</var> = <span class="php-num">1000000</span></span>, <span>type <var>$mulai</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan n baris data dari webservice PDDIKTI (equal: select * from [table] where [filter] limit [offset], [limit]).
+<br/> catatan: jika tidak muncul, tambahkan alias pada field di filter, misal: p.field atau gunakan nama_tabel.raw</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan n baris data dari webservice PDDIKTI (equal: select * from [table] where [filter] limit [offset], [limit]).
+<br/> catatan: jika tidak muncul, tambahkan alias pada field di filter, misal: p.field atau gunakan nama_tabel.raw</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$order</var></dt>
+					<dd><ul>
+<li>pengurutan data - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$batas</var></dt>
+					<dd><ul>
+<li>banyaknya data yang akan ditampilkan - OPSIONAL, default: 1000000</li>
+</ul></dd>
+					<dt><var>$mulai</var></dt>
+					<dd><ul>
+<li>dari nomor berapa data akan diambil - OPSIONAL, default: 0</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetCountRecordset" id="_GetCountRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetCountRecordset">#</a>
+		<code><a href="source-class-webservice.html#442-459" title="Go to source code">GetCountRecordset</a>( <span>type <var>$tabel</var></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan informasi berapa baris data pada tabel dari webservice PDDIKTI (equal: select sum(1) as jumlah from [table])</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan informasi berapa baris data pada tabel dari webservice PDDIKTI (equal: select sum(1) as jumlah from [table])</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>jumlah baris data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetDeletedRecordset" id="_GetDeletedRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetDeletedRecordset">#</a>
+		<code><a href="source-class-webservice.html#461-486" title="Go to source code">GetDeletedRecordset</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var></span>, <span>type <var>$order</var></span>, <span>type <var>$batas</var> = <span class="php-num">1000000</span></span>, <span>type <var>$mulai</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan data yang telah dihapus pada suatu tabel dari webservice PDDIKTI (equal: select * from [table] where [filter] order by [order] limit [offset], [limit])</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan data yang telah dihapus pada suatu tabel dari webservice PDDIKTI (equal: select * from [table] where [filter] order by [order] limit [offset], [limit])</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$order</var></dt>
+					<dd><ul>
+<li>pengurutan data - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$batas</var></dt>
+					<dd><ul>
+<li>banyaknya data yang akan ditampilkan - OPSIONAL, default: 1000000</li>
+</ul></dd>
+					<dt><var>$mulai</var></dt>
+					<dd><ul>
+<li>dari nomor berapa data akan diambil - OPSIONAL, default: 0</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetCountDeletedRecordset" id="_GetCountDeletedRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetCountDeletedRecordset">#</a>
+		<code><a href="source-class-webservice.html#488-505" title="Go to source code">GetCountDeletedRecordset</a>( <span>type <var>$tabel</var></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan informasi berapa baris data yang telah dihapus pada tabel dari webservice PDDIKTI (equal: equal: select sum(1) as jumlah from [table])</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan informasi berapa baris data yang telah dihapus pada tabel dari webservice PDDIKTI (equal: equal: select sum(1) as jumlah from [table])</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>jumlah baris data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="InsertRecord" id="_InsertRecord">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_InsertRecord">#</a>
+		<code><a href="source-class-webservice.html#507-526" title="Go to source code">InsertRecord</a>( <span>type <var>$tabel</var></span>, <span>type <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>menyisipkan satu baris data ke dalam tabel dari webservice PDDIKTI (equal: insert into [table] (<namakolom>) values (<data>))</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menyisipkan satu baris data ke dalam tabel dari webservice PDDIKTI (equal: insert into [table] (<namakolom>) values (<data>))</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>data berupa array 1 dimensi yang indeksnya adalah nama kolom dan isinya adalah data. $sisip = array( "namakolom1" => "data1", ... )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status penyisipan data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="InsertRecordset" id="_InsertRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_InsertRecordset">#</a>
+		<code><a href="source-class-webservice.html#528-547" title="Go to source code">InsertRecordset</a>( <span>type <var>$tabel</var></span>, <span>type <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>menyisipkan n baris data ke dalam tabel dari webservice PDDIKTI (equal: insert into [table] (<namakolom>) values (<data1>), (<data2>), ...)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menyisipkan n baris data ke dalam tabel dari webservice PDDIKTI (equal: insert into [table] (<namakolom>) values (<data1>), (<data2>), ...)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>data berupa array 2 dimensi yang indeksnya adalah nama kolom dan isinya adalah data. $sisip = array ( array( "namakolom1" => "data1.1", ... ), ... )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status penyisipan data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="UpdateRecord" id="_UpdateRecord">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_UpdateRecord">#</a>
+		<code><a href="source-class-webservice.html#549-569" title="Go to source code">UpdateRecord</a>( <span>type <var>$tabel</var></span>, <span>type <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>mengubah satu baris data di dalam tabel dari webservice PDDIKTI (equal: update [table] set <namakolomdata:data> where <namakolomfilter:datafilter>)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengubah satu baris data di dalam tabel dari webservice PDDIKTI (equal: update [table] set <namakolomdata:data> where <namakolomfilter:datafilter>)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>data harus berupa array 2 dimensi dengan indeks bernama 'key' dan 'data', yang masing-masing berupa array yang indeksnya adalah nama kolom dan isinya adalah data.
+$ubah = array( "key" => array( "namakolomfilter1" => "datafilter1", ... ), "data" => array( "namakolomdata1" => "data1", ... ) )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status ubah data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="UpdateRecordset" id="_UpdateRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_UpdateRecordset">#</a>
+		<code><a href="source-class-webservice.html#571-591" title="Go to source code">UpdateRecordset</a>( <span>type <var>$tabel</var></span>, <span>type <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>mengubah n baris data di dalam tabel dari webservice PDDIKTI (equal: update [table] set <namakolomdata1:data1>, <namakolomdata2:data2>, ... where <namakolomfilter:datafilter>)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengubah n baris data di dalam tabel dari webservice PDDIKTI (equal: update [table] set <namakolomdata1:data1>, <namakolomdata2:data2>, ... where <namakolomfilter:datafilter>)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>data harus berupa array 3 dimensi dengan sebuah array berupa kumpulan array dengan indeks bernama 'key' dan 'data', yang masing-masing berupa array yang indeksnya adalah nama field dan isinya adalah data.
+$ubah = array( "key" => array( "namakolomfilter1" => "datafilter1", ... ), "data" => array( "namakolomdata1.1" => "data1.1", ... ), ... )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status ubah data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="DeleteRecord" id="_DeleteRecord">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_DeleteRecord">#</a>
+		<code><a href="source-class-webservice.html#593-613" title="Go to source code">DeleteRecord</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			<p>menghapus satu baris data secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=1 where <namakolomfilter:datafilter>)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menghapus satu baris data secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=1 where <namakolomfilter:datafilter>)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter berupa array yang indeksnya adalah nama field dan isinya adalah data.
+$hapus = array( "namakolomfilter1" => "datafilter1", ... )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status hapus data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="DeleteRecordset" id="_DeleteRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_DeleteRecordset">#</a>
+		<code><a href="source-class-webservice.html#615-635" title="Go to source code">DeleteRecordset</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			<p>menghapus n baris data secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=1 where <namakolomfilter1:datafilter1>; update <tabel> set soft_delete=1 where <namakolomfilter2:datafilter2>;... )</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menghapus n baris data secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=1 where <namakolomfilter1:datafilter1>; update <tabel> set soft_delete=1 where <namakolomfilter2:datafilter2>;... )</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter berupa array yang indeksnya adalah nama field dan isinya adalah data.
+$hapus = array ( array( "namakolomfilter1" => "datafilter1", ... ), ... )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status hapus data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="RestoreRecord" id="_RestoreRecord">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_RestoreRecord">#</a>
+		<code><a href="source-class-webservice.html#637-657" title="Go to source code">RestoreRecord</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			<p>mengembalikan satu baris data yang telah dihapus secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=0 where <namakolomfilter:datafilter>)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengembalikan satu baris data yang telah dihapus secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=0 where <namakolomfilter:datafilter>)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter berupa array yang indeksnya adalah nama field dan isinya adalah data.
+$hapus = array( "namakolomfilter1" => "datafilter1", ... )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status mengembalikan data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="RestoreRecordset" id="_RestoreRecordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_RestoreRecordset">#</a>
+		<code><a href="source-class-webservice.html#659-679" title="Go to source code">RestoreRecordset</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var></span> )</code>
+
+		<div class="description short">
+			<p>mengembalikan n baris data yang telah dihapus secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=1 where <namakolomfilter1:datafilter1>; update <tabel> set soft_delete=1 where <namakolomfilter2:datafilter2>;... )</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengembalikan n baris data yang telah dihapus secara halus (memberi tanda) di dalam tabel dari webservice PDDIKTI (equal: update <tabel> set soft_delete=1 where <namakolomfilter1:datafilter1>; update <tabel> set soft_delete=1 where <namakolomfilter2:datafilter2>;... )</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter berupa array yang indeksnya adalah nama field dan isinya adalah data.
+$hapus = array ( array( "namakolomfilter1" => "datafilter1", ... ), ... )</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>status mengembalikan data</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetVersion" id="_GetVersion">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetVersion">#</a>
+		<code><a href="source-class-webservice.html#681-693" title="Go to source code">GetVersion</a>( )</code>
+
+		<div class="description short">
+			<p>mendapatkan versi dari webservice PDDIKTI (dan pesan error, jika ada)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan versi dari webservice PDDIKTI (dan pesan error, jika ada)</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>mengembalikan array berisi data versi, disertai dengan informasi error apabila ada masalah dengan koneksi webservice</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="GetExpired" id="_GetExpired">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_GetExpired">#</a>
+		<code><a href="source-class-webservice.html#695-707" title="Go to source code">GetExpired</a>( )</code>
+
+		<div class="description short">
+			<p>mendapatkan waktu kadaluarsa dari webservice PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan waktu kadaluarsa dari webservice PDDIKTI</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>mendapatkan status expired</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mysqli_terhubung" id="_mysqli_terhubung">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mysqli_terhubung">#</a>
+		<code><a href="source-class-webservice.html#712-728" title="Go to source code">mysqli_terhubung</a>( )</code>
+
+		<div class="description short">
+			<p>koneksi basis data institusi</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>koneksi basis data institusi</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>id koneksi</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mysqli_putus" id="_mysqli_putus">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mysqli_putus">#</a>
+		<code><a href="source-class-webservice.html#730-738" title="Go to source code">mysqli_putus</a>( <span>type <var>$iddb</var></span> )</code>
+
+		<div class="description short">
+			<p>memutus koneksi basis data institusi</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memutus koneksi basis data institusi</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$iddb</var></dt>
+					<dd><ul>
+<li>id koneksi</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mysqli_bersihkan" id="_mysqli_bersihkan">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mysqli_bersihkan">#</a>
+		<code><a href="source-class-webservice.html#740-763" title="Go to source code">mysqli_bersihkan</a>( <span>type <var>$iddb</var></span> )</code>
+
+		<div class="description short">
+			<p>membersihkan hasil</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>membersihkan hasil</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$iddb</var></dt>
+					<dd><ul>
+<li>id koneksi</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mysqli_select" id="_mysqli_select">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mysqli_select">#</a>
+		<code><a href="source-class-webservice.html#765-798" title="Go to source code">mysqli_select</a>( <span>type <var>$iddb</var></span>, <span>string <var>$sql</var></span>, <span>type <var>$filter</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan data dari basis data</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan data dari basis data</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$iddb</var></dt>
+					<dd><ul>
+<li>id koneksi</li>
+</ul></dd>
+					<dt><var>$sql</var></dt>
+					<dd><ul>
+<li>berisi statemen yang mengandung query: select <kolom> from <tabel></li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter berupa array dengan indeks: where, order by, limit - OPSIONAL, default=array()</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mysqli_iud" id="_mysqli_iud">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mysqli_iud">#</a>
+		<code><a href="source-class-webservice.html#800-813" title="Go to source code">mysqli_iud</a>( <span>type <var>$iddb</var></span>, <span>string <var>$sql</var></span> )</code>
+
+		<div class="description short">
+			<p>eksekusi insert, update, delete</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>eksekusi insert, update, delete</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$iddb</var></dt>
+					<dd>-id koneksi</dd>
+					<dt><var>$sql</var></dt>
+					<dd><ul>
+<li>berisi statemen yang mengandung query insert, update atau delete</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="mysqli_mapdb_select" id="_mysqli_mapdb_select">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_mysqli_mapdb_select">#</a>
+		<code><a href="source-class-webservice.html#815-853" title="Go to source code">mysqli_mapdb_select</a>( <span>type <var>$iddb</var></span>, <span>string <var>$tabel</var></span>, <span>type <var>$filter</var> = <span class="php-keyword1">array</span>()</span>, <span>type <var>$iscek</var> = <span class="php-keyword1">false</span></span>, <span>type <var>$iscetak</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan data dari map sesuai dengan tabel yang diinginkan</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan data dari map sesuai dengan tabel yang diinginkan</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$iddb</var></dt>
+					<dd><ul>
+<li>id koneksi</li>
+</ul></dd>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter berupa array dengan indeks: where, order by, limit - OPSIONAL, default=array()</li>
+</ul></dd>
+					<dt><var>$iscek</var></dt>
+					<dd><ul>
+<li>apakah hanya cek saja? - OPSIONAL, default=false</li>
+</ul></dd>
+					<dt><var>$iscetak</var></dt>
+					<dd><ul>
+<li>apakah perlu dicetak? - OPSIONAL, default=false</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="infokolominstitusi_mapdb" id="_infokolominstitusi_mapdb">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_infokolominstitusi_mapdb">#</a>
+		<code><a href="source-class-webservice.html#855-874" title="Go to source code">infokolominstitusi_mapdb</a>( <span>type <var>$tabel</var></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan informasi kolom institusi yang terpetakan ke tabel PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan informasi kolom institusi yang terpetakan ke tabel PDDIKTI</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>nama tabel PDDIKTI</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>info berupa (1) pemetaan lengkap, PDDIKTI sebagai indeks dan institusi sebagai data, (2) jumlah kolom yang dipetakan, dan (3) pemetaan kolom institusi saja (indeks menggunakan angka, mulai dari 0)</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cek_tabel" id="_cek_tabel">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cek_tabel">#</a>
+		<code><a href="source-class-webservice.html#879-1020" title="Go to source code">cek_tabel</a>( <span>type <var>$exception</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			<p>memeriksa kecocokan tabel dan isi dari tabel-tabel pada basis data Institusi dengan PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memeriksa kecocokan tabel dan isi dari tabel-tabel pada basis data Institusi dengan PDDIKTI</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$exception</var></dt>
+					<dd><ul>
+<li>daftar tabel PDDIKTI yang tidak ikut dicocokkan</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cetak_recordset" id="_cetak_recordset">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cetak_recordset">#</a>
+		<code><a href="source-class-webservice.html#1022-1058" title="Go to source code">cetak_recordset</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>type <var>$order</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>type <var>$batas</var> = <span class="php-num">1000000</span></span>, <span>type <var>$mulai</var> = <span class="php-num">0</span></span> )</code>
+
+		<div class="description short">
+			<p>mencetak n baris data dari webservice PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mencetak n baris data dari webservice PDDIKTI</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$order</var></dt>
+					<dd><ul>
+<li>pengurutan data - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$batas</var></dt>
+					<dd><ul>
+<li>banyaknya data yang akan ditampilkan - OPSIONAL, default: 1000000</li>
+</ul></dd>
+					<dt><var>$mulai</var></dt>
+					<dd><ul>
+<li>dari nomor berapa data akan diambil - OPSIONAL, default: 0</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_sinkron_guid" id="_pddikti_sinkron_guid">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_sinkron_guid">#</a>
+		<code><a href="source-class-webservice.html#1060-1077" title="Go to source code">pddikti_sinkron_guid</a>( <span>type <var>$tabel</var></span>, <span>type <var>$filter</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>type <var>$filterIns</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			<p>mensinkronkan GUID pada tabel-tabel basis data Institusi dari basis data Feeder PDDIKTI,
+<br/> yaitu mencari baris yang GUID-nya masih kosong (null) pada tabel Institusi kemudian diisi GUID dari PDDIKTI pada tabel yang bersesuaian</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mensinkronkan GUID pada tabel-tabel basis data Institusi dari basis data Feeder PDDIKTI,
+<br/> yaitu mencari baris yang GUID-nya masih kosong (null) pada tabel Institusi kemudian diisi GUID dari PDDIKTI pada tabel yang bersesuaian</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil (PDDIKTI) - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$filterIns</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil (Institusi) - OPSIONAL, default: ""</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_sinkron_guid_filterinjek" id="_pddikti_sinkron_guid_filterinjek">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_sinkron_guid_filterinjek">#</a>
+		<code><a href="source-class-webservice.html#1079-1099" title="Go to source code">pddikti_sinkron_guid_filterinjek</a>( <span>type <var>$tabel</var></span>, <span>type <var>$inject</var></span>, <span>type <var>$tahunakademikkrs</var></span>, <span>type <var>$tahunakademiksebelum</var></span>, <span>type <var>$filter</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			<p>mensinkronkan GUID pada tabel-tabel basis data Institusi dari basis data Feeder PDDIKTI,
+<br/> yaitu mencari baris yang GUID-nya masih kosong (null) pada tabel Institusi kemudian diisi GUID dari PDDIKTI pada tabel yang bersesuaian</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mensinkronkan GUID pada tabel-tabel basis data Institusi dari basis data Feeder PDDIKTI,
+<br/> yaitu mencari baris yang GUID-nya masih kosong (null) pada tabel Institusi kemudian diisi GUID dari PDDIKTI pada tabel yang bersesuaian</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$inject</var></dt>
+					<dd><ul>
+<li>konfigurasi injeksi</li>
+</ul></dd>
+					<dt><var>$tahunakademikkrs</var></dt>
+					<dd><ul>
+<li>tahun akademik krs</li>
+</ul></dd>
+					<dt><var>$tahunakademiksebelum</var></dt>
+					<dd><ul>
+<li>tahun akademik krs sebelumnya</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil (PDDIKTI) - OPSIONAL, default: ""</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_sinkron_guid_tunggal" id="_pddikti_sinkron_guid_tunggal">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_sinkron_guid_tunggal">#</a>
+		<code><a href="source-class-webservice.html#1101-1304" title="Go to source code">pddikti_sinkron_guid_tunggal</a>( <span>type <var>$tabel</var></span>, <span>type <var>$mapdb_guid</var></span>, <span>type <var>$filter</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>type <var>$filterIns</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			<p>memecah proses pddikti_sinkron_guid</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memecah proses pddikti_sinkron_guid</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+					<dt><var>$mapdb_guid</var></dt>
+					<dd><ul>
+<li>konfigurasi sinkronisasi</li>
+</ul></dd>
+					<dt><var>$filter</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil (PDDIKTI) - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$filterIns</var></dt>
+					<dd><ul>
+<li>filter data yang akan diambil (Institusi) - OPSIONAL, default: ""</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="tahunakademiksebelum" id="_tahunakademiksebelum">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_tahunakademiksebelum">#</a>
+		<code><a href="source-class-webservice.html#1306-1316" title="Go to source code">tahunakademiksebelum</a>( <span>type <var>$tahunakademik</var></span> )</code>
+
+		<div class="description short">
+			<p>mendapatkan tahunakademik sebelumnya, misal: 20152 -> 20151, 20161 -> 20152</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mendapatkan tahunakademik sebelumnya, misal: 20152 -> 20151, 20161 -> 20152</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tahunakademik</var></dt>
+					<dd><ul>
+<li>tahun akademik</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>tahun akademik sebelum</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_ekstrak" id="_pddikti_ekstrak">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_ekstrak">#</a>
+		<code><a href="source-class-webservice.html#1318-1380" title="Go to source code">pddikti_ekstrak</a>( <span>type <var>$tahunakademikkrs</var></span>, <span>type <var>$tabel</var></span> )</code>
+
+		<div class="description short">
+			<p>lawan dari injek. memasukkan data dari PDDIKTI ke Institusi, metode: insert where not exists</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>lawan dari injek. memasukkan data dari PDDIKTI ke Institusi, metode: insert where not exists</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tahunakademikkrs</var></dt>
+					<dd><ul>
+<li>tahun akademik yang digunakan untuk KRS</li>
+</ul></dd>
+					<dt><var>$tabel</var></dt>
+					<dd><ul>
+<li>tabel (PDDIKTI) di mana data disimpan</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cek_penugasan" id="_cek_penugasan">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cek_penugasan">#</a>
+		<code><a href="source-class-webservice.html#1382-1423" title="Go to source code">cek_penugasan</a>( <span>type <var>$tahunakademik</var></span> )</code>
+
+		<div class="description short">
+			<p>cek apakah semua dosen mengajar sudah dimasukkan ke Penugasan di Feeder</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>cek apakah semua dosen mengajar sudah dimasukkan ke Penugasan di Feeder</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tahunakademik</var></dt>
+					<dd><ul>
+<li>tahun akademik</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>true: semua dosen sudah dimasukkan ke penugasan, false: belum semua dosen sudah dimasukkan ke penugasan</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update_nidn" id="_update_nidn">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update_nidn">#</a>
+		<code><a href="source-class-webservice.html#1425-1456" title="Go to source code">update_nidn</a>( )</code>
+
+		<div class="description short">
+			<p>mengupdate data NIDN/NUPN di tabel Institusi</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengupdate data NIDN/NUPN di tabel Institusi</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="filtertahunakademik" id="_filtertahunakademik">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_filtertahunakademik">#</a>
+		<code><a href="source-class-webservice.html#1458-1499" title="Go to source code">filtertahunakademik</a>( <span>type <var>$tahunakademik</var></span>, <span>type <var>$tandatahunakademik</var></span>, <span>type <var>$istahunakademikkrs</var></span>, <span>type <var>$tahunakademikkrs</var></span>, <span>type <var>$tahunakademiksebelum</var></span>, <span>type <var>$banyakparameter</var> = -<span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			<p>membuat string filter akademik</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>membuat string filter akademik</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tahunakademik</var></dt>
+					<dd><ul>
+<li>kolom tahun akademik (mapping.inc.php)</li>
+</ul></dd>
+					<dt><var>$tandatahunakademik</var></dt>
+					<dd><ul>
+<li>tanda tahun akademik</li>
+</ul></dd>
+					<dt><var>$istahunakademikkrs</var></dt>
+					<dd><ul>
+<li>apakah tahun akademik krs</li>
+</ul></dd>
+					<dt><var>$tahunakademikkrs</var></dt>
+					<dd><ul>
+<li>tahun akademik krs</li>
+</ul></dd>
+					<dt><var>$tahunakademiksebelum</var></dt>
+					<dd><ul>
+<li>tahun akademik krs sebelumnya</li>
+</ul></dd>
+					<dt><var>$banyakparameter</var></dt>
+					<dd><ul>
+<li>banyaknya parameter yang ingin digunakan, -1 atau 0 berarti semua digunakan - OPSIONAL, default=-1</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>string filter akademik</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_injek" id="_pddikti_injek">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_injek">#</a>
+		<code><a href="source-class-webservice.html#1501-1774" title="Go to source code">pddikti_injek</a>( <span>type <var>$tahunakademikkrs</var></span>, <span>type <var>$tabelinjectindividual</var> = <span class="php-quote">&quot;&quot;</span></span>, <span>type <var>$modeinjek</var> = <span class="php-quote">&quot;inject&quot;</span></span>, <span>type <var>$ignoreguid</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			<p>memasukkan data dari tabel Institusi ke PDDIKTI</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memasukkan data dari tabel Institusi ke PDDIKTI</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tahunakademikkrs</var></dt>
+					<dd><ul>
+<li>tahun akademik krs</li>
+</ul></dd>
+					<dt><var>$tabelinjectindividual</var></dt>
+					<dd><ul>
+<li>nama tabel PDDIKTI, jika diisi, maka hanya tabel ini saja yang diinjek - OPSIONAL, default: ""</li>
+</ul></dd>
+					<dt><var>$modeinjek</var></dt>
+					<dd><ul>
+<li>mode inject atau inject_perbaiki_usang - OPSIONAL, default: "inject"</li>
+</ul></dd>
+					<dt><var>$ignoreguid</var></dt>
+					<dd><ul>
+<li>jika bernilai true, maka semua data akan dibaca, tetapi jika bernilai false, maka hanya data yang belum sinkron saja yang akan dibaca - OPSIONAL, default: "false"</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_sinkronisasi_injek_insert" id="_pddikti_sinkronisasi_injek_insert">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_sinkronisasi_injek_insert">#</a>
+		<code><a href="source-class-webservice.html#1776-1818" title="Go to source code">pddikti_sinkronisasi_injek_insert</a>( <span> <var>$hasil</var></span>, <span> <var>$mapdb_guid</var></span>, <span> <var>$mode</var></span>, <span> <var>$data</var></span>, <span> <var>$iddb</var></span>, <span> <var>$proses</var></span>, <span> <var>$row</var></span>, <span> <var>$tabel</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_sinkronisasi_injek_update" id="_pddikti_sinkronisasi_injek_update">
+
+		<td class="attributes"><code>
+			 private 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_sinkronisasi_injek_update">#</a>
+		<code><a href="source-class-webservice.html#1820-1853" title="Go to source code">pddikti_sinkronisasi_injek_update</a>( <span> <var>$hasil</var></span>, <span> <var>$mapdb_guid</var></span>, <span> <var>$mode</var></span>, <span> <var>$data</var></span>, <span> <var>$iddb</var></span>, <span> <var>$proses</var></span>, <span> <var>$row</var></span>, <span> <var>$tabel</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="pddikti_injek_perbaiki_usang" id="_pddikti_injek_perbaiki_usang">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_pddikti_injek_perbaiki_usang">#</a>
+		<code><a href="source-class-webservice.html#1855-1866" title="Go to source code">pddikti_injek_perbaiki_usang</a>( <span>type <var>$tahunakademikkrs</var></span>, <span>type <var>$tabelinjectindividual</var> = <span class="php-quote">&quot;&quot;</span></span> )</code>
+
+		<div class="description short">
+			<p>memperbaiki peta_injek_usang ke PDDIKTI.<br/>
+memanggil pddikti_injek dengan $modeinjek bernilai inject_perbaiki_usang dan $ignoreguid bernilai true</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memperbaiki peta_injek_usang ke PDDIKTI.<br/>
+memanggil pddikti_injek dengan $modeinjek bernilai inject_perbaiki_usang dan $ignoreguid bernilai true</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$tahunakademikkrs</var></dt>
+					<dd><ul>
+<li>tahun akademik krs</li>
+</ul></dd>
+					<dt><var>$tabelinjectindividual</var></dt>
+					<dd><ul>
+<li>nama tabel PDDIKTI, jika diisi, maka hanya tabel ini saja yang diinjek - OPSIONAL, default: ""</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sinkron_data_institusi" id="_sinkron_data_institusi">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sinkron_data_institusi">#</a>
+		<code><a href="source-class-webservice.html#1868-1883" title="Go to source code">sinkron_data_institusi</a>( )</code>
+
+		<div class="description short">
+			<p>mensinkronkan GUID pada tabel-tabel basis data dasar Institusi dari basis data Feeder PDDIKTI
+<br />satuan_pendidikan (institusi), sms (program studi), kurikulum dan mata_kuliah</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mensinkronkan GUID pada tabel-tabel basis data dasar Institusi dari basis data Feeder PDDIKTI
+<br />satuan_pendidikan (institusi), sms (program studi), kurikulum dan mata_kuliah</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="ignore_alias" id="_ignore_alias">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_ignore_alias">#</a>
+		<code><a href="source-class-webservice.html#1887-1897" title="Go to source code">ignore_alias</a>( <span>type <var>$str</var></span> )</code>
+
+		<div class="description short">
+			<p>mengabaikan alias tabel pada nama kolom, misal: p.kdkrsnilai menjadi kdkrsnilai</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengabaikan alias tabel pada nama kolom, misal: p.kdkrsnilai menjadi kdkrsnilai</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$str</var></dt>
+					<dd><ul>
+<li>nama kolom (yang mungkin ada alias tabelnya)</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>nama kolom tanpa alias tabel</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="is_exist" id="_is_exist">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_is_exist">#</a>
+		<code><a href="source-class-webservice.html#1899-1923" title="Go to source code">is_exist</a>( <span>type <var>$haysack</var></span>, <span>type <var>$needles</var></span>, <span>type <var>$restrict</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			<p>apakah kumpulan kata yang dipisahkan dengan tanda koma ada pada kalimat</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>apakah kumpulan kata yang dipisahkan dengan tanda koma ada pada kalimat</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$haysack</var></dt>
+					<dd><ul>
+<li>kalimat lengkap</li>
+</ul></dd>
+					<dt><var>$needles</var></dt>
+					<dd><ul>
+<li>kata dicari</li>
+</ul></dd>
+					<dt><var>$restrict</var></dt>
+					<dd><ul>
+<li>restrict=true berarti harus semua kata ditemukan</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>true: terdapat kata, false: tidak terdapat kata</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="print_r_rapi" id="_print_r_rapi">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_print_r_rapi">#</a>
+		<code><a href="source-class-webservice.html#1925-1937" title="Go to source code">print_r_rapi</a>( <span>type <var>$arr</var></span> )</code>
+
+		<div class="description short">
+			<p>mencetak array dalam bentuk yang mudah untuk dibaca</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mencetak array dalam bentuk yang mudah untuk dibaca</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$arr</var></dt>
+					<dd><ul>
+<li>array yang akan ditampilkan</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cetak_tabel" id="_cetak_tabel">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cetak_tabel">#</a>
+		<code><a href="source-class-webservice.html#1939-1974" title="Go to source code">cetak_tabel</a>( <span>type <var>$header</var></span>, <span>type <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>mencetak tabel dari array header dan data</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mencetak tabel dari array header dan data</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><ul>
+<li>array header</li>
+</ul></dd>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>array data</li>
+</ul></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="countdim" id="_countdim">
+
+		<td class="attributes"><code>
+			 public 
+
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_countdim">#</a>
+		<code><a href="source-class-webservice.html#1976-1995" title="Go to source code">countdim</a>( <span>type <var>$array</var></span> )</code>
+
+		<div class="description short">
+			<p>menghitung berapa dimensi array
+<br/> sumber: http://theserverpages.com/php/manual/en/ref.array.php</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menghitung berapa dimensi array
+<br/> sumber: http://theserverpages.com/php/manual/en/ref.array.php</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$array</var></dt>
+					<dd><ul>
+<li>array yang dihitung dimensinya</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					integer<br><ul>
+<li>dimensi</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cetak_tabel_parsial_mulai" id="_cetak_tabel_parsial_mulai">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cetak_tabel_parsial_mulai">#</a>
+		<code><a href="source-class-webservice.html#1997-2019" title="Go to source code">cetak_tabel_parsial_mulai</a>( <span>type <var>$id</var> = <span class="php-num">1</span></span>, <span>type <var>$mode</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			<p>memulai membuat tabel secara terpisah (harus diakhiri dengan partial_print_table_end)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>memulai membuat tabel secara terpisah (harus diakhiri dengan partial_print_table_end)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd><ul>
+<li>id dari tabel, tabel akan dibuat sesuai dengan id-nya</li>
+</ul></dd>
+					<dt><var>$mode</var></dt>
+					<dd><ul>
+<li>1 -> echo, 2 -> return</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br><ul>
+<li>header <tabel></li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cetak_tabel_parsial" id="_cetak_tabel_parsial">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cetak_tabel_parsial">#</a>
+		<code><a href="source-class-webservice.html#2021-2118" title="Go to source code">cetak_tabel_parsial</a>( <span>type <var>$data</var></span>, <span>type <var>$ignore_count</var> = <span class="php-keyword1">false</span></span>, <span>type <var>$id</var> = <span class="php-num">1</span></span>, <span>type <var>$mode</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			<p>mengisi tabel secara terpisah (harus diakhiri dengan partial_print_table_end)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengisi tabel secara terpisah (harus diakhiri dengan partial_print_table_end)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>isi tabel</li>
+</ul></dd>
+					<dt><var>$ignore_count</var></dt>
+					<dd><ul>
+<li>jumlah baris tidak perlu dihitung?</li>
+</ul></dd>
+					<dt><var>$id</var></dt>
+					<dd><ul>
+<li>id dari tabel, tabel akan dibuat sesuai dengan id-nya</li>
+</ul></dd>
+					<dt><var>$mode</var></dt>
+					<dd><ul>
+<li>1 -> echo, 2 -> return</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br><ul>
+<li><tr><td></td></tr></li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cetak_tabel_parsial_indeks" id="_cetak_tabel_parsial_indeks">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cetak_tabel_parsial_indeks">#</a>
+		<code><a href="source-class-webservice.html#2120-2175" title="Go to source code">cetak_tabel_parsial_indeks</a>( <span>type <var>$data</var></span>, <span>type <var>$mode</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			<p>mengisi tabel secara terpisah, tetapi hanya data indeks dari array (harus diakhiri dengan partial_print_table_end)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>mengisi tabel secara terpisah, tetapi hanya data indeks dari array (harus diakhiri dengan partial_print_table_end)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>isi tabel</li>
+</ul></dd>
+					<dt><var>$mode</var></dt>
+					<dd><ul>
+<li>1 -> echo, 2 -> return</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br><ul>
+<li><tr><td></td></tr></li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="cetak_tabel_parsial_akhiri" id="_cetak_tabel_parsial_akhiri">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_cetak_tabel_parsial_akhiri">#</a>
+		<code><a href="source-class-webservice.html#2177-2201" title="Go to source code">cetak_tabel_parsial_akhiri</a>( <span>type <var>$id</var> = <span class="php-num">1</span></span>, <span>type <var>$mode</var> = <span class="php-num">1</span></span> )</code>
+
+		<div class="description short">
+			<p>menutup tabel terpisah (yang dimulai dengan partial_print_table_start)</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>menutup tabel terpisah (yang dimulai dengan partial_print_table_start)</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$id</var></dt>
+					<dd><ul>
+<li>id dari tabel, tabel akan dibuat sesuai dengan id-nya</li>
+</ul></dd>
+					<dt><var>$mode</var></dt>
+					<dd><ul>
+<li>1 -> echo, 2 -> return</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br><ul>
+<li>footer </tabel></li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="array_auto_fill" id="_array_auto_fill">
+
+		<td class="attributes"><code>
+			 public 
+
+			type
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_array_auto_fill">#</a>
+		<code><a href="source-class-webservice.html#2203-2244" title="Go to source code">array_auto_fill</a>( <span>type <var>$data</var></span> )</code>
+
+		<div class="description short">
+			<p>membuat array yang memiliki kolom yang sama untuk semua baris, kolom baru berisi data kosong</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>membuat array yang memiliki kolom yang sama untuk semua baris, kolom baru berisi data kosong</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$data</var></dt>
+					<dd><ul>
+<li>array dua dimensi, yang mungkin kolomnya tidak sama setiap barisnya,
+misal: arrayA = array(array("idx1"=>1, "idx2"=>2), array("idx1"=>3, "idx3"=>4));</li>
+</ul></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					type<br><ul>
+<li>array yang memiliki kolom yang sama untuk semua baris,
+output dari permisalan data: arrayA = array(array("idx1"=>1, "idx2"=>2, "idx3" =>), array("idx1"=>3, "idx2"=>, "idx3"=>4));</li>
+</ul>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="proxy" id="$proxy">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#22-25" title="Go to source code"><var>$proxy</var></a>
+
+			<div class="description short">
+				<p>proxy koneksi webservice PDDIKTI</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>proxy koneksi webservice PDDIKTI</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$proxy" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="pddikti" id="$pddikti">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#26-29" title="Go to source code"><var>$pddikti</var></a>
+
+			<div class="description short">
+				<p>setting PDDIKTI</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>setting PDDIKTI</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$pddikti" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="institusi" id="$institusi">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#30-33" title="Go to source code"><var>$institusi</var></a>
+
+			<div class="description short">
+				<p>setting institusi</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>setting institusi</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$institusi" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="sekarang" id="$sekarang">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#34-37" title="Go to source code"><var>$sekarang</var></a>
+
+			<div class="description short">
+				<p>waktu saat ini</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>waktu saat ini</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$sekarang" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="debug" id="$debug">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#38-41" title="Go to source code"><var>$debug</var></a>
+
+			<div class="description short">
+				<p>mode debug</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>mode debug</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$debug" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="status" id="$status">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#42-45" title="Go to source code"><var>$status</var></a>
+
+			<div class="description short">
+				<p>status webservice PDDIKTI</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>status webservice PDDIKTI</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$status" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="mapdb" id="$mapdb">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#46-49" title="Go to source code"><var>$mapdb</var></a>
+
+			<div class="description short">
+				<p>pemetaan field basis data institusi dengan PDDIKTI (mapping.inc.php)</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>pemetaan field basis data institusi dengan PDDIKTI (mapping.inc.php)</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$mapdb" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="db" id="$db">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#50-53" title="Go to source code"><var>$db</var></a>
+
+			<div class="description short">
+				<p>basis data institusi</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>basis data institusi</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$db" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="nbaris_tabel" id="$nbaris_tabel">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#54-57" title="Go to source code"><var>$nbaris_tabel</var></a>
+
+			<div class="description short">
+				<p>jumlah baris pada tabel</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>jumlah baris pada tabel</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$nbaris_tabel" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="issinkron_injek" id="$issinkron_injek">
+		<td class="attributes"><code>
+			public  
+			
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-webservice.html#58-61" title="Go to source code"><var>$issinkron_injek</var></a>
+
+			<div class="description short">
+				<p>apakah perlu memanggil fungsi pddikti_sinkron_guid()? mengingat sudah ada proses sinkronisasi bersamaan dengan data diinjek</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>apakah perlu memanggil fungsi pddikti_sinkron_guid()? mengingat sudah ada proses sinkronisasi bersamaan dengan data diinjek</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$issinkron_injek" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		ws_pddikti API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>
