@@ -72,7 +72,7 @@
 <br/> untuk mencatat catatan (termasuk perubahan-perubahan sistem)
 <br/> profil  https://id.linkedin.com/in/basitadhi
 <br/> buat    2017-04-27
-<br/> rev     2017-05-02
+<br/> rev     2018-03-27
 <br/> sifat   open source
 <br/> catatan:
 <br/> - Bugs Fix (BF) &amp; Improvement (IM)
@@ -95,7 +95,7 @@
 
 				<b>Author:</b>
 				Basit Adhi Prabowo, S.T. <a href="&#x6d;&#97;i&#x6c;&#116;&#111;&#x3a;&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d">&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d</a><br>
-			<b>Located at</b> <a href="source-class-readme.html#4-287" title="Go to source code">readme.info.php</a>
+			<b>Located at</b> <a href="source-class-readme.html#4-327" title="Go to source code">readme.info.php</a>
 		<br>
 	</div>
 
@@ -103,6 +103,128 @@
 
 	<table class="summary methods" id="methods">
 	<caption>Methods summary</caption>
+	<tr data-order="TODO" id="_TODO">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_TODO">#</a>
+		<code><a href="source-class-readme.html#19-27" title="Go to source code">TODO</a>( )</code>
+
+		<div class="description short">
+			<ol>
+<li>Mapping Aktivitas Mahasiswa</li>
+</ol>
+		</div>
+
+		<div class="description detailed hidden">
+			<ol>
+<li>Mapping Aktivitas Mahasiswa</li>
+</ol>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_20180331" id="__20180331">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__20180331">#</a>
+		<code><a href="source-class-readme.html#29-46" title="Go to source code">_20180331</a>( )</code>
+
+		<div class="description short">
+			<ol>
+<li>IM Menambahkan accordion, agar dapat memudahkan ketika melihat data (terutama jika ada yang sangat panjang datanya</li>
+<li>IM Cek keaktifan Laporan Tahun Akademik. Jika aktif maka lanjutkan proses injek, tidak non aktif maka by pass. Tambah fungsi is_tahunakademikaktif(). Diaplikasikan di pddikti_injek() untuk yang terpengaruh dengan tahunakademik.</li>
+<li>IM Tetapkan mode SQL setiap koneksi untuk menjamin stabilitas injeksi/sinkronisasi. Tambahkan di query("SET SESSION sql_mode='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'");</li>
+<li>IM Pembersihan warning pada source code (Netbeans)</li>
+<li>IM Adaptasi perubahan/penambahan fitur PDDIKTI: (1.) Mahasiswa (mahasiswa, mahasiswa_pt) tambah: NISN, NIK Ayah, NIK Ibu, NPWP, No BPJS (2.) Keaktifan Mahasiswa (kuliah_mahasiswa) sekarang hanya bisa untuk A, N, C; sedangkan L, K sudah tidak bisa lagi</li>
+<li>IM Menambah menu pada init.inc.php</li>
+<li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
+<li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
+<li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
+<li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
+</ol>
+		</div>
+
+		<div class="description detailed hidden">
+			<ol>
+<li>IM Menambahkan accordion, agar dapat memudahkan ketika melihat data (terutama jika ada yang sangat panjang datanya</li>
+<li>IM Cek keaktifan Laporan Tahun Akademik. Jika aktif maka lanjutkan proses injek, tidak non aktif maka by pass. Tambah fungsi is_tahunakademikaktif(). Diaplikasikan di pddikti_injek() untuk yang terpengaruh dengan tahunakademik.</li>
+<li>IM Tetapkan mode SQL setiap koneksi untuk menjamin stabilitas injeksi/sinkronisasi. Tambahkan di query("SET SESSION sql_mode='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'");</li>
+<li>IM Pembersihan warning pada source code (Netbeans)</li>
+<li>IM Adaptasi perubahan/penambahan fitur PDDIKTI: (1.) Mahasiswa (mahasiswa, mahasiswa_pt) tambah: NISN, NIK Ayah, NIK Ibu, NPWP, No BPJS (2.) Keaktifan Mahasiswa (kuliah_mahasiswa) sekarang hanya bisa untuk A, N, C; sedangkan L, K sudah tidak bisa lagi</li>
+<li>IM Menambah menu pada init.inc.php</li>
+<li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
+<li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
+<li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
+<li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
+</ol>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_2017Mei04" id="__2017Mei04">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__2017Mei04">#</a>
+		<code><a href="source-class-readme.html#48-57" title="Go to source code">_2017Mei04</a>( )</code>
+
+		<div class="description short">
+			<ol>
+<li>Terjadi masalah ketika field bukan NULL, tetapi "NULL" atau "", buat fungsi filter_perbaiki_isnull() dan diaplikasikan di beberapa tempat</li>
+<li>Memperbaiki mekanisme sinkron di injek</li>
+</ol>
+		</div>
+
+		<div class="description detailed hidden">
+			<ol>
+<li>Terjadi masalah ketika field bukan NULL, tetapi "NULL" atau "", buat fungsi filter_perbaiki_isnull() dan diaplikasikan di beberapa tempat</li>
+<li>Memperbaiki mekanisme sinkron di injek</li>
+</ol>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="_2017Mei02" id="__2017Mei02">
 
 		<td class="attributes"><code>
@@ -115,7 +237,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Mei02">#</a>
-		<code><a href="source-class-readme.html#19-29" title="Go to source code">_2017Mei02</a>( )</code>
+		<code><a href="source-class-readme.html#59-69" title="Go to source code">_2017Mei02</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -153,7 +275,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Apr27">#</a>
-		<code><a href="source-class-readme.html#31-50" title="Go to source code">_2017Apr27</a>( )</code>
+		<code><a href="source-class-readme.html#71-90" title="Go to source code">_2017Apr27</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -209,7 +331,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Mar03">#</a>
-		<code><a href="source-class-readme.html#52-62" title="Go to source code">_2017Mar03</a>( )</code>
+		<code><a href="source-class-readme.html#92-102" title="Go to source code">_2017Mar03</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -247,7 +369,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Mar01">#</a>
-		<code><a href="source-class-readme.html#64-76" title="Go to source code">_2017Mar01</a>( )</code>
+		<code><a href="source-class-readme.html#104-116" title="Go to source code">_2017Mar01</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -289,7 +411,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Mei21">#</a>
-		<code><a href="source-class-readme.html#78-86" title="Go to source code">_2016Mei21</a>( )</code>
+		<code><a href="source-class-readme.html#118-126" title="Go to source code">_2016Mei21</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -323,7 +445,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Mei20">#</a>
-		<code><a href="source-class-readme.html#88-102" title="Go to source code">_2016Mei20</a>( )</code>
+		<code><a href="source-class-readme.html#128-142" title="Go to source code">_2016Mei20</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -369,7 +491,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Apr04">#</a>
-		<code><a href="source-class-readme.html#104-113" title="Go to source code">_2016Apr04</a>( )</code>
+		<code><a href="source-class-readme.html#144-153" title="Go to source code">_2016Apr04</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -405,7 +527,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Jan28">#</a>
-		<code><a href="source-class-readme.html#115-123" title="Go to source code">_2016Jan28</a>( )</code>
+		<code><a href="source-class-readme.html#155-163" title="Go to source code">_2016Jan28</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -439,7 +561,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des29">#</a>
-		<code><a href="source-class-readme.html#125-135" title="Go to source code">_2015Des29</a>( )</code>
+		<code><a href="source-class-readme.html#165-175" title="Go to source code">_2015Des29</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -477,7 +599,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des28">#</a>
-		<code><a href="source-class-readme.html#137-145" title="Go to source code">_2015Des28</a>( )</code>
+		<code><a href="source-class-readme.html#177-185" title="Go to source code">_2015Des28</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -511,7 +633,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des13">#</a>
-		<code><a href="source-class-readme.html#147-158" title="Go to source code">_2015Des13</a>( )</code>
+		<code><a href="source-class-readme.html#187-198" title="Go to source code">_2015Des13</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -551,7 +673,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des12">#</a>
-		<code><a href="source-class-readme.html#160-169" title="Go to source code">_2015Des12</a>( )</code>
+		<code><a href="source-class-readme.html#200-209" title="Go to source code">_2015Des12</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -587,7 +709,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des11">#</a>
-		<code><a href="source-class-readme.html#171-181" title="Go to source code">_2015Des11</a>( )</code>
+		<code><a href="source-class-readme.html#211-221" title="Go to source code">_2015Des11</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -625,7 +747,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des10">#</a>
-		<code><a href="source-class-readme.html#183-195" title="Go to source code">_2015Des10</a>( )</code>
+		<code><a href="source-class-readme.html#223-235" title="Go to source code">_2015Des10</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -667,7 +789,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des08">#</a>
-		<code><a href="source-class-readme.html#197-207" title="Go to source code">_2015Des08</a>( )</code>
+		<code><a href="source-class-readme.html#237-247" title="Go to source code">_2015Des08</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -705,7 +827,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des07">#</a>
-		<code><a href="source-class-readme.html#209-220" title="Go to source code">_2015Des07</a>( )</code>
+		<code><a href="source-class-readme.html#249-260" title="Go to source code">_2015Des07</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -745,7 +867,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des02">#</a>
-		<code><a href="source-class-readme.html#222-230" title="Go to source code">_2015Des02</a>( )</code>
+		<code><a href="source-class-readme.html#262-270" title="Go to source code">_2015Des02</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -779,7 +901,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Nov30">#</a>
-		<code><a href="source-class-readme.html#232-243" title="Go to source code">_2015Nov30</a>( )</code>
+		<code><a href="source-class-readme.html#272-283" title="Go to source code">_2015Nov30</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -819,7 +941,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Nov26">#</a>
-		<code><a href="source-class-readme.html#245-275" title="Go to source code">_2015Nov26</a>( )</code>
+		<code><a href="source-class-readme.html#285-315" title="Go to source code">_2015Nov26</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -897,7 +1019,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Nov20">#</a>
-		<code><a href="source-class-readme.html#277-286" title="Go to source code">_2015Nov20</a>( )</code>
+		<code><a href="source-class-readme.html#317-326" title="Go to source code">_2015Nov20</a>( )</code>
 
 		<div class="description short">
 			<ol>
