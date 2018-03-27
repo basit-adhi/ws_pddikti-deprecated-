@@ -4,7 +4,7 @@
  * <br/> untuk inisialisasi proses sebelum melakukan aksi yang lain
  * <br/> profil  https://id.linkedin.com/in/basitadhi
  * <br/> buat    2015-10-30
- * <br/> rev     2017-05-02
+ * <br/> rev     2018-03-27
  * <br/> sifat   open source
  * @author Basit Adhi Prabowo, S.T. <basit@unisayogya.ac.id>
  * @access public
@@ -18,9 +18,85 @@ session_start();
 $mapdb  = new mapdb();
 $ws     = new webservice($pddikti, $institusi);
 $ws->setMapdb($mapdb->peta());
-//$ws->GetDictionary_SemuaTabel();
+$_a     = filter_input(INPUT_GET, "a", FILTER_SANITIZE_NUMBER_INT);
+switch ($_a)
+{
+    case 1: $ws->cek_tabel(); break;
+    case 2: $ws->pddikti_sinkron_guid("satuan_pendidikan"); 
+            $temp = $ws->GetRecord("satuan_pendidikan", "npsn='".$pddikti["login"]["username"]."'");
+            $ws->pddikti_sinkron_guid("sms", "id_sp='".$temp["result"]["id_sp"]."'");
+            $ws->pddikti_sinkron_guid("kurikulum");
+            $ws->pddikti_sinkron_guid("mata_kuliah");
+            break;
+    case 3: $ws->GetDictionary_SemuaTabel(); break;
+    case 4: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
+            if ($_t > 0)
+            {
+                $ws->pddikti_injek($_t);
+            }
+            else
+            {
+                echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
+            }
+            break;
+    case 5: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
+            if ($_t > 0)
+            {
+                $ws->pddikti_injek($_t, "mahasiswa updatedata");
+            }
+            else
+            {
+                echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
+            }
+            break;
+    case 6: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
+            if ($_t > 0)
+            {
+                $ws->pddikti_injek($_t, "mahasiswa_pt updatedata");
+            }
+            else
+            {
+                echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
+            }
+            break;
+    case 7: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
+            if ($_t > 0)
+            {
+                $ws->pddikti_sinkron_guid("dosen");
+                $ws->cek_penugasan($_t);
+            }
+            else
+            {
+                echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
+            }
+            break;
+    case 8: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
+            if ($_t > 0)
+            {
+                $ws->pddikti_injek($_t, "ajar_dosen");
+            }
+            else
+            {
+                echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
+            }
+            break;  
+    default :   echo "<table border=1 cellspacing=2 cellpadding=2>"
+                    . "       <tr><th>Kode</th><th>Aksi</th></tr>"
+                    . "       <tr><td>?a=1</td><td>Cek data tabel referensi</td></tr>"
+                    . "       <tr><td>?a=2</td><td>Sinkronisasi PT, Prodi, Kurikulum dan Matakuliah</td></tr>"
+                    . "       <tr><td>?a=3</td><td>Lihat deskripsi</td></tr>"
+                    . "       <tr><td>?a=4&t=tahunakademik</td><td>Injek pada tahunakademik</td></tr>"
+                    . "       <tr><td>?a=5&t=tahunakademik</td><td>Update data personal pada tahunakademik</td></tr>"
+                    . "       <tr><td>?a=6&t=tahunakademik</td><td>Update data mahasiswa pada tahunakademik</td></tr>"
+                    . "       <tr><td>?a=7&t=tahunakademik</td><td>Mengupdate data NIDN/NUPN di tabel Institusi, memasukkan data dosen_pt dari PDDIKTI ke Institusi dan Cek penugasan dalam 1 tahun.</td></tr>"
+                    . "       <tr><td>?a=8&t=tahunakademik</td><td>Isi rekap mengajar dosen (penugasan harus sudah dilakukan). Awas!!! Per tahun akademik hanya dapat dilakukan satu kali karena modenya adalah sisip, tidak (belum) ada mode update.</td></tr>"
+                    . "</table>";
+                break;
+}
 
-// $ws->print_r_rapi($ws->ListTable());
+//$ws->GetDictionary_SemuaTabel();
+//print_r($ws->pddikti["proxy"]->GetJenisPendaftaran());
+
 /* langkah 1 */
 //  $ws->check_table(array("kebutuhan_khusus"));
 /* langkah 2 */
@@ -122,10 +198,20 @@ $ws->pddikti_sinkron_guid( "mahasiswa_pt","","kdtamasuk=20092");
 $ws->pddikti_sinkron_guid( "mahasiswa_pt","","kdtamasuk=20091");*/
 
 //$ws->setIssinkron_injek(false);
-$ws->sinkron_data_institusi();
-$ws->pddikti_injek(20152);
-$ws->pddikti_injek(20161);
-$ws->pddikti_injek(20162);
+//$ws->sinkron_data_institusi();
+//$ws->pddikti_injek(20152);
+//$ws->pddikti_injek(20161);
+//$ws->pddikti_injek(20162, "nilai_transfer");
+//$ws->pddikti_injek(20171, "nilai_transfer");
+//$ws->pddikti_injek(20162, "nilai krs");
+//$ws->pddikti_injek(20171, "nilai krs");
+//$ws->pddikti_injek(20162, "nilai update");
+//$ws->pddikti_injek(20171, "nilai update");
+//$ws->pddikti_injek(20162, "mahasiswa_pt lulus");
+//$ws->pddikti_injek(20172, "mahasiswa_pt lulus");
+
+
+
 
 //$ws->pddikti_injek(20152, "mahasiswa_pt updatedata");
 //$ws->pddikti_injek(20161, "mahasiswa_pt updatedata");
@@ -148,7 +234,7 @@ $ws->pddikti_injek(20102, "mahasiswa updatedata");
 //$ws->print_r_rapi($ws->cetak_recordset("ajar_dosen", "p.id_reg_ptk='9910f9cd-c474-41e2-b975-ef447342af40' and k.id_kls='c2b46f08-3aa1-4914-b428-8dfe21666c6f'", "", 1000));
 
 $ws->kirim_buffer();
+$ws->akhirwebservice(); 
 //bersih-bersih
 unset($pddikti, $institusi);
 unset($temp);
-?>

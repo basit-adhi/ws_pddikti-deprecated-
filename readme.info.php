@@ -6,7 +6,7 @@
  * <br/> untuk mencatat catatan (termasuk perubahan-perubahan sistem)
  * <br/> profil  https://id.linkedin.com/in/basitadhi
  * <br/> buat    2017-04-27
- * <br/> rev     2017-05-02
+ * <br/> rev     2018-03-27
  * <br/> sifat   open source
  * <br/> catatan:
  * <br/> - Bugs Fix (BF) & Improvement (IM)
@@ -16,6 +16,46 @@
  */
 class readme
 {
+    /**
+     * <ol>
+     * <li>Mapping Aktivitas Mahasiswa</li>
+     * </ol>
+     */
+    function TODO()
+    {
+        
+    }
+    
+    /**
+     * <ol>
+     * <li>IM Menambahkan accordion, agar dapat memudahkan ketika melihat data (terutama jika ada yang sangat panjang datanya</li>
+     * <li>IM Cek keaktifan Laporan Tahun Akademik. Jika aktif maka lanjutkan proses injek, tidak non aktif maka by pass. Tambah fungsi is_tahunakademikaktif(). Diaplikasikan di pddikti_injek() untuk yang terpengaruh dengan tahunakademik.</li>
+     * <li>IM Tetapkan mode SQL setiap koneksi untuk menjamin stabilitas injeksi/sinkronisasi. Tambahkan di query("SET SESSION sql_mode='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'");</li>
+     * <li>IM Pembersihan warning pada source code (Netbeans)</li>
+     * <li>IM Adaptasi perubahan/penambahan fitur PDDIKTI: (1.) Mahasiswa (mahasiswa, mahasiswa_pt) tambah: NISN, NIK Ayah, NIK Ibu, NPWP, No BPJS (2.) Keaktifan Mahasiswa (kuliah_mahasiswa) sekarang hanya bisa untuk A, N, C; sedangkan L, K sudah tidak bisa lagi</li>
+     * <li>IM Menambah menu pada init.inc.php</li>
+     * <li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
+     * <li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
+     * <li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
+     * <li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
+     * </ol>
+     */
+    function _20180331()
+    {
+        
+    }
+    
+    /**
+     * <ol>
+     * <li>Terjadi masalah ketika field bukan NULL, tetapi "NULL" atau "", buat fungsi filter_perbaiki_isnull() dan diaplikasikan di beberapa tempat</li>
+     * <li>Memperbaiki mekanisme sinkron di injek</li>
+     * </ol>
+     */
+    function _2017Mei04()
+    {
+        
+    }
+    
     /**
      * <ol>
      * <li>IM sekarang aktif di github: https://github.com/basit-adhi/ws_pddikti</li>

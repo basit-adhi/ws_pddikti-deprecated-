@@ -6,7 +6,7 @@
  * <br/> untuk melakukan pemetaan antara basis data Institusi dengan basis data PDDIKTI
  * <br/> profil  https://id.linkedin.com/in/basitadhi
  * <br/> buat    2015-10-30
- * <br/> rev     2017-04-27
+ * <br/> rev     2018-03-27
  * <br/> sifat   open source
  * <br/> <a href="https://pdsi.unisayogya.ac.id/wordpress_bpti/wp-content/uploads/2017/04/mapdb.ppt">Dokumentasi MapDB</a>
  * <br/> <img src="mapdb2.png" />
@@ -65,7 +65,7 @@ class mapdb
                                             "wilayah"                           => array("id_wil" => "idwil", "nm_wil" => "wil", "asal_wil" => "", "kode_bps" => "", "kode_dagri" => "", "kode_keu" => "", "id_induk_wilayah" => "idindukwil", "id_level_wil" => "level", "id_negara" => ""),
                                             "negara"                            => array("id_negara" => "kdnegara", "nm_negara" => "namanegara", "a_ln" => "isluarnegeri", "benua" => "benua"),
                                             "pekerjaan"                         => array("id_pekerjaan" => "kdpekerjaanpddikti", "nm_pekerjaan" => "pekerjaan"),
-                                            "jenis_pendaftaran"                 => array("id_jns_daftar" => "kdjeniskelaspddikti", "nm_jns_daftar" => "jeniskelas"),
+                                            "jenis_pendaftaran"                 => array("id_jenis_daftar" => "kdjeniskelaspddikti", "nama_jenis_daftar" => "jeniskelas"),
                                             /* tabel Isian */
                                             /* primary key tidak digunakan untuk memasukkan data ke FEEDER PDDIKTI */
                                             /* informasi pemetaan dengan tabel institusi ada pada $this->peta["table"] */
@@ -75,18 +75,18 @@ class mapdb
                                             "mata_kuliah_kurikulum"             => array("id" => "guid", "id_kurikulum_sp" => "guid_kurikulum", "id_mk" => "guid_matakuliah", "smt" => "semester", "a_wajib" => "wajib"),
                                             "kuliah_mahasiswa"                  => array("id" => "guid", "id_smt" => "kdtahunakademik", "id_reg_pd" => "guidmahasiswa", "ips" => "ips", "sks_smt" => "sks", "ipk" => "ipk", "sks_total" => "skstotal", "id_stat_mhs" => "kdaktivitasmhs"), /*untuk mahasiswa yang Non Aktif dan Keluar */
                                             "mahasiswa_pt keluar"               => array("id" => "guidlulus", "id_reg_pd" => "guid", "id_jns_keluar" => "kdaktivitasmhs", "tgl_keluar" => "tglkeluar", "ket" => "keterangan"), /*untuk update data mahasiswa yang Keluar pada tabel mahasiswa */
+                                            "mahasiswa_pt lulus"                => array("id" => "guidlulus", "id_reg_pd" => "guid", "id_jns_keluar" => "kdaktivitasmhs", "tgl_keluar" => "tglkeluar", "ket" => "keterangan", "jalur_skripsi" => "jalurskripsi", "judul_skripsi" => "judulkaryatulis", "sk_yudisium" => "nosk", "tgl_sk_yudisium" => "tglsk", "ipk" => "ipk", "no_seri_ijazah" => "noijazah"), /*untuk update data mahasiswa yang Lulus pada tabel mahasiswa */
                                             "kuliah_mahasiswa aktif"            => array("id" => "guidinsert", "id_smt" => "kdtahunakademik", "id_reg_pd" => "guidmahasiswa", "ips" => "ips", "sks_smt" => "skss", "ipk" => "ipk", "sks_total" => "sks", "id_stat_mhs" => "kdaktivitasmhs"), /*untuk mahasiswa yang Aktif */
                                             "kuliah_mahasiswa aktif_update"     => array("id" => "guidupdate", "id_smt" => "kdtahunakademik", "id_reg_pd" => "guidmahasiswa", "ips" => "ips", "sks_smt" => "skss", "ipk" => "ipk", "sks_total" => "sks", "id_stat_mhs" => "kdaktivitasmhs"), /*untuk update data mahasiswa yang Aktif */
                                             "kuliah_mahasiswa lulus_keaktifan"  => array("id" => "guidlulus", "id_smt" => "kdtahunakademik", "id_reg_pd" => "guidmahasiswa", "id_stat_mhs" => "kdaktivitasmhs"), /*untuk update data mahasiswa yang Lulus */
-                                            "mahasiswa_pt lulus"                => array("id" => "guidlulus", "id_reg_pd" => "guid", "id_jns_keluar" => "kdaktivitasmhs", "tgl_keluar" => "tglkeluar", "ket" => "keterangan", "jalur_skripsi" => "jalurskripsi", "judul_skripsi" => "judulkaryatulis", "sk_yudisium" => "nosk", "tgl_sk_yudisium" => "tglsk", "ipk" => "ipk", "no_seri_ijazah" => "noijazah"), /*untuk update data mahasiswa yang Lulus pada tabel mahasiswa */
                                             "dosen_pembimbing"                  => array("id" => "guid", "id_ptk" => "guiddosen", "id_reg_pd" => "guidmahasiswa", "urutan_promotor" => "nourut"),
-                                            "mahasiswa"                         => array("id" => "guid", "nm_pd" => "namalengkap", "jk" => "jeniskelamin", "nik" => "nik", "tmpt_lahir" => "tempatlahir", "tgl_lahir" => "tanggallahir", "a_terima_kps" => "statuskps", "id_kk" => "kdkebutuhankhusus", "id_agama" => "kdagama", "jln" => "alamatlengkap", "rt" => "rt", "rw" => "rw", "nm_dsn" => "dusun", "ds_kel" => "kelurahan", "id_wil" => "kodekecpddikti", "kode_pos" => "kodepos", "no_tel_rmh" => "notelpon", "email" => "email", "nm_ayah" => "namaayah", "tgl_lahir_ayah" => "tgllahirayah", "id_jenjang_pendidikan_ayah" => "kdpendidikanayah", "id_pekerjaan_ayah" => "kdpekerjaan", "id_penghasilan_ayah" => "kdpenghasilanayah", "nm_ibu_kandung" => "namaibu", "tgl_lahir_ibu" => "tgllahiribu", "id_jenjang_pendidikan_ibu" => "kdpendidikanibu", "id_pekerjaan_ibu" => "kdpekerjaanibu", "id_penghasilan_ibu" => "kdpenghasilanibu", "kewarganegaraan" => "kdkewarganegaraan", "id_kebutuhan_khusus_ayah" => "idkebutuhankhususayah", "id_kebutuhan_khusus_ibu" => "idkebutuhankhususibu", "nik_ayah" => "nikayah", "nik_ibu" => "nikibu", "npwp" => "npwp"),
+                                            "mahasiswa"                         => array("id" => "guid", "nm_pd" => "namalengkap", "jk" => "jeniskelamin", "nik" => "nik", "tmpt_lahir" => "tempatlahir", "tgl_lahir" => "tanggallahir", "a_terima_kps" => "statuskps", "id_kk" => "kdkebutuhankhusus", "id_agama" => "kdagama", "jln" => "alamatlengkap", "rt" => "rt", "rw" => "rw", "nm_dsn" => "dusun", "ds_kel" => "kelurahan", "id_wil" => "kodekecpddikti", "kode_pos" => "kodepos", "no_tel_rmh" => "notelpon", "email" => "email", "nm_ayah" => "namaayah", "tgl_lahir_ayah" => "tgllahirayah", "id_jenjang_pendidikan_ayah" => "kdpendidikanayah", "id_pekerjaan_ayah" => "kdpekerjaan", "id_penghasilan_ayah" => "kdpenghasilanayah", "nm_ibu_kandung" => "namaibu", "tgl_lahir_ibu" => "tgllahiribu", "id_jenjang_pendidikan_ibu" => "kdpendidikanibu", "id_pekerjaan_ibu" => "kdpekerjaanibu", "id_penghasilan_ibu" => "kdpenghasilanibu", "kewarganegaraan" => "kdkewarganegaraan", "id_kebutuhan_khusus_ayah" => "idkebutuhankhususayah", "id_kebutuhan_khusus_ibu" => "idkebutuhankhususibu", "nik_ayah" => "nikayah", "nik_ibu" => "nikibu", "npwp" => "npwp", "nisn" => "nisn", "no_kps" => "nobpjs"),
                                             "mahasiswa_pt"                      => array("id" => "guid", "id_sms" => "guidprodi", "id_pd" => "guidmahasiswa", "id_sp" => "guidinstitusi", "id_jns_daftar" => "kdprogkul", "nipd" => "nim", "tgl_masuk_sp" => "tglawalkuliah", "a_pernah_paud" => "ispernahpaud", "a_pernah_tk" => "ispernahtk", "mulai_smt" => "mulaisemester", "sks_diakui" => "sksdiakui", "id_jalur_masuk" => "jalurmasuk", "id_pt_asal" => "kdptasal", "id_prodi_asal" => "kdprodiasal", "no_peserta_ujian" => "nopesertaujian"),
                                             "nilai krs"                         => array("id" => "guidkrs", "id_kls" => "guidpenawaran", "id_reg_pd" => "guidmahasiswa", "nilai_angka" => "nilairiil", "nilai_huruf" => "nilai", "nilai_indeks" => "nilaiangka"),
                                             "nilai update"                      => array("id" => "guidnilai", "id_kls" => "guidpenawaran", "id_reg_pd" => "guidmahasiswa", "nilai_angka" => "nilairiil", "nilai_huruf" => "nilai", "nilai_indeks" => "nilaiangka"),
                                             "ajar_dosen"                        => array("id" => "tt.guid", "id_reg_ptk" => "guidpenugasan", "id_kls" => "guidkelas", "jml_tm_renc" => "rencana", "jml_tm_real" => "realisasi", "id_jns_eval" => "jeniseval", "sks_subst_tot" => "skssubsttot"),
                                             "mahasiswa_pt updatedata"           => array("id" => "null", "id_reg_pd" => "guid", "id_sms" => "guidprodi", "id_pd" => "guidmahasiswa", "id_sp" => "guidinstitusi", "id_jns_daftar" => "kdprogkul", "nipd" => "nim", "tgl_masuk_sp" => "tglawalkuliah", "a_pernah_paud" => "ispernahpaud", "a_pernah_tk" => "ispernahtk", "mulai_smt" => "mulaisemester", "sks_diakui" => "sksdiakui", "id_jalur_masuk" => "jalurmasuk", "id_pt_asal" => "kdptasal", "id_prodi_asal" => "kdprodiasal", "no_peserta_ujian" => "nopesertaujian"),
-                                            "mahasiswa updatedata"              => array("id" => "null", "id_pd" => "guid", "nm_pd" => "namalengkap", "jk" => "jeniskelamin", "nik" => "nik", "a_terima_kps" => "statuskps", "id_kk" => "kdkebutuhankhusus", "id_agama" => "kdagama", "jln" => "alamatlengkap", "rt" => "rt", "rw" => "rw", "nm_dsn" => "dusun", "ds_kel" => "kelurahan", "id_wil" => "kodekecpddikti", "kode_pos" => "kodepos", "no_tel_rmh" => "notelpon", "email" => "email", "nm_ayah" => "namaayah", "tgl_lahir_ayah" => "tgllahirayah", "id_jenjang_pendidikan_ayah" => "kdpendidikanayah", "id_pekerjaan_ayah" => "kdpekerjaan", "id_penghasilan_ayah" => "kdpenghasilanayah", "tgl_lahir_ibu" => "tgllahiribu", "id_jenjang_pendidikan_ibu" => "kdpendidikanibu", "id_pekerjaan_ibu" => "kdpekerjaanibu", "id_penghasilan_ibu" => "kdpenghasilanibu", "kewarganegaraan" => "kdkewarganegaraan", "id_kebutuhan_khusus_ayah" => "idkebutuhankhususayah", "id_kebutuhan_khusus_ibu" => "idkebutuhankhususibu", "nik_ayah" => "nikayah", "nik_ibu" => "nikibu", "npwp" => "npwp"),
+                                            "mahasiswa updatedata"              => array("id" => "null", "id_pd" => "guid", "nm_pd" => "namalengkap", "jk" => "jeniskelamin", "nik" => "nik", "a_terima_kps" => "statuskps", "id_kk" => "kdkebutuhankhusus", "id_agama" => "kdagama", "jln" => "alamatlengkap", "rt" => "rt", "rw" => "rw", "nm_dsn" => "dusun", "ds_kel" => "kelurahan", "id_wil" => "kodekecpddikti", "kode_pos" => "kodepos", "no_tel_rmh" => "notelpon", "email" => "email", "nm_ayah" => "namaayah", "tgl_lahir_ayah" => "tgllahirayah", "id_jenjang_pendidikan_ayah" => "kdpendidikanayah", "id_pekerjaan_ayah" => "kdpekerjaan", "id_penghasilan_ayah" => "kdpenghasilanayah", "tgl_lahir_ibu" => "tgllahiribu", "id_jenjang_pendidikan_ibu" => "kdpendidikanibu", "id_pekerjaan_ibu" => "kdpekerjaanibu", "id_penghasilan_ibu" => "kdpenghasilanibu", "kewarganegaraan" => "kdkewarganegaraan", "id_kebutuhan_khusus_ayah" => "idkebutuhankhususayah", "id_kebutuhan_khusus_ibu" => "idkebutuhankhususibu", "nik_ayah" => "nikayah", "nik_ibu" => "nikibu", "npwp" => "npwp", "nisn" => "nisn", "no_kps" => "nobpjs"),
                                             "dosen_pt"                          => array("id" => "null", "id_reg_ptk" => "id_reg_ptk", "id_sdm" => "id_sdm", "id_thn_ajaran" => "tahun")
                                         );
     }
@@ -186,9 +186,10 @@ class mapdb
                                                                                 ),
                                     "nilai_transfer"                    => array( "table"               => "pddikti_v_nilai_transfer nt",
                                                                                   "filter"              => "isnull(guid) and nt.isignoremahasiswa=0 and nt.isignorematakuliah=0 and not isnull(guidmahasiswa) and not isnull(guidmatakuliah)",
-                                                                                  "tahunakademik"       => "m.kdtamasuk",
+                                                                                  "tahunakademik"       => "kdtamasuk",
                                                                                   "tandatahunakademik"  => "=",
                                                                                   "istahunakademikkrs"  => true,
+                                                                                  "infotambahanerror"   => "kodematakuliah",
                                                                                   "type"                => "insert",
                                                                                   "ignoreinject"        => false
                                                                                 ),
@@ -212,24 +213,8 @@ class mapdb
                                                                                   "fieldwhere"          => array("id_kls","id_reg_pd"),
                                                                                   "ignoreinject"        => false
                                                                                 ),
-                                    "ajar_dosen"                        => array( "table"               => "select sql_cache kdtimteaching, guid, guidkelas, id_reg_ptk as guidpenugasan, ceil(sum(rencana)) as rencana, ceil(sum(realisasi)) as realisasi, jeniseval, skssubsttot, datamengajar
-                                                                                                           from 
-                                                                                                           (
-                                                                                                               (select tt.kdtimteaching, tt.guid, pm.guid as guidkelas, id_reg_ptk, count(1)*durasislot as rencana, sum(if(isrealisasi,1,0))*durasislot as realisasi, 1 as jeniseval, 0 as skssubsttot, tt.kdpenawaran, tt.kdpersonepsbed, concat(namalengkap, '-', matakuliah, '-', kelas) as datamengajar from ak_jadwalkuliah jk join ak_timteaching tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_penawaranmatakuliah pm on pm.kdpenawaran=tt.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed join ak_penugasan pn on (pn.id_sdm=p.guiddosen and pn.tahun=floor(jk.kdtahunakademik/10)) join ak_matakuliah m on m.kdmatakuliah=pm.kdmatakuliah where [internalfilter] and kdalasan0<>2 group by tt.kdpenawaran, tt.kdpersonepsbed) 
-                                                                                                            union all 
-                                                                                                               (select tt.kdtimteaching, tt.guid, pm.guid as guidkelas, id_reg_ptk, count(1)*durasislot as rencana, sum(if(isrealisasi,1,0))*durasislot as realisasi, 1 as jeniseval, 0 as skssubsttot, kl.kdpenawaran, tt.kdpersonepsbed, concat(namalengkap, '-', matakuliah, '-', kelas) as datamengajar from ak_jadwalkuliah_lab jk join ak_timteaching_lab tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_kelompok kl on kl.kdkelompok=tt.kdkelompok join ak_penawaranmatakuliah pm on pm.kdpenawaran=kl.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed join ak_penugasan pn on (pn.id_sdm=p.guiddosen and pn.tahun=floor(jk.kdtahunakademik/10)) join ak_matakuliah m on m.kdmatakuliah=pm.kdmatakuliah where [internalfilter] and kdalasan0<>2 group by kl.kdpenawaran, tt.kdpersonepsbed)
-                                                                                                           ) ajar_dosen 
-                                                                                                           group by kdpenawaran, kdpersonepsbed",
-                                                                                  "filter"              => "tt.isignore=0 and pm.isignore=0",
-                                                                                  "jenisfilter"         => "internalfilter",
-                                                                                  "tahunakademik"       => "tt.kdtahunakademik,pm.kdtahunakademik,jk.kdtahunakademik",
-                                                                                  "tandatahunakademik"  => "=",
-                                                                                  "istahunakademikkrs"  => false,
-                                                                                  "type"                => "insert",
-                                                                                  "ignoreinject"        => false
-                                                                                ),
                                     "kuliah_mahasiswa"                  => array( "table"               => "pddikti_v_kuliah_mahasiswa c",
-                                                                                  "filter"              => "isnull(c.guid) and not isnull(c.guidmahasiswa) and c.isignore=0 and c.isignoremahasiswa=0 and c.kdaktivitasmhs not in('L', 'A')",
+                                                                                  "filter"              => "isnull(c.guid) and not isnull(c.guidmahasiswa) and c.isignore=0 and c.isignoremahasiswa=0 and c.kdaktivitasmhs not in('L', 'K', 'A')",  //pantau
                                                                                   "tahunakademik"       => "c.kdtahunakademik",
                                                                                   "tandatahunakademik"  => "=",
                                                                                   "istahunakademikkrs"  => true,
@@ -246,27 +231,6 @@ class mapdb
                                                                                   "fieldwhere"          => array("id_reg_pd"),
                                                                                   "ignoreinject"        => false
                                                                                 ),
-                                    "kuliah_mahasiswa aktif"            => array( "table"               => "select sql_cache kdrekapipk, ri.kdtahunakademik, m.guid as guidmahasiswa, ips, skss, ipk, sks, kdaktivitasmhs, guidinsert, guidupdate from (select distinct kdmahasiswa, kdtahunakademik, 'A' as kdaktivitasmhs from ak_krsnilai) krs join ak_rekap_ipk ri on (ri.kdmahasiswa=krs.kdmahasiswa and ri.kdtahunakademik=krs.kdtahunakademik) join ak_mahasiswa m on m.kdmahasiswa=ri.kdmahasiswa where [internalfilter]",
-        //                                                                          "filter"              => "isnull(guidinsert) and m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0 or kdyudisium='')",
-                                                                                  "filter"              => "isnull(guidinsert) and m.isignore=0", //--> mahasiswa lulus itu harus aktif terlebih dahulu, kemudian baru statusnya berubah menjadi lulus.. meskipun data pernah masuk tidak masalah, nanti akan tertolak, daripada data tidak masuk
-                                                                                  "jenisfilter"         => "internalfilter",
-                                                                                  "tahunakademik"       => "ri.kdtahunakademik",
-                                                                                  "tandatahunakademik"  => "=",
-                                                                                  "istahunakademikkrs"  => true,
-                                                                                  "type"                => "insert",
-                                                                                  "ignoreinject"        => false
-                                                                                ),
-                                    "kuliah_mahasiswa aktif_update"     => array( "table"               => "select sql_cache kdrekapipk, ri.kdtahunakademik, m.guid as guidmahasiswa, ips, skss, ipk, sks, kdaktivitasmhs, guidinsert, guidupdate from (select distinct kdmahasiswa, kdtahunakademik, 'A' as kdaktivitasmhs from ak_krsnilai) krs join ak_rekap_ipk ri on (ri.kdmahasiswa=krs.kdmahasiswa and ri.kdtahunakademik=krs.kdtahunakademik) join ak_mahasiswa m on m.kdmahasiswa=ri.kdmahasiswa where [internalfilter]",
-                                                                                  "filter"              => "m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0 or kdyudisium='')",
-                                                                                  "jenisfilter"         => "internalfilter",
-                                                                                  "tahunakademik"       => "ri.kdtahunakademik",
-                                                                                  "tandatahunakademik"  => "=",
-                                                                                  "istahunakademikkrs"  => false,
-                                                                                  "type"                => "update",
-                                                                                  "fieldupdate"         => array("ips", "sks_smt", "ipk", "sks_total"),
-                                                                                  "fieldwhere"          => array("id_smt","id_reg_pd","id_stat_mhs"),
-                                                                                  "ignoreinject"        => false
-                                                                                ),
                                     "mahasiswa_pt lulus"                => array( "table"               => "pddikti_v_lulus_mahasiswa m",
                                                                                   "filter"              => "isignore=0",
                                                                                   "tahunakademik"       => "m.kdtahunakademik",
@@ -278,6 +242,27 @@ class mapdb
                                                                                   "fieldwhere"          => array("id_reg_pd"),
                                                                                   "ignoreinject"        => false
                                                                                 ),
+                                    "kuliah_mahasiswa aktif"            => array( "table"               => "select sql_cache kdrekapipk, ri.kdtahunakademik, m.guid as guidmahasiswa, ips, skss, ipk, sks, kdaktivitasmhs, guidinsert, guidupdate from (select distinct kdmahasiswa, kdtahunakademik, 'A' as kdaktivitasmhs from ak_krsnilai) krs join ak_rekap_ipk ri on (ri.kdmahasiswa=krs.kdmahasiswa and ri.kdtahunakademik=krs.kdtahunakademik) join ak_mahasiswa m on m.kdmahasiswa=ri.kdmahasiswa where [internalfilter]",
+        //                                                                          "filter"              => "isnull(guidinsert) and m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0)",
+                                                                                  "filter"              => "isnull(guidinsert) and m.isignore=0", //--> mahasiswa lulus itu harus aktif terlebih dahulu, kemudian baru statusnya berubah menjadi lulus.. meskipun data pernah masuk tidak masalah, nanti akan tertolak, daripada data tidak masuk
+                                                                                  "jenisfilter"         => "internalfilter",
+                                                                                  "tahunakademik"       => "ri.kdtahunakademik",
+                                                                                  "tandatahunakademik"  => "=",
+                                                                                  "istahunakademikkrs"  => true,
+                                                                                  "type"                => "insert",
+                                                                                  "ignoreinject"        => false
+                                                                                ),
+                                    "kuliah_mahasiswa aktif_update"     => array( "table"               => "select sql_cache kdrekapipk, ri.kdtahunakademik, m.guid as guidmahasiswa, ips, skss, ipk, sks, kdaktivitasmhs, guidinsert, guidupdate from (select distinct kdmahasiswa, kdtahunakademik, 'A' as kdaktivitasmhs from ak_krsnilai) krs join ak_rekap_ipk ri on (ri.kdmahasiswa=krs.kdmahasiswa and ri.kdtahunakademik=krs.kdtahunakademik) join ak_mahasiswa m on m.kdmahasiswa=ri.kdmahasiswa where [internalfilter]",
+                                                                                  "filter"              => "m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0)",
+                                                                                  "jenisfilter"         => "internalfilter",
+                                                                                  "tahunakademik"       => "ri.kdtahunakademik",
+                                                                                  "tandatahunakademik"  => "=",
+                                                                                  "istahunakademikkrs"  => false,
+                                                                                  "type"                => "update",
+                                                                                  "fieldupdate"         => array("ips", "sks_smt", "ipk", "sks_total"),
+                                                                                  "fieldwhere"          => array("id_smt","id_reg_pd","id_stat_mhs"),
+                                                                                  "ignoreinject"        => false
+                                                                                ),
                                     "dosen_pembimbing"                  => array( "table"               => "pddikti_v_dosen_pembimbing p",
                                                                                   "filter"              => "isignore=0",
                                                                                   "tahunakademik"       => "kdtahunakademik",
@@ -285,6 +270,22 @@ class mapdb
                                                                                   "istahunakademikkrs"  => false,
                                                                                   "type"                => "insert",
                                                                                   "ignoreinject"        => false
+                                                                                ),
+                                    "ajar_dosen"                        => array( "table"               => "select sql_cache kdtimteaching, guid, guidkelas, id_reg_ptk as guidpenugasan, ceil(sum(rencana)) as rencana, ceil(sum(realisasi)) as realisasi, jeniseval, skssubsttot, datamengajar
+                                                                                                           from 
+                                                                                                           (
+                                                                                                               (select tt.kdtimteaching, tt.guid, pm.guid as guidkelas, id_reg_ptk, count(1)*durasislot as rencana, sum(if(isrealisasi,1,0))*durasislot as realisasi, 1 as jeniseval, 0 as skssubsttot, tt.kdpenawaran, tt.kdpersonepsbed, concat(namalengkap, '-', matakuliah, '-', kelas) as datamengajar from ak_jadwalkuliah jk join ak_timteaching tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_penawaranmatakuliah pm on pm.kdpenawaran=tt.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed join ak_penugasan pn on (pn.id_sdm=p.guiddosen and pn.tahun=floor(jk.kdtahunakademik/10)) join ak_matakuliah m on m.kdmatakuliah=pm.kdmatakuliah where [internalfilter] and kdalasan0<>2 group by tt.kdpenawaran, tt.kdpersonepsbed) 
+                                                                                                            union all 
+                                                                                                               (select tt.kdtimteaching, tt.guid, pm.guid as guidkelas, id_reg_ptk, count(1)*durasislot as rencana, sum(if(isrealisasi,1,0))*durasislot as realisasi, 1 as jeniseval, 0 as skssubsttot, kl.kdpenawaran, tt.kdpersonepsbed, concat(namalengkap, '-', matakuliah, '-', kelas) as datamengajar from ak_jadwalkuliah_lab jk join ak_timteaching_lab tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_kelompok kl on kl.kdkelompok=tt.kdkelompok join ak_penawaranmatakuliah pm on pm.kdpenawaran=kl.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed join ak_penugasan pn on (pn.id_sdm=p.guiddosen and pn.tahun=floor(jk.kdtahunakademik/10)) join ak_matakuliah m on m.kdmatakuliah=pm.kdmatakuliah where [internalfilter] and kdalasan0<>2 group by kl.kdpenawaran, tt.kdpersonepsbed)
+                                                                                                           ) ajar_dosen 
+                                                                                                           group by kdpenawaran, kdpersonepsbed",
+                                                                                  "filter"              => "tt.isignore=0 and pm.isignore=0",
+                                                                                  "jenisfilter"         => "internalfilter",
+                                                                                  "tahunakademik"       => "tt.kdtahunakademik,pm.kdtahunakademik,jk.kdtahunakademik",
+                                                                                  "tandatahunakademik"  => "=",
+                                                                                  "istahunakademikkrs"  => false,
+                                                                                  "type"                => "insert",
+                                                                                  "ignoreinject"        => true
                                                                                 ),
                                     "mahasiswa_pt updatedata"          => array(  "table"               => "pddikti_v_mahasiswa_pt m",
                                                                                   "filter"              => "m.isignore=0",
@@ -302,7 +303,7 @@ class mapdb
                                                                                   "tandatahunakademik"  => "=",
                                                                                   "istahunakademikkrs"  => true,
                                                                                   "type"                => "update",
-                                                                                  "fieldupdate"         => array("jk","nik","a_terima_kps","id_kk","id_agama","jln","rt","rw","nm_dsn","ds_kel","id_wil","kode_pos","telepon_rumah","email","nm_ayah","tgl_lahir_ayah", "id_jenjang_pendidikan_ayah","id_pekerjaan_ayah","id_penghasilan_ayah","tgl_lahir_ibu","id_jenjang_pendidikan_ibu","id_pekerjaan_ibu","id_penghasilan_ibu","kewarganegaraan","id_kebutuhan_khusus_ayah", "id_kebutuhan_khusus_ibu"),
+                                                                                  "fieldupdate"         => array("jk","nik","id_kk","id_agama","jln","rt","rw","nm_dsn","ds_kel","id_wil","kode_pos","no_tel_rmh","email","nm_ayah","tgl_lahir_ayah", "id_jenjang_pendidikan_ayah","id_pekerjaan_ayah","id_penghasilan_ayah","tgl_lahir_ibu","id_jenjang_pendidikan_ibu","id_pekerjaan_ibu","id_penghasilan_ibu","kewarganegaraan","id_kebutuhan_khusus_ayah", "id_kebutuhan_khusus_ibu", "nik_ayah", "nik_ibu", "npwp", "nisn", "a_terima_kps", "no_kps"),
                                                                                   "infotambahanerror"   => "namalengkap",
                                                                                   "fieldwhere"          => array("id_pd"),
                                                                                   "ignoreinject"        => true
@@ -409,8 +410,8 @@ class mapdb
     private function peta_ekstrak()
     {
         $this->peta["extract"]  = array (  "dosen_pt"  =>  array(   "table"                 => "ak_penugasan",
-                                                                    "uniquefield"          => array("id_sdm,id_reg_ptk","id_sdm,id_reg_ptk"),
-                                                                    "istahunakademikkrs"    => false,
+                                                                    "uniquefield"          => array("id_sdm,id_reg_ptk,id_thn_ajaran","id_sdm,id_reg_ptk,tahun"),
+                                                                    "istahunakademikkrs"    => true,
                                                                     "filtertahunakademik"   => "t.id_thn_ajaran=[tahun]"
                                                                 )
                                         );
@@ -446,7 +447,7 @@ class mapdb
                                         "level_wilayah"                     => array("id_level_wil", ""),
                                         "negara"                            => array("id_negara", "kdnegara"),
                                         "pangkat_gol"                       => array("id_pangkat_gol", ""),
-                                        "pekerjaan"                         => array("id_pekerjaan", "kdpekerjaan"),
+                                        "pekerjaan"                         => array("id_pekerjaan", "kdpekerjaanpddikti"),
                                         "jenis_pendaftaran"                 => array("id_jns_daftar", "kdjeniskelaspddikti"),
                                         "penghasilan"                       => array("id_penghasilan", "kdpenghasilan"),
                                         "semester"                          => array("id_smt", "kdtahunakademik"),
@@ -610,7 +611,7 @@ class mapdb
                                                                                                 "variable"                      => array("raw.id_reg_pd,id_smt,id_stat_mhs", "m.guid,c.kdtahunakademik,c.kdaktivitasmhs"), 
                                                                                                 "table"                         => array("check" => "ak_mahasiswa_ckd c join ak_mahasiswa m on m.kdmahasiswa=c.kdmahasiswa join pt_person p on p.kdperson=m.kdperson", "update" => "ak_mahasiswa_ckd c"), 
                                                                                                 "prerequisite"                  => "", 
-                                                                                                "filter"                        => "c.isignore=0 and m.isignore=0 and c.kdaktivitasmhs not in('L', 'A')", 
+                                                                                                "filter"                        => "c.isignore=0 and m.isignore=0 and c.kdaktivitasmhs not in('L', 'K', 'A')", 
                                                                                                 "infotambahanerror"             => "m.nim,p.namalengkap", 
                                                                                                 "order by"                      => "c.kdaktivitasmhs, c.kdtahunakademik,m.nim", 
                                                                                                 "forcedouble"                   => "",
@@ -628,11 +629,22 @@ class mapdb
                                                                                                 "tahunakademikinjectdipakai"    => -1
                                                                                               )
                                                                                     ),
+                                        "mahasiswa_pt lulus"                => array(   array(  "guid"                          => array("id_reg_pd", "m.guidlulus"), 
+                                                                                                "variable"                      => array("raw.id_reg_pd,p.id_jns_keluar", "m.guid,jeniskeluar"), 
+                                                                                                "table"                         => array("check" => "(select 1 as jeniskeluar) l,pddikti_v_lulus_mahasiswa m", "update" => "ak_mahasiswa m"), 
+                                                                                                "prerequisite"                  => "", 
+                                                                                                "filter"                        => "m.isignore=0", 
+                                                                                                "infotambahanerror"             => "m.nim,m.kdtahunakademik", 
+                                                                                                "order by"                      => "m.kdtahunakademik,m.nim", 
+                                                                                                "forcedouble"                   => "",
+                                                                                                "tahunakademikinjectdipakai"    => -1
+                                                                                              )
+                                                                                    ),
                                         "kuliah_mahasiswa aktif"            => array(   array(  "guid"                          => array("id_reg_pd,id_smt", "ri.guidinsert"), 
                                                                                                 "variable"                      => array("raw.id_reg_pd,id_smt,id_stat_mhs", "m.guid,ri.kdtahunakademik,krs.kdaktivitasmhs"), 
                                                                                                 "table"                         => array("check" => "(select distinct kdmahasiswa, kdtahunakademik, 'A' as kdaktivitasmhs from ak_krsnilai) krs join ak_rekap_ipk ri on (ri.kdmahasiswa=krs.kdmahasiswa and ri.kdtahunakademik=krs.kdtahunakademik) join ak_mahasiswa m on m.kdmahasiswa=ri.kdmahasiswa", "update" => "ak_rekap_ipk ri"), 
                                                                                                 "prerequisite"                  => "", 
-                                                                                                "filter"                        => "m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0 or kdyudisium='')", 
+                                                                                                "filter"                        => "m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0)", 
                                                                                                 "infotambahanerror"             => "m.nim,ri.kdtahunakademik", 
                                                                                                 "order by"                      => "ri.kdtahunakademik,m.nim", 
                                                                                                 "forcedouble"                   => "",
@@ -643,7 +655,7 @@ class mapdb
                                                                                                 "variable"                      => array("raw.id_reg_pd,id_smt,id_stat_mhs", "m.guid,ri.kdtahunakademik,krs.kdaktivitasmhs"), 
                                                                                                 "table"                         => array("check" => "(select distinct kdmahasiswa, kdtahunakademik, 'A' as kdaktivitasmhs from ak_krsnilai) krs join ak_rekap_ipk ri on (ri.kdmahasiswa=krs.kdmahasiswa and ri.kdtahunakademik=krs.kdtahunakademik) join ak_mahasiswa m on m.kdmahasiswa=ri.kdmahasiswa", "update" => "ak_rekap_ipk ri"), 
                                                                                                 "prerequisite"                  => "", 
-                                                                                                "filter"                        => "m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0 or kdyudisium='')", 
+                                                                                                "filter"                        => "m.isignore=0 and (isnull(kdyudisium) or kdyudisium=0)", 
                                                                                                 "infotambahanerror"             => "m.nim,ri.kdtahunakademik", 
                                                                                                 "order by"                      => "ri.kdtahunakademik,m.nim", 
                                                                                                 "forcedouble"                   => "",
@@ -657,17 +669,6 @@ class mapdb
                                                                                                 "filter"                        => "m.isignore=0", 
                                                                                                 "infotambahanerror"             => "m.nim,ri.kdtahunakademik", 
                                                                                                 "order by"                      => "ri.kdtahunakademik,m.nim", 
-                                                                                                "forcedouble"                   => "",
-                                                                                                "tahunakademikinjectdipakai"    => -1
-                                                                                              )
-                                                                                    ),
-                                        "mahasiswa_pt lulus"                => array(   array(  "guid"                          => array("id_reg_pd", "m.guidlulus"), 
-                                                                                                "variable"                      => array("raw.id_reg_pd,p.id_jns_keluar", "m.guid,jeniskeluar"), 
-                                                                                                "table"                         => array("check" => "(select 1 as jeniskeluar) l,pddikti_v_lulus_mahasiswa m", "update" => "ak_mahasiswa m"), 
-                                                                                                "prerequisite"                  => "", 
-                                                                                                "filter"                        => "m.isignore=0", 
-                                                                                                "infotambahanerror"             => "m.nim,m.kdtahunakademik", 
-                                                                                                "order by"                      => "m.kdtahunakademik,m.nim", 
                                                                                                 "forcedouble"                   => "",
                                                                                                 "tahunakademikinjectdipakai"    => -1
                                                                                               )
@@ -758,8 +759,9 @@ class mapdb
     {
         $this->peta["updatenidn"]   = array (   "table"   => array("dosen", "ak_dosen"),
                                                 "nidn"    => array("nidn", "nidn"),
-                                                "guid"    => "id_ptk",
-                                                "filter"  => "kdperson in (select kdperson from pt_person where guidperson=:guid)"
+                                                "guid"    => "id_sdm",
+                                                "info"    => "nm_sdm",
+                                                "filter"  => "kdperson in (select kdperson from pt_person where guiddosen=':guid')"
                                             );
     }
     
@@ -785,4 +787,3 @@ class mapdb
         return $this->peta;
     }
 }
-?>
