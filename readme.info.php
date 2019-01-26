@@ -26,18 +26,46 @@ class readme
         
     }
     
+    function _akanrilis()
+    {
+        
+    }
+    
     /**
      * <ol>
+     * <li>BF Pada pddikti_injek(), sync update menggunakan $table, bukan $table_asli (sama dengan sync insert). Sinkronisasi juga dilakukan untuk MODE_INJECT_INDIVIDU. MODE_INJECT_GAGAL tidak ikut disinkron</li>
+     * <li>BF Cek Tabel ada yang hanya muncul 1 baris, padahal lebih dari satu baris. Tambah peringatan untuk menambah peringatan bahwa $this->peta["pk"] untuk tabel tersebut belum ada</li>
+     * <li>IM Tambahkan info [".$this->db["info"][$iddb]."] di semua query update/insert/delete (contoh hasil: [Rows matched: 1 Changed: 1 Warnings: 1]). Informasi update/insert/delete diletakkan setelah query (bukan sebelum query)</li>
+     * <li>IM Lengkapi informasi error pada update/insert/delete</li>
+     * <li>IM Perubahan pemetaan kuliah_mahasiswa menjadi "p.id_reg_pd,p.id_smt,p.id_stat_mhs" pada variabel PDDIKTI</li>
+     * <li>IM Menampilkan daftar perubahan/penambahan web service, agar programmer tidak buta perubahan</li>
+     * <li>IM Menampilkan daftar method webservice PDDIKTI</li>
+     * <li>IM Jika jumlah sync sama dengan jumlah injeksi, maka tidak perlu sync. Tambahkan parameter error di pddikti_sinkron_guid(), pddikti_sinkron_guid_filterinjek() dan pddikti_sinkron_guid_tunggal()</li>
+     * <li>IM Tambahkan data sms/prodi pada init.inc.php?a=1</li>
+     * <li>IM Tambahkan tabel non referensi ke cek tabel. Non referensi selain tambahan tidak perlu dicek</li>
+     * <li>IM Buat opsi baru di init.inc.php untuk menampilkan pemetaan secara visual. 1. Ubah fungsi cetak_tabel_parsial() agar dapat mencetak array dan indeksnya sebagai baris 2. Tambah fungsi cetak_tabel_sel() agar dapat mencetak string atau array 3. Tambah indeks ideksekusi di peta inject agar mudah dalam eksekusi
+     * <li>IM Tambahkan variabel issudahcekpenugasan agar cek penugasan dieksekusi sekali saja</li>
+     * <li>IM Perubahan struktur dosen pembimbing. Sekarang dipisah ke dalam beberapa tabel, menginduk ke kegiatan mahasiswa, cabangnya pembimbing, penguji, anggota.</li>
+</li>
+     * </ol>
+     */
+    function _20190126()
+    {
+        
+    }
+    
+    /**
+     * <ol>
+     * <li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
+     * <li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
+     * <li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
+     * <li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
      * <li>IM Menambahkan accordion, agar dapat memudahkan ketika melihat data (terutama jika ada yang sangat panjang datanya</li>
      * <li>IM Cek keaktifan Laporan Tahun Akademik. Jika aktif maka lanjutkan proses injek, tidak non aktif maka by pass. Tambah fungsi is_tahunakademikaktif(). Diaplikasikan di pddikti_injek() untuk yang terpengaruh dengan tahunakademik.</li>
      * <li>IM Tetapkan mode SQL setiap koneksi untuk menjamin stabilitas injeksi/sinkronisasi. Tambahkan di query("SET SESSION sql_mode='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'");</li>
      * <li>IM Pembersihan warning pada source code (Netbeans)</li>
      * <li>IM Adaptasi perubahan/penambahan fitur PDDIKTI: (1.) Mahasiswa (mahasiswa, mahasiswa_pt) tambah: NISN, NIK Ayah, NIK Ibu, NPWP, No BPJS (2.) Keaktifan Mahasiswa (kuliah_mahasiswa) sekarang hanya bisa untuk A, N, C; sedangkan L, K sudah tidak bisa lagi</li>
      * <li>IM Menambah menu pada init.inc.php</li>
-     * <li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
-     * <li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
-     * <li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
-     * <li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
      * </ol>
      */
     function _20180331()
