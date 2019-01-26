@@ -12,7 +12,7 @@ require_once ("lib/class.wsdlcache.php");
  * <br/> kelas webservice: untuk mengambil data dari PDDIKTI atau menyimpan data ke PDDIKTI, disinkronkan dengan database institusi
  * <br/> profil  https://id.linkedin.com/in/basitadhi
  * <br/> buat    2015-10-30
- * <br/> rev     2018-03-27
+ * <br/> rev     2019-01-26
  * <br/> sifat   open source
  * @author Basit Adhi Prabowo, S.T. <basit@unisayogya.ac.id>
  * @access public
@@ -59,7 +59,11 @@ class webservice
      * apakah perlu memanggil fungsi pddikti_sinkron_guid()? mengingat sudah ada proses sinkronisasi bersamaan dengan data diinjek 
      */
     var $issinkron_injek;
-
+    /**
+     * apakah cek penugasan sudah dilakukan? jika sudah, maka tidak perlu melakukan cek lagi untuk injek berikutnya
+     */
+    var $issudahcekpenugasan;
+    
 /*vv koneksi WEBSERVICE PDDIKTI vv*/
 
     /**
@@ -78,10 +82,11 @@ class webservice
         /* ubah setting maksimal waktu tunggu eksekusi */
         set_time_limit(EXECUTION_TIME_LIMIT);
         /* awalan */
-        $this->pddikti    = $pddikti;
-        $this->institusi  = $institusi;
-        $this->debug      = $debug;
-        $this->status     = array("status" => true, "pesankesalahan" => "");
+        $this->pddikti              = $pddikti;
+        $this->institusi            = $institusi;
+        $this->debug                = $debug;
+        $this->status               = array("status" => true, "pesankesalahan" => "");
+        $this->issudahcekpenugasan  = false;
         /* tampilkan pesan debug apabila dalam mode debug */
         if ($this->debug)
         {
@@ -362,6 +367,7 @@ class webservice
      */
     function GetDictionary_SemuaTabel()
     {
+        $this->GetChangeLog();
         /* mendapatkan daftar tabel dari webservice PDDIKTI (equal: show [table]) */
         $daftarTabel  = $this->ListTable();
         /* mencetak daftar tabel */
@@ -754,6 +760,27 @@ class webservice
         }
     }
     
+    /**
+     * mencetak daftar perubahan/penambahan dari webservice PDDIKTI
+     */
+    function GetChangeLog()
+    {
+        $this->ListWSMethod();
+        /* jika koneksi FEEDER DIKTI tidak bermasalah */
+        if ($this->status_periksa())
+        {
+            echo "<h1>Daftar Perubahan Web Service</h1><pre>".$this->pddikti["proxy"]->GetChangeLog($_SESSION["token"])["result"]."</pre>";
+        }
+    }
+    
+    /**
+     * menampilkan daftar method webservice PDDIKTI (di dalam frame)
+     */
+    function ListWSMethod()
+    {
+        echo "<iframe width='100%' height='100%' src='".str_replace("?wsdl", "", $this->pddikti["ws"]["url"])."'> </iframe>";
+    }
+    
 /*^^ WEBSERVICE PDDIKTI ^^*/
 
 /*vv manipulasi DB - WEBSERVICE PDDIKTI vv*/
@@ -863,7 +890,7 @@ class webservice
         $this->db["info"][$iddb]   = $this->db["conn"][$iddb]->info;
         if (!empty($this->db["error"][$iddb]))
         {
-            echo "<br/>".$this->db["error"][$iddb];
+            echo "<br/>Query: $sql. Error: ".$this->db["error"][$iddb];
         }
     }
 
@@ -940,10 +967,12 @@ class webservice
 
     /**
      * memeriksa kecocokan tabel dan isi dari tabel-tabel pada basis data Institusi dengan PDDIKTI
-     * @param type $exception
+     * @param type $perkecualian
      * - daftar tabel PDDIKTI yang tidak ikut dicocokkan 
+     * @param type $nonref
+     * - daftar tabel non referensi yang ikut dicocokkan
      */
-    function cek_tabel($exception=array())
+    function cek_tabel($perkecualian=array(), $nonref=array())
     {
         $tabel_ref = array();
         /* mendapatkan daftar tabel PDDIKTI */
@@ -956,84 +985,89 @@ class webservice
         /* cek setiap tabel */
         foreach ($listtable["result"] as $tabel)
         {
+            $pemetaanpk = true;
             /* reset kolom yang sudah dipakai oleh data institusi ($i) */
-            $i  = 0;
-            $this->cetak_accordion_mulai("Tabel ".$tabel["table"]);
-            /* cek mapping tabel PDDIKTI dengan tabel Institusi, tabel belum dipetakan */
-            if (count($this->mapdb["table"][$tabel["table"]]["nama"])==0 || $this->mapdb["table"][$tabel["table"]]["nama"]=="")
-            {
-                echo "Warning! Tabel ".$tabel["table"]." belum dipetakan";
-            }
-            /* tabel sudah dipetakan */
-            else
-            {
-                echo "Tabel ".$tabel["table"]." dipetakan ke tabel ".$this->mapdb["table"][$tabel["table"]]["nama"]."<br />";
-                /* mendapatkan daftar kolom PDDIKTI dari tabel spesifik */
-                $listfield  = $this->GetDictionary($tabel["table"]);
-                foreach ($listfield["result"] as $idx_field => $kolom)
-                {
-                    /* cek mapping kolom PDDIKTI dengan kolom Institusi */
-                    echo (($this->mapdb["table"][$tabel["table"]]["nama"][$idx_field]=="") ? "Warning! Field ".$tabel["table"].".".$idx_field." belum dipetakan" : "Field ".$tabel["table"].".".$idx_field." dipetakan ke field ".$this->mapdb["table"][$tabel["table"]]["nama"].".".$this->mapdb["field"][$tabel["table"]][$idx_field])."<br />";
-                }
-                /* cek keberadaan tabel Institusi */
-                $this->mysqli_mapdb_select($iddb, $tabel["table"], array(), true);
-                echo (($this->db["error"][$iddb]=="") ? "Tabel ".$tabel["table"]." pada Institusi OK" : $this->db["error"][$iddb])."<br />";
-                /* bersih-bersih */
-                $this->mysqli_bersihkan($iddb);
-                unset($listfield);
-            }
+            $i          = 0;
             /* mengirimkan buffer terakhir ke browser, kemudian membersihkan buffer */
             $this->kirim_buffer();
-            /* jika tabel merupakan tabel referensi, maka isinya harus sesuai antara PDDIKTI dengan Institusi */
-            if (strtolower($tabel["jenis"])=="ref")
-            {      
-                /* jika tabel sudah dipetakan, dapatkan data dari institusi */
-                if (!(count($this->mapdb["table"][$tabel["table"]]["nama"])==0 || $this->mapdb["table"][$tabel["table"]]["nama"]==""))
+            /* jika tabel merupakan tabel referensi/non referensi yang dipetakan, dan tidak dikecualikan, maka isinya harus sesuai antara PDDIKTI dengan Institusi */
+            if ((strtolower($tabel["jenis"])=="ref" || in_array($tabel["table"], $nonref)) && !in_array($tabel["table"], $perkecualian))
+            { 
+                $this->cetak_accordion_mulai("Tabel ".$tabel["table"]);
+                /* cek mapping tabel PDDIKTI dengan tabel Institusi, tabel belum dipetakan */
+                if (count($this->mapdb["table"][$tabel["table"]]["nama"])==0 || $this->mapdb["table"][$tabel["table"]]["nama"]=="")
                 {
-                    /* dapatkan data dari institusi */
-                    $this->mysqli_mapdb_select($iddb, $tabel["table"], array("order by" => $this->mapdb["pk"][$tabel["table"]][1], "where" => $this->filter_perbaiki_isnull($this->mapdb["table"][$tabel["table"]]["filter"])));
-                    $kolom        = $this->infokolominstitusi_mapdb($tabel["table"]);
-                    /* header */
-                    foreach ($kolom["value"] as $idx => $value)
+                    echo "<br />Warning! Tabel ".$tabel["table"]." belum dipetakan";
+                }
+                /* tabel sudah dipetakan */
+                else
+                {
+                    echo "<br />Tabel ".$tabel["table"]." dipetakan ke tabel ".$this->mapdb["table"][$tabel["table"]]["nama"]."<br />";
+                    /* mendapatkan daftar kolom PDDIKTI dari tabel spesifik */
+                    $listfield  = $this->GetDictionary($tabel["table"]);
+                    foreach ($listfield["result"] as $idx_field => $kolom)
                     {
-                        $tabel_ref["header"][]  = "ins ".$value;
+                        /* cek mapping kolom PDDIKTI dengan kolom Institusi */
+                        echo "<br />".(($this->mapdb["field"][$tabel["table"]][$idx_field]=="") ? "Warning! Field ".$tabel["table"].".".$idx_field." belum dipetakan" : "Field ".$tabel["table"].".".$idx_field." dipetakan ke field ".$this->mapdb["table"][$tabel["table"]]["nama"].".".$this->mapdb["field"][$tabel["table"]][$idx_field]);
                     }
-                    /* data institusi, 
-                     * data akan disimpan berdasarkan nilai kunci primernya, 
-                     * sehingga akan terlihat apakah dengan primary key yang sama antara data Institusi dan PDDIKTI, memiliki data yang sama
-                     */
-                    while($row = $this->db["result"][$iddb]->fetch_assoc())
-                    {
-                        /* ambil data hanya yang sudah dipetakan saja */
-                        for ($i=0; $i<$kolom["count"]; $i++)
-                        {
-                            /* jika kolom adalah kolom primary key */
-                            if ($kolom["value"][$i] == $this->mapdb["pk"][$tabel["table"]][1]) 
-                            {
-                                /* gunakan nilai dari PK sebagai indeks */
-                                $indeks = trim($row[$this->ignore_alias($kolom["value"][$i])]);
-                                /* tangkap data */
-                                $tabel_ref["data"][$indeks][$i] = $row[$this->ignore_alias($kolom["value"][$i])];
-                            }
-                            /* kolom selain PK */
-                            else
-                            {
-                                /* tangkap data, jika terdapat data dobel, maka digabungkan */
-                                $tabel_ref["data"][$indeks][$i] .= $row[$this->ignore_alias($kolom["value"][$i])]."; ";
-                            }
-                        }
-                    }
+                    /* cek keberadaan tabel Institusi */
+                    $this->mysqli_mapdb_select($iddb, $tabel["table"], array(), true);
+                    echo "<br />".(($this->db["error"][$iddb]=="") ? "Tabel ".$tabel["table"]." pada Institusi OK" : $this->db["error"][$iddb])."<br />";
                     /* bersih-bersih */
                     $this->mysqli_bersihkan($iddb);
-                    unset($kolom);
+                    unset($listfield);
                 }
-                /* dapatkan data dari PDDIKTI */
-                /* kecuali yang terdaftar dalam array exception */
-                if (!in_array($tabel["table"], $exception))
+                /* tidak menampilkan ketika pemetaan pk belum ada */
+                if ($this->mapdb["pk"][$tabel["table"]][0] == "" || $this->mapdb["pk"][$tabel["table"]][1] == "")
                 {
-                    $baris  = $this->GetCountRecordset($tabel["table"])["result"];
+                    $pemetaanpk = false;
+                    echo "<br />Warning! Tabel ".$tabel["table"]." belum dipetakan primary key-nya";
+                }
+                /* jika tabel sudah dipetakan, dapatkan data dari institusi */
+//                else 
+                {
+                    if ($pemetaanpk && !(count($this->mapdb["table"][$tabel["table"]]["nama"])==0 || $this->mapdb["table"][$tabel["table"]]["nama"]==""))
+                    {
+                        /* dapatkan data dari institusi */
+                        $this->mysqli_mapdb_select($iddb, $tabel["table"], array("order by" => $this->mapdb["pk"][$tabel["table"]][1], "where" => $this->filter_perbaiki_isnull($this->mapdb["table"][$tabel["table"]]["filter"])));
+                        $kolom        = $this->infokolominstitusi_mapdb($tabel["table"]);
+                        /* header */
+                        foreach ($kolom["value"] as $idx => $value)
+                        {
+                            $tabel_ref["header"][]  = "ins ".$value;
+                        }
+                        /* data institusi, 
+                         * data akan disimpan berdasarkan nilai kunci primernya, 
+                         * sehingga akan terlihat apakah dengan primary key yang sama antara data Institusi dan PDDIKTI, memiliki data yang sama
+                         */
+                        while($row = $this->db["result"][$iddb]->fetch_assoc())
+                        {
+                            /* ambil data hanya yang sudah dipetakan saja */
+                            for ($i=0; $i<$kolom["count"]; $i++)
+                            {
+                                /* jika kolom adalah kolom primary key */
+                                if ($kolom["value"][$i] == $this->mapdb["pk"][$tabel["table"]][1]) 
+                                {
+                                    /* gunakan nilai dari PK sebagai indeks */
+                                    $indeks = trim($row[$this->ignore_alias($kolom["value"][$i])]);
+                                    /* tangkap data */
+                                    $tabel_ref["data"][$indeks][$i] = $row[$this->ignore_alias($kolom["value"][$i])];
+                                }
+                                /* kolom selain PK */
+                                else
+                                {
+                                    /* tangkap data, jika terdapat data dobel, maka digabungkan */
+                                    $tabel_ref["data"][$indeks][$i] .= $row[$this->ignore_alias($kolom["value"][$i])]."; ";
+                                }
+                            }
+                        }
+                        /* bersih-bersih */
+                        $this->mysqli_bersihkan($iddb);
+                        unset($kolom);
+                    }
+                    /* dapatkan data dari PDDIKTI */                
                     /* mendapakan 1 baris saja untuk mendapatkan nama field */
-                    $hasil = $this->GetRecordset($tabel["table"], "", "", 1, 0);
+                    $hasil  = $this->GetRecordset($tabel["table"], "", "", 1, 0);
                     /* header */
                     foreach ($hasil["result"][0] as $idx => $value)
                     {
@@ -1044,36 +1078,37 @@ class webservice
                     {
                         $this->print_r_rapi($hasil);
                     }
-                    /* data diambil per $pddikti["ws"]["limit"] baris agar tidak kehabisan memory */
-                    for ($awal=0; $awal < $baris; $awal+=$this->pddikti["ws"]["limit"])
+//                    if ($pemetaanpk)
                     {
-                        /* ambil data secara parsial, sesuai dengan limit */
-                        $hasil = $this->GetRecordset($tabel["table"], "", "", $this->pddikti["ws"]["limit"], $awal);
-                        foreach ($hasil["result"] as $kolom => $row)
+                        $baris  = $this->GetCountRecordset($tabel["table"])["result"];
+                        /* data diambil per $pddikti["ws"]["limit"] baris agar tidak kehabisan memory */
+                        for ($awal=0; $awal < $baris; $awal+=$this->pddikti["ws"]["limit"])
                         {
-                            /* kolom dari data PDDIKTI ($j) dimulai dari sebelah kolom yang sudah dipakai oleh data institusi ($i) */
-                            $j  = $i;
-                            /* data */
-                            foreach ($row as $idx => $value)
+                            /* ambil data secara parsial, sesuai dengan limit */
+                            $hasil = $this->GetRecordset($tabel["table"], "", "", $this->pddikti["ws"]["limit"], $awal);
+                            foreach ($hasil["result"] as $kolom => $row)
                             {
+                                /* kolom dari data PDDIKTI ($j) dimulai dari sebelah kolom yang sudah dipakai oleh data institusi ($i) */
+                                $j      = $i;
                                 /* gunakan nilai dari PK sebagai indeks */
-                                if ($idx == $this->mapdb["pk"][$tabel["table"]][0])
+                                $indeks = trim($row[$this->mapdb["pk"][$tabel["table"]][0]]);
+                                /* data */
+                                foreach ($row as $idx => $value)
                                 {
-                                    $indeks = trim($value);
+                                    /* tangkap data */
+                                    $tabel_ref["data"][$indeks][$j]  = $value;
+                                    $j++;
                                 }
-                                /* tangkap data */
-                                $tabel_ref["data"][$indeks][$j]  = $value;
-                                $j++;
                             }
                         }
                     }
+                    /* cetak data institusi dan PDDIKTI */
+                    $this->cetak_tabel($tabel_ref["header"], $tabel_ref["data"]);
+                    /* bersih-bersih */
+                    unset($hasil);
+                    unset($tabel_ref);
                 }
-                /* cetak data institusi dan PDDIKTI */
-                $this->cetak_tabel($tabel_ref["header"], $tabel_ref["data"]);
                 $this->cetak_accordion_akhiri();
-                /* bersih-bersih */
-                unset($hasil);
-                unset($tabel_ref);
             }
         }
         /* bersih-bersih */
@@ -1129,12 +1164,14 @@ class webservice
      * - filter data yang akan diambil (PDDIKTI) - OPSIONAL, default: ""
      * @param type $filterIns
      * - filter data yang akan diambil (Institusi) - OPSIONAL, default: ""
+     * @param type $error
+     * - jumlah error dari proses sebalumnya - OPSIONAL, default: 0
      */
-    function pddikti_sinkron_guid($tabel, $filter="", $filterIns = "")
+    function pddikti_sinkron_guid($tabel, $filter="", $filterIns = "", $error = 0)
     {
         foreach ($this->mapdb["guid"][$tabel] as $mapdb_guid)
         {
-            $this->pddikti_sinkron_guid_tunggal ($tabel, $mapdb_guid, $filter, $filterIns);
+            $this->pddikti_sinkron_guid_tunggal ($tabel, $mapdb_guid, $filter, $filterIns, $error);
         }
         //$this->filtertahunakademik($inject["tahunakademik"], "=", $inject["istahunakademikkrs"], $tahunakademikkrs, $tahunakademiksebelum)
     }
@@ -1152,12 +1189,14 @@ class webservice
      * - tahun akademik krs sebelumnya
      * @param type $filter
      * - filter data yang akan diambil (PDDIKTI) - OPSIONAL, default: ""
+     * @param type $error
+     * - jumlah error dari proses sebalumnya - OPSIONAL, default: 0
      */
-    function pddikti_sinkron_guid_filterinjek($tabel, $inject, $tahunakademikkrs, $tahunakademiksebelum, $filter="")
+    function pddikti_sinkron_guid_filterinjek($tabel, $inject, $tahunakademikkrs, $tahunakademiksebelum, $filter="", $error=0)
     {
         foreach ($this->mapdb["guid"][$tabel] as $mapdb_guid)
         {
-            $this->pddikti_sinkron_guid_tunggal ($tabel, $mapdb_guid, $filter, $this->filtertahunakademik($inject["tahunakademik"], "=", $inject["istahunakademikkrs"], $tahunakademikkrs, $tahunakademiksebelum, $mapdb_guid["tahunakademikinjectdipakai"]));
+            $this->pddikti_sinkron_guid_tunggal ($tabel, $mapdb_guid, $filter, $this->filtertahunakademik($inject["tahunakademik"], "=", $inject["istahunakademikkrs"], $tahunakademikkrs, $tahunakademiksebelum, $mapdb_guid["tahunakademikinjectdipakai"]), $error);
         }
     }
 
@@ -1171,8 +1210,10 @@ class webservice
      * - filter data yang akan diambil (PDDIKTI) - OPSIONAL, default: ""
      * @param type $filterIns
      * - filter data yang akan diambil (Institusi) - OPSIONAL, default: ""
+     * @param type $error
+     * - jumlah error dari proses sebalumnya - OPSIONAL, default: 0
      */
-    private function pddikti_sinkron_guid_tunggal($tabel, $mapdb_guid, $filter="", $filterIns = "")
+    private function pddikti_sinkron_guid_tunggal($tabel, $mapdb_guid, $filter="", $filterIns = "", $error=0)
     {
         /* ambil nama tabel, karena nama tabel bisa lebih dari satu kata, di mana kata pertama adalah nama tabel, sedangkan kata berikutnya adalah keterangan */
         $tabel_asli = split(" ", $tabel)[0];
@@ -1195,172 +1236,177 @@ class webservice
                 $this->cetak_accordion_akhiri();
                 echo "<br />Tidak ada data yang akan diproses<br />"; 
             }
-            /* ada data */
-            else 
+            /* ada data dan jumlah data tidak sama dengan error sebelumnya */
+            else if ($this->db["result"][$iddb]->num_rows != $error)
             {
                 echo "<br />Terdapat ".$this->db["result"][$iddb]->num_rows." data yang akan diproses<br />";
-            }
-            /* proses sinkronisasi jika terdapat GUID yang masih kosong (null) */
-            if ($this->db["result"][$iddb]->num_rows > 0)
-            {
-                $proses = 0;
-                $error  = 0;
-                /* ambil variabel dari mapdb */
-                $v0     = explode(",", $mapdb_guid["variable"][0]); //variabel pddikti
-                $v1     = explode(",", $mapdb_guid["variable"][1]); //variabel institusi
-                /* memulai membuat tabel secara terpisah (harus diakhiri dengan cetak_tabel_parsial_akhiri) */
-                $this->cetak_tabel_parsial_mulai();
-                /* cetak headaer */
-                $this->cetak_tabel_parsial(array_merge($this->db["field"][$iddb], array("no sync"), array("keterangan")), true);
-                /* data institusi yang GUID masih kosong (null) */
-                while($row = $this->db["result"][$iddb]->fetch_row())
+                /* proses sinkronisasi jika terdapat GUID yang masih kosong (null) */
+                if ($this->db["result"][$iddb]->num_rows > 0)
                 {
-                    $proses++;
-                    /* catat no urut proses */
-                    $row["syn"] = $proses;
-                    /* cari info guid di feeder pddikti */
-                    $v  = array();
-                    reset($v0);
-                    /* membuat string parameter, misalnya: trim(npsn)='053033' */
-                    foreach ($v0 as $idx => $value)
+                    $proses = 0;
+                    $error  = 0;
+                    /* ambil variabel dari mapdb */
+                    $v0     = explode(",", $mapdb_guid["variable"][0]); //variabel pddikti
+                    $v1     = explode(",", $mapdb_guid["variable"][1]); //variabel institusi
+                    /* memulai membuat tabel secara terpisah (harus diakhiri dengan cetak_tabel_parsial_akhiri) */
+                    $this->cetak_tabel_parsial_mulai();
+                    /* cetak headaer */
+                    $this->cetak_tabel_parsial(array_merge($this->db["field"][$iddb], array("no sync"), array("keterangan")), true);
+                    /* data institusi yang GUID masih kosong (null) */
+                    while($row = $this->db["result"][$iddb]->fetch_row())
                     {
-                          /* rule nama kolom PDDIKTI:
-                           * dengan raw.  -> nama kolom akan ditampilkan tanpa alias, contoh: raw.kolom1 akan ditampilkan kolom1
-                           * tanpa  raw.  -> diberikan fungsi trim pada nama kolom,   contoh: kolom1     akan ditampilkan trim(kolom1)
-                           * dengan alias -> nama kolom akan ditampilkan apa adanya,  contoh: p.kolom1   akan ditampilkan p.kolom1
-                           */
-                          /*
-                           * penggunaan upper dan lower akan disamakan antara PDDIKTI dan Institusi
-                           */
-                          $awalan     = ((substr_count($v1[$idx], "upper")>0)?" upper(":((substr_count($v1[$idx], "lower")>0)?" lower(":""));
-                          $akhiran    = ((substr_count($v1[$idx], "upper")>0) || (substr_count($v1[$idx], "lower")>0)?")":"");
-                          $v[]        = $awalan.((!(substr_count($value, ".")>0 || substr_count($value, "raw.")>0)) ? "trim(".$value.")".$akhiran."='".$row[$idx+1]."'" : ((substr_count($value, "raw.")>0)?substr($value, 4):$value).$akhiran."='".$row[$idx+1]."'");
-                    }
-                    /* mendapatkan data di PDDIKTI sesuai dengan parameter di atas */
-                    $rec = $this->GetRecordset($tabel_asli, (($filter)?$filter." and ":"").implode(" and ", $v));
-                    /* data pada PDDIKTI kosong, berarti ada data yang ada di Institusi tetapi belum masuk ke PDDIKTI, tingkatkan jumlah kesalahan dan tampilkan pesan kesalahan */
-                    if (!is_array($rec["result"]))
-                    {
-                          $error++;
-                          $row["ket"] = "filter ".(($filter)?$filter." and ":"").implode(" and ", $v)." tidak ditemukan di tabel $tabel_asli FEEDER PDDIKTI";
-                          $this->cetak_tabel_parsial($row);
-                    }
-                    /* data yang ditemukan pada PDDIKTI lebih dari satu, 
-                     * membutuhkan penanganan manual 
-                     */
-                    elseif (count($rec["result"]) > 1) 
-                    {
-                        /* forcedouble untuk tabel PDDIKTI (mapping.inc.php) ini tidak diisi, tingkatkan jumlah kesalahan dan tampilkan pesan kesalahan (tabel di dalam tabel) */
-                        if (!is_array($mapdb_guid["forcedouble"]))
+                        $proses++;
+                        /* catat no urut proses */
+                        $row["syn"] = $proses;
+                        /* cari info guid di feeder pddikti */
+                        $v  = array();
+                        reset($v0);
+                        /* membuat string parameter, misalnya: trim(npsn)='053033' */
+                        foreach ($v0 as $idx => $value)
                         {
-                            $error++;
-                            $row["ket"] = "filter ".implode(" dan ", $v)." ditemukan lebih dari satu di tabel $tabel_asli FEEDER PDDIKTI"
-                                          .$this->cetak_tabel_parsial_mulai(2, 2)
-                                          .$this->cetak_tabel_parsial($rec["result"], false, 2, 2)
-                                          .$this->cetak_tabel_parsial_akhiri(2, 2);
+                              /* rule nama kolom PDDIKTI:
+                               * dengan raw.  -> nama kolom akan ditampilkan tanpa alias, contoh: raw.kolom1 akan ditampilkan kolom1
+                               * tanpa  raw.  -> diberikan fungsi trim pada nama kolom,   contoh: kolom1     akan ditampilkan trim(kolom1)
+                               * dengan alias -> nama kolom akan ditampilkan apa adanya,  contoh: p.kolom1   akan ditampilkan p.kolom1
+                               */
+                              /*
+                               * penggunaan upper dan lower akan disamakan antara PDDIKTI dan Institusi
+                               */
+                              $awalan     = ((substr_count($v1[$idx], "upper")>0)?" upper(":((substr_count($v1[$idx], "lower")>0)?" lower(":""));
+                              $akhiran    = ((substr_count($v1[$idx], "upper")>0) || (substr_count($v1[$idx], "lower")>0)?")":"");
+                              $v[]        = $awalan.((!(substr_count($value, ".")>0 || substr_count($value, "raw.")>0)) ? "trim(".$value.")".$akhiran."='".$row[$idx+1]."'" : ((substr_count($value, "raw.")>0)?substr($value, 4):$value).$akhiran."='".$row[$idx+1]."'");
                         }
-                        /* forcedouble untuk tabel PDDIKTI (mapping.inc.php) ini tidak diisi, penanganan otomatis */
-                        else
+                        /* mendapatkan data di PDDIKTI sesuai dengan parameter di atas */
+                        $rec = $this->GetRecordset($tabel_asli, (($filter)?$filter." and ":"").implode(" and ", $v));
+                        /* data pada PDDIKTI kosong, berarti ada data yang ada di Institusi tetapi belum masuk ke PDDIKTI, tingkatkan jumlah kesalahan dan tampilkan pesan kesalahan */
+                        if (!is_array($rec["result"]))
                         {
-                            /* tampilkan pemberitahuan (tabel di dalam tabel) */
-                            $row["ket"] = "notice! filter ".implode(" dan ", $v)." ditemukan lebih dari satu di tabel $tabel_asli FEEDER PDDIKTI, tetapi sudah dijadikan satu."
-                                          .$this->cetak_tabel_parsial_mulai(2, 2)
-                                          .$this->cetak_tabel_parsial($rec["result"], false, 2, 2)
-                                          .$this->cetak_tabel_parsial_akhiri(2, 2);
-                            /* $upd: siapkan 1 data diantara data yang dobel sebagai data baru, sehingga data tidak dobel lagi */
-                            $upd        = $rec["result"][count($rec["result"]) - 1][$mapdb_guid["forcedouble"]["field"]];
-                            /* samakan data dobel pada tabel Institusi */
-                            $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."='".$upd."' where ".$this->mapdb["pk"][$tabel][1]."='".$row[0]."'");
-                            /* iterasi pada data dobel PDDIKTI */
-                            foreach ($rec["result"] as $idx => $val)
-                            {
-                                /* jika data layak untuk diupdate (lihat $upd di atas) */
-                                if ($val[$mapdb_guid["forcedouble"]["field"]] != $upd)
-                                {
-                                    /* menggabungkan data pada kolom yang terdefinisi pada forcedouble (mapping.inc.php) dengan 1 data ($upd) */
-                                    $dataupdate = array(array("key"=>array($mapdb_guid["forcedouble"]["field"] => $val[$mapdb_guid["forcedouble"]["field"]]), "data"=>array($mapdb_guid["forcedouble"]["field"]=>$upd)));
-                                    $hasil = $this->UpdateRecordset($mapdb_guid["forcedouble"]["table"], $dataupdate);
-                                    /* tampilkan pesan kesalahan jika proses penggabungan gagal */
-                                    if ($hasil["result"]["error_desc"] != "") 
-                                    {
-                                        $row["ket"] .= "<br />Error: ".$hasil["result"]["error_desc"];
-                                    }
-                                    /* hapus data dobel, sisa dari penggabungan */
-                                    $datadelete = array(array($mapdb_guid["forcedouble"]["field"] => $val[$mapdb_guid["forcedouble"]["field"]]));
-                                    $this->DeleteRecordset($mapdb_guid["forcedouble"]["table"], $datadelete);
-                                    /* bersih-bersih */
-                                    unset($dataupdate, $datadelete);
-                                }
-                            }  
+                              $error++;
+                              $row["ket"] = "filter ".(($filter)?$filter." and ":"").implode(" and ", $v)." tidak ditemukan di tabel $tabel_asli FEEDER PDDIKTI";
+                              $this->cetak_tabel_parsial($row);
                         }
-                        $this->cetak_tabel_parsial($row);
-                    }
-                    /* ditemukan 1 guid yang cocok, perbaharui guid di tabel Institusi */
-                    else 
-                    {
-                        /* ambil nama kolom di PDDIKTI di mana guid berada */
-                        $g    = explode(",", $mapdb_guid["guid"][0]);
-                        /* guid pertama ada isinya */
-                        if ($rec["result"][0][$g[0]] != "")
+                        /* data yang ditemukan pada PDDIKTI lebih dari satu, 
+                         * membutuhkan penanganan manual 
+                         */
+                        elseif (count($rec["result"]) > 1) 
                         {
-                            reset($g);
-                            $upd  = array();
-                            /* buat guid yang diambil dari PDDIKTI, jika lebih dari satu kolom maka akan digabungkan*/
-                            foreach ($g as $idx => $val)
-                            {
-                                $upd[]  = "'".$rec["result"][0][$val]."'";
-                            }
-                            $upd  = "concat(".implode(",", $upd).")";
-                            /* eksekusi pembaharuan guid ke tabel Institusi */
-                            echo "<br />Sync >>".$proses.">> table institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."=".$upd." dimana ".$this->mapdb["pk"][$tabel][1]."='".$row[0]."' [OK]";
-                            $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."=".$upd." where ".$this->mapdb["pk"][$tabel][1]."='".$row[0]."'");
-                            /* tampilkan pesan kesalahan jika proses pembaharuan gagal */
-                            if ($this->db["error"][$iddb] != "") 
+                            /* forcedouble untuk tabel PDDIKTI (mapping.inc.php) ini tidak diisi, tingkatkan jumlah kesalahan dan tampilkan pesan kesalahan (tabel di dalam tabel) */
+                            if (!is_array($mapdb_guid["forcedouble"]))
                             {
                                 $error++;
-                                echo "Error! ".$this->db["error"][$iddb];
+                                $row["ket"] = "filter ".implode(" dan ", $v)." ditemukan lebih dari satu di tabel $tabel_asli FEEDER PDDIKTI"
+                                              .$this->cetak_tabel_parsial_mulai(2, 2)
+                                              .$this->cetak_tabel_parsial($rec["result"], false, 2, 2)
+                                              .$this->cetak_tabel_parsial_akhiri(2, 2);
                             }
-                        }
-                        /* guid pertama kosong, tampilkan pesan kesalahan */
-                        else
-                        {
-                            $error++;
-                            $row["ket"] = "filter ".implode(" dan ", $v)." tidak ditemukan di tabel $tabel_asli FEEDER PDDIKTI";
+                            /* forcedouble untuk tabel PDDIKTI (mapping.inc.php) ini tidak diisi, penanganan otomatis */
+                            else
+                            {
+                                /* tampilkan pemberitahuan (tabel di dalam tabel) */
+                                $row["ket"] = "notice! filter ".implode(" dan ", $v)." ditemukan lebih dari satu di tabel $tabel_asli FEEDER PDDIKTI, tetapi sudah dijadikan satu."
+                                              .$this->cetak_tabel_parsial_mulai(2, 2)
+                                              .$this->cetak_tabel_parsial($rec["result"], false, 2, 2)
+                                              .$this->cetak_tabel_parsial_akhiri(2, 2);
+                                /* $upd: siapkan 1 data diantara data yang dobel sebagai data baru, sehingga data tidak dobel lagi */
+                                $upd        = $rec["result"][count($rec["result"]) - 1][$mapdb_guid["forcedouble"]["field"]];
+                                /* samakan data dobel pada tabel Institusi */
+                                $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."='".$upd."' where ".$this->mapdb["pk"][$tabel][1]."='".$row[0]."'");
+                                /* iterasi pada data dobel PDDIKTI */
+                                foreach ($rec["result"] as $idx => $val)
+                                {
+                                    /* jika data layak untuk diupdate (lihat $upd di atas) */
+                                    if ($val[$mapdb_guid["forcedouble"]["field"]] != $upd)
+                                    {
+                                        /* menggabungkan data pada kolom yang terdefinisi pada forcedouble (mapping.inc.php) dengan 1 data ($upd) */
+                                        $dataupdate = array(array("key"=>array($mapdb_guid["forcedouble"]["field"] => $val[$mapdb_guid["forcedouble"]["field"]]), "data"=>array($mapdb_guid["forcedouble"]["field"]=>$upd)));
+                                        $hasil = $this->UpdateRecordset($mapdb_guid["forcedouble"]["table"], $dataupdate);
+                                        /* tampilkan pesan kesalahan jika proses penggabungan gagal */
+                                        if ($hasil["result"]["error_desc"] != "") 
+                                        {
+                                            $row["ket"] .= "<br />Error: ".$hasil["result"]["error_desc"];
+                                        }
+                                        /* hapus data dobel, sisa dari penggabungan */
+                                        $datadelete = array(array($mapdb_guid["forcedouble"]["field"] => $val[$mapdb_guid["forcedouble"]["field"]]));
+                                        $this->DeleteRecordset($mapdb_guid["forcedouble"]["table"], $datadelete);
+                                        /* bersih-bersih */
+                                        unset($dataupdate, $datadelete);
+                                    }
+                                }  
+                            }
                             $this->cetak_tabel_parsial($row);
                         }
-                        /* kirim data ke browser setiap 50 proses */
-                        if ($proses % 50 == 0)
+                        /* ditemukan 1 guid yang cocok, perbaharui guid di tabel Institusi */
+                        else 
                         {
-                            echo "<br />Sync ".$tabel." ($proses dari ".$this->db["result"][$iddb]->num_rows.")...<br />";
-                            $this->kirim_buffer();
+                            /* ambil nama kolom di PDDIKTI di mana guid berada */
+                            $g    = explode(",", $mapdb_guid["guid"][0]);
+                            /* guid pertama ada isinya */
+                            if ($rec["result"][0][$g[0]] != "")
+                            {
+                                reset($g);
+                                $upd  = array();
+                                /* buat guid yang diambil dari PDDIKTI, jika lebih dari satu kolom maka akan digabungkan*/
+                                foreach ($g as $idx => $val)
+                                {
+                                    $upd[]  = "'".$rec["result"][0][$val]."'";
+                                }
+                                $upd  = "concat(".implode(",", $upd).")";
+                                /* eksekusi pembaharuan guid ke tabel Institusi */
+                                $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."=".$upd." where ".$this->mapdb["pk"][$tabel][1]."='".$row[0]."'");
+                                echo "<br />Sync >>".$proses.">> table institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."=".$upd." dimana ".$this->mapdb["pk"][$tabel][1]."='".$row[0]."' [".$this->db["info"][$iddb]."]";
+                                /* tampilkan pesan kesalahan jika proses pembaharuan gagal */
+                                if ($this->db["error"][$iddb] != "") 
+                                {
+                                    $error++;
+                                    echo "Error! ".$this->db["error"][$iddb];
+                                }
+                            }
+                            /* guid pertama kosong, tampilkan pesan kesalahan */
+                            else
+                            {
+                                $error++;
+                                $row["ket"] = "filter ".implode(" dan ", $v)." tidak ditemukan di tabel $tabel_asli FEEDER PDDIKTI";
+                                $this->cetak_tabel_parsial($row);
+                            }
+                            /* kirim data ke browser setiap 50 proses */
+                            if ($proses % 50 == 0)
+                            {
+                                echo "<br />Sync ".$tabel." ($proses dari ".$this->db["result"][$iddb]->num_rows.")...<br />";
+                                $this->kirim_buffer();
+                            }
+                            /* bersih-bersih */
+                            unset($g);
                         }
                         /* bersih-bersih */
-                        unset($g);
+                        unset($rec);
+                    } //-->end while
+                    echo "<br />Sync ".$tabel." ($proses dari ".$this->db["result"][$iddb]->num_rows.")...<br />";
+                    /* mengakhiri membuat tabel secara terpisah */
+                    $this->cetak_tabel_parsial_akhiri();
+                    $this->cetak_accordion_akhiri();
+                    /* informasikan status sync */
+                    if ($error == 0)
+                    {
+                        echo "$proses proses sync berhasil";
+                    }
+                    else
+                    {
+                        echo "$error kesalahan ditemukan pada $proses proses sync";
                     }
                     /* bersih-bersih */
-                    unset($rec);
-                } //-->end while
-                echo "<br />Sync ".$tabel." ($proses dari ".$this->db["result"][$iddb]->num_rows.")...<br />";
-                /* mengakhiri membuat tabel secara terpisah */
-                $this->cetak_tabel_parsial_akhiri();
-                $this->cetak_accordion_akhiri();
-                /* informasikan status sync */
-                if ($error == 0)
-                {
-                    echo "$proses proses sync berhasil";
+                    unset($row);
+                    unset($v0, $v1, $v);
                 }
+                /* tidak terdapat GUID yang masih kosong (null) */
                 else
                 {
-                    echo "$error kesalahan ditemukan pada $proses proses sync";
+                    echo "Tidak ada proses sync. Mungkin semua data sudah sinkron";
                 }
-                /* bersih-bersih */
-                unset($row);
-                unset($v0, $v1, $v);
             }
-            /* tidak terdapat GUID yang masih kosong (null) */
             else
             {
-              echo "Tidak ada proses sync. Mungkin semua data sudah sinkron";
+                $this->cetak_accordion_akhiri();
+                echo "Tidak perlu sync, karena jumlah error sama dengan proses sebelumnya";
             }
             /* bersih-bersih */
             $this->mysqli_bersihkan($iddb);
@@ -1461,7 +1507,7 @@ class webservice
         echo "<h1>Daftar pengajar yang tidak ada di dalam penugasan tahun ".substr($tahunakademik_, 0, 4)."</h1>";
         $iddb = $this->mysqli_terhubung();
         /* dapatkan daftar pengajar yang tidak ada di dalam penugasan pada tahunakademik bersangkutan */
-        $que  = "select distinct guiddosen, namalengkap from ((select guiddosen, namalengkap from ak_jadwalkuliah jk join ak_timteaching tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_penawaranmatakuliah pm on pm.kdpenawaran=tt.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed where tt.kdtahunakademik=".$tahunakademik_." and tt.isignore=0 and pm.isignore=0 and jk.kdtahunakademik=".$tahunakademik_." and pm.kdtahunakademik=".$tahunakademik_." and isrealisasi=1) union all (select guiddosen, namalengkap from ak_jadwalkuliah_lab jk join ak_timteaching_lab tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_kelompok kl on kl.kdkelompok=tt.kdkelompok join ak_penawaranmatakuliah pm on pm.kdpenawaran=kl.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed where tt.kdtahunakademik=".$tahunakademik_." and tt.isignore=0 and pm.isignore=0 and jk.kdtahunakademik=".$tahunakademik_." and pm.kdtahunakademik=".$tahunakademik_." and isrealisasi=1)) cek_dosen where guiddosen not in (select id_sdm from ak_penugasan where tahun=left(".$tahunakademik_.", 4))";
+        $que  = "select distinct guiddosen, namalengkap from ((select guiddosen, namalengkap from ak_jadwalkuliah jk join ak_timteaching tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_penawaranmatakuliah pm on pm.kdpenawaran=tt.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed where tt.kdtahunakademik=".$tahunakademik_." and tt.isignore=0 and pm.isignore=0 and jk.kdtahunakademik=".$tahunakademik_." and pm.kdtahunakademik=".$tahunakademik_." and isrealisasi in (1,4)) union all (select guiddosen, namalengkap from ak_jadwalkuliah_lab jk join ak_timteaching_lab tt on tt.kdtimteaching=ifnull(jk.kdtimteachingperubahan, jk.kdtimteaching) join ak_kelompok kl on kl.kdkelompok=tt.kdkelompok join ak_penawaranmatakuliah pm on pm.kdpenawaran=kl.kdpenawaran join pt_person p on p.kdperson=tt.kdpersonepsbed where tt.kdtahunakademik=".$tahunakademik_." and tt.isignore=0 and pm.isignore=0 and jk.kdtahunakademik=".$tahunakademik_." and pm.kdtahunakademik=".$tahunakademik_." and isrealisasi in (1,4))) cek_dosen where guiddosen not in (select id_sdm from ak_penugasan where tahun=left(".$tahunakademik_.", 4))";
         $this->mysqli_select($iddb, $que);
         /* memulai membuat tabel secara terpisah (harus diakhiri dengan cetak_tabel_parsial_akhiri) */
         $this->cetak_tabel_parsial_mulai();
@@ -1503,7 +1549,7 @@ class webservice
         {
             /* eksekusi update */
             $this->mysqli_iud($iddb, "update ".$this->mapdb["updatenidn"]["table"][1]." set ".$this->mapdb["updatenidn"]["nidn"][1]."='".$row[$this->ignore_alias($this->mapdb["updatenidn"]["nidn"][0])]."' where ".str_replace(":guid",$row[$this->ignore_alias($this->mapdb["updatenidn"]["guid"])],$this->mapdb["updatenidn"]["filter"]));
-            echo "<b>Ubah >> ".$row[$this->mapdb["updatenidn"]["info"]]." ".$row[$this->ignore_alias($this->mapdb["updatenidn"]["guid"])]." > </b>".$this->mapdb["updatenidn"]["nidn"][1]."='".$row[$this->ignore_alias($this->mapdb["updatenidn"]["nidn"][0])]."'<br/>";
+            echo "<b>Ubah >> ".$row[$this->mapdb["updatenidn"]["info"]]." ".$row[$this->ignore_alias($this->mapdb["updatenidn"]["guid"])]." > </b>".$this->mapdb["updatenidn"]["nidn"][1]."='".$row[$this->ignore_alias($this->mapdb["updatenidn"]["nidn"][0])]."' [".$this->db["info"][$iddb]."]<br/>";
             /* kirim data ke browser setiap 50 proses */
             if (++$proses % 50 == 0)
             {
@@ -1627,15 +1673,19 @@ class webservice
       /* cek keaktifan tahunakademik */
       $is_aktif[$tahunakademikkrs]      = $this->is_tahunakademikaktif($tahunakademikkrs);
       $is_aktif[$tahunakademiksebelum]  = $this->is_tahunakademikaktif($tahunakademiksebelum);
-      /* cek data penugasan terlebih dahulu, jika belum semua dosen ditugaskan, maka proses injek untuk ajar_dosen dibatalkan */
-      if(!$this->cek_penugasan($tahunakademikkrs) && $tabelinjectindividual == "ajar_dosen")
+      if (!$this->issudahcekpenugasan)
       {
-          echo "<br /><H2>Belum semua Dosen didaftarkan pada Penugasan, proses INJECT PDDIKTI dibatalkan. Silakan daftarkan semua nama Dosen di atas<br />Coba cari terlebih dahulu dosen di tabel di atas by nama, siapa tahu UUID/GUID nya berubah.";
-          exit();
+        /* cek data penugasan terlebih dahulu, jika belum semua dosen ditugaskan, maka proses injek untuk ajar_dosen dibatalkan */
+        if(!$this->cek_penugasan($tahunakademikkrs) && $tabelinjectindividual == "ajar_dosen")
+        {
+            echo "<br /><H2>Belum semua Dosen didaftarkan pada Penugasan, proses INJECT PDDIKTI dibatalkan. Silakan daftarkan semua nama Dosen di atas<br />Coba cari terlebih dahulu dosen di tabel di atas by nama, siapa tahu UUID/GUID nya berubah.";
+            exit();
+        }
+        $this->issudahcekpenugasan = true;
       }
       $iddb = $this->mysqli_terhubung();
       foreach ($this->mapdb[$modeinjek] as $tabel => $inject)
-      {
+      {            
         /* eksekusi: 
          * jika tabelinjectindividual tidak kosong maka eksekusi sesuai tabelinjectindividual saja
          * atau jika sebaliknya maka eksekusi yang ignoreinject=false
@@ -1670,7 +1720,8 @@ class webservice
           }*/
           $this->cetak_accordion_mulai("Inject $tabel ".(($inject["istahunakademikkrs"]) ? $tahunakademikkrs : $tahunakademiksebelum)." - Metode ".$inject["type"]);
           /* cek apakah perlu dilanjutkan (tahun akademiknya aktif atau tidak terpengaruh tahun akademik) atau tidak */
-          $prosesinjek = (array_key_exists("tahunakademik", $inject)) ? $is_aktif[(($inject["istahunakademikkrs"]) ? $tahunakademikkrs : $tahunakademiksebelum)] : true;
+//          $prosesinjek = (array_key_exists("tahunakademik", $inject)) ? $is_aktif[(($inject["istahunakademikkrs"]) ? $tahunakademikkrs : $tahunakademiksebelum)] : true;
+          $prosesinjek = true;
           if ($prosesinjek)
           {
               /* siapkan kolom-kolom yang digunakan */
@@ -1854,14 +1905,22 @@ class webservice
                     else
                     {
                         $jumlahproses = 0;
-                        foreach($this->mapdb["guid"][$tabel_asli] as $idx => $mapdb_guid)
+                        foreach($this->mapdb["guid"][$tabel] as $idx => $mapdb_guid)
                         {
-                            $this->pddikti_sinkronisasi_injek_update($hasil["result"][$this->mapdb["guid"][$tabel_asli][0]["guid"][0]], $mapdb_guid, $mode, $data, $iddb, $proses, $row[$this->ignore_alias($this->mapdb["pk"][$tabel][1])], $tabel);
+                            $this->pddikti_sinkronisasi_injek_update($hasil["result"][$this->mapdb["guid"][$tabel][0]["guid"][0]], $mapdb_guid, $mode, $data, $iddb, $proses, $row[$this->ignore_alias($this->mapdb["pk"][$tabel][1])], $tabel);
                             $jumlahproses++;
                         }
                         if ($jumlahproses == 0)
                         {
-                            echo "Apakah GUID belum dipetakan untuk $tabel_asli?<br/>";
+                            foreach($this->mapdb["guid"][$tabel_asli] as $idx => $mapdb_guid)
+                            {
+                                $this->pddikti_sinkronisasi_injek_update($hasil["result"][$this->mapdb["guid"][$tabel_asli][0]["guid"][0]], $mapdb_guid, $mode, $data, $iddb, $proses, $row[$this->ignore_alias($this->mapdb["pk"][$tabel][1])], $tabel);
+                                $jumlahproses++;
+                            }
+                            if ($jumlahproses == 0)
+                            {
+                                echo "Apakah GUID belum dipetakan untuk $tabel_asli dan/atau $table?<br/>";
+                            }
                         }
                     }
                     /* kirim data ke browser setiap 50 proses */
@@ -1896,17 +1955,17 @@ class webservice
           $this->kirim_buffer();
         }
         /* sinkronisasi guid semua data yang sudah diinjek (jika issinkron_injek bernilai true) */
-        if ($prosesinjek)
+        if ($prosesinjek && $mode != MODE_INJECT_GAGAL)
         {
           if ($mode == MODE_INJECT_MASSAL && $this->issinkron_injek)
           {
             if (array_key_exists("tahunakademik", $inject))
             {
-                $this->pddikti_sinkron_guid_filterinjek($tabel, $inject, $tahunakademikkrs, $tahunakademiksebelum, "");
+                $this->pddikti_sinkron_guid_filterinjek($tabel, $inject, $tahunakademikkrs, $tahunakademiksebelum, "", $error);
             }
             else
             {
-                $this->pddikti_sinkron_guid($tabel);
+                $this->pddikti_sinkron_guid($tabel, $filter="", $filterIns = "", $error);
             }
           }
           else
@@ -1934,11 +1993,11 @@ class webservice
          print_r($data);
          echo "<b> [OK]</b>";
          /* sinkronisasi jika modenya adalah injek massal */
-         if ($mode == MODE_INJECT_MASSAL)
+         if ($mode == MODE_INJECT_MASSAL || $mode == MODE_INJECT_INDIVIDU)
          {
            $upd  = $hasil;
-           echo "<br /><b>--Sync Sisip >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."=".$upd." dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."'";
            $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."=".$upd." where ".$this->mapdb["pk"][$tabel][1]."='".$row."'");
+           echo "<br /><b>--Sync Sisip >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."=".$upd." dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."' [".$this->db["info"][$iddb]."]";
          }
        }
        /* apabila data berhasil dimasukkan, maka segera update guid yang ada di tabel institusi sesuai dengan guid yang didapatkan dari webservice 
@@ -1950,7 +2009,7 @@ class webservice
          print_r($data);
          echo "<b> [OK]</b>";
          /* sinkronisasi jika modenya adalah injek massal */
-         if ($mode == MODE_INJECT_MASSAL)
+         if ($mode == MODE_INJECT_MASSAL || $mode == MODE_INJECT_INDIVIDU)
          {
            $g    = explode(",", $mapdb_guid["guid"][0]);
            reset($g);
@@ -1960,15 +2019,14 @@ class webservice
                $upd[]  = "'".$row[$this->ignore_alias($this->mapdb["field"][$tabel][$this->ignore_alias($val)])]."'";
            }
            $upd  = "concat(".implode(",", $upd).")";
-           echo "<br /><b>--Sync Sisip >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."=".$upd." dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."'";
            $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."=".$upd." where ".$this->mapdb["pk"][$tabel][1]."='".$row."'");
+           echo "<br /><b>--Sync Sisip >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."=".$upd." dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."' [".$this->db["info"][$iddb]."]";
          }
        }
     }
 
     private function pddikti_sinkronisasi_injek_update($hasil, $mapdb_guid, $mode, $data, $iddb, $proses, $row, $tabel)
     {
-        echo "update";
       /* apabila data berhasil dimasukkan, maka segera update guid yang ada di tabel institusi sesuai dengan guid yang didapatkan dari webservice 
        * guid berada pada satu kolom
        */
@@ -1977,11 +2035,11 @@ class webservice
         echo "<br /><b>Ubah >>".$proses.">> </b>";
         print_r($data);
         echo "<b> [OK]</b>";
-        if ($mode == MODE_INJECT_MASSAL)
+        if ($mode == MODE_INJECT_MASSAL || $mode == MODE_INJECT_INDIVIDU)
         {
-          $upd  = $hasil;
-          echo "<br /><b>--Sync Ubah >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."='".$upd."' dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."'";
-          $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."='".$upd."' where ".$this->mapdb["pk"][$tabel][1]."='".$row."'");
+            $upd  = $hasil;
+            $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."='".$upd."' where ".$this->mapdb["pk"][$tabel][1]."='".$row."'");
+            echo "<br /><b>--Sync Ubah >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."='".$upd."' dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."' [".$this->db["info"][$iddb]."]";
         }
       }
       /* apabila data berhasil dimasukkan, maka segera update guid yang ada di tabel institusi sesuai dengan guid yang didapatkan dari webservice 
@@ -1993,11 +2051,11 @@ class webservice
         //tidak terdapat primary key pada tabel PDDIKTI
         print_r($data);
         echo "<b> [OK]</b>";
-        if ($mode == MODE_INJECT_MASSAL)
+        if ($mode == MODE_INJECT_MASSAL || $mode == MODE_INJECT_INDIVIDU)
         {
-          $upd  = implode("", $data["key"]);
-          echo "<br /><b>--Sync Ubah >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."='".$upd."' dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."'";
-          $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."='".$upd."' where ".$this->mapdb["pk"][$tabel][1]."='".$row."'");
+            $upd  = implode("", $data["key"]);
+            $this->mysqli_iud($iddb, "update ".$mapdb_guid["table"]["update"]." set ".$mapdb_guid["guid"][1]."='".$upd."' where ".$this->mapdb["pk"][$tabel][1]."='".$row."'");
+            echo "<br /><b>--Sync Ubah >>".$proses.">> </b> sync tabel institusi ".$mapdb_guid["table"]["update"]." dengan data ".$mapdb_guid["guid"][1]."='".$upd."' dimana ".$this->mapdb["pk"][$tabel][1]."='".$row."' [".$this->db["info"][$iddb]."]";
         }
       }
     }
@@ -2162,6 +2220,25 @@ class webservice
       }
       return $return;
     }
+    
+    /**
+     * mencetak string atau array
+     * @param type $sel
+     * - sel yang akan dicetak
+     */
+    function cetak_tabel_sel($sel)
+    {
+        if (is_array($sel))
+        {
+            echo "<td><pre>";
+            print_r($sel);
+            echo "</pre></td>";
+        }
+        else
+        {
+            echo "<td>".$sel."</td>";
+        }
+    }
 
     /**
      *  memulai membuat tabel secara terpisah (harus diakhiri dengan cetak_tabel_parsial_akhiri)
@@ -2200,7 +2277,7 @@ class webservice
      * @return string
      * - <tr><td></td></tr>
      */
-    function cetak_tabel_parsial($data, $ignore_count=false, $id=1, $mode=1)
+    function cetak_tabel_parsial($data, $ignore_count=false, $id=1, $mode=1, $include_index=false)
     {
       $ret = "";
       /* menghitung berapa dimensi array */
@@ -2212,9 +2289,13 @@ class webservice
         if ($mode == 1)
         {
           echo "<tr>";
+          if ($include_index)
+          {
+              $this->cetak_tabel_sel("");
+          }
           foreach ($data as $idx => $cell)
           {
-              echo "<td>$cell</td>";
+              $this->cetak_tabel_sel($cell);
           }
           echo "</tr>";
         }
@@ -2222,6 +2303,10 @@ class webservice
         else
         {
           $ret .= "<tr>";
+          if ($include_index)
+          {
+              $ret .= "<td></td>";
+          }
           foreach ($data as $idx => $cell)
           {
               $ret .= "<td>$cell</td>";
@@ -2243,9 +2328,13 @@ class webservice
           foreach ($data as $idx => $value)
           {
             echo "<tr>";
+            if ($include_index)
+            {
+                $this->cetak_tabel_sel($idx);
+            }
             foreach ($value as $idx => $cell)
             {
-                echo "<td>$cell</td>";
+                $this->cetak_tabel_sel($cell);
             }
             echo "</tr>";
           }
@@ -2256,6 +2345,10 @@ class webservice
           foreach ($data as $idx => $value)
           {
             $ret .= "<tr>";
+            if ($include_index)
+            {
+                $ret .= "<td>$idx</td>";
+            }
             foreach ($value as $idx => $cell)
             {
                 $ret .= "<td>$cell</td>";
@@ -2295,7 +2388,7 @@ class webservice
      * @return string
      * - <tr><td></td></tr>
      */
-    function cetak_tabel_parsial_indeks($data, $mode=1)
+    function cetak_tabel_parsial_indeks($data, $mode=1, $include_index=false)
     {
       $ret  = "";
       /* jika data merupakan array */
@@ -2307,9 +2400,13 @@ class webservice
         if ($mode == 1)
         {
           echo "<tr>";
+          if ($include_index)
+          {
+              echo "<td>Item</td>";
+          }
           foreach ($arr as $idx => $val)
           {
-              echo "<td>$idx</td>";
+              echo "<td>".ucwords($idx)."</td>";
           }
           echo "</tr>";
         }
@@ -2409,5 +2506,27 @@ class webservice
       /* bersih-bersih */
       unset($idxList);
       return $tempData;
+    }
+    
+    function visualisasi_pemetaan_injek()
+    {
+        $visual = array();
+        foreach($this->mapdb["inject"] as $idx_ => $val_)
+        {
+            $visual[$val_["ignoreinject"]][$idx_] = [   "type"          => $val_["type"], 
+                                                        "tahunakademik" => $val_["tandatahunakademik"]." ".$val_["tahunakademik"]." ".(($val_["istahunakademikkrs"]) ? "" : $this->tahunakademiksebelum($val_["tandatahunakademik"])),
+                                                        "data"          => ($val_["type"] == "insert") ? $this->mapdb["field"][$idx_] : $val_["fieldupdate"],
+                                                        "filter"        => $val_["filter"],
+                                                        "ideksekusi"    => $val_["ideksekusi"]
+                                                    ];
+        }
+//        echo "<pre>";
+//        print_r($visual[false]);
+//        echo "</pre>";
+        $this->cetak_tabel_parsial_mulai();
+        $this->cetak_tabel_parsial_indeks($visual[false], 1, true);
+        $this->cetak_tabel_parsial($visual[true], true, 1, 1, true);
+        $this->cetak_tabel_parsial($visual[false], true, 1, 1, true);
+        $this->cetak_tabel_parsial_akhiri();
     }
 }

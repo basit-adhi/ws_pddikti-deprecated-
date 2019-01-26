@@ -4,7 +4,7 @@
  * <br/> untuk inisialisasi proses sebelum melakukan aksi yang lain
  * <br/> profil  https://id.linkedin.com/in/basitadhi
  * <br/> buat    2015-10-30
- * <br/> rev     2018-03-27
+ * <br/> rev     2019-01-26
  * <br/> sifat   open source
  * @author Basit Adhi Prabowo, S.T. <basit@unisayogya.ac.id>
  * @access public
@@ -19,20 +19,45 @@ $mapdb  = new mapdb();
 $ws     = new webservice($pddikti, $institusi);
 $ws->setMapdb($mapdb->peta());
 $_a     = filter_input(INPUT_GET, "a", FILTER_SANITIZE_NUMBER_INT);
+//$ws->print_r_rapi($ws->cetak_recordset("bimbing_mahasiswa"));
+//$ws->print_r_rapi($ws->cetak_recordset("uji_mahasiswa"));
+//$ws->print_r_rapi($ws->cetak_recordset("mata_kuliah_kurikulum", "p.id_kurikulum_sp='77c36e5b-032b-4a95-972d-b6f4f0504685' and p.id_mk='6fd06cbe-c7ea-4446-b45f-23b0ec78a960'", "", 1000));
 switch ($_a)
 {
-    case 1: $ws->cek_tabel(); break;
-    case 2: $ws->pddikti_sinkron_guid("satuan_pendidikan"); 
+    case 1: $ws->cek_tabel(array(), array("satuan_pendidikan","sms")); break;
+    case 2: $ws->pddikti_sinkron_guid("satuan_pendidikan institusi"); 
             $temp = $ws->GetRecord("satuan_pendidikan", "npsn='".$pddikti["login"]["username"]."'");
             $ws->pddikti_sinkron_guid("sms", "id_sp='".$temp["result"]["id_sp"]."'");
             $ws->pddikti_sinkron_guid("kurikulum");
             $ws->pddikti_sinkron_guid("mata_kuliah");
+            $ws->pddikti_sinkron_guid("satuan_pendidikan");
             break;
     case 3: $ws->GetDictionary_SemuaTabel(); break;
     case 4: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
             if ($_t > 0)
             {
-                $ws->pddikti_injek($_t);
+                $_n = filter_input(INPUT_GET, "n", FILTER_SANITIZE_NUMBER_INT);
+                switch ($_n)
+                {
+                    case 1:     $ws->pddikti_injek($_t, "mata_kuliah_kurikulum"); break;
+                    case 2:     $ws->pddikti_injek($_t, "kelas_kuliah"); break;
+                    case 3:     $ws->pddikti_injek($_t, "mahasiswa"); break;
+                    case 4:     $ws->pddikti_injek($_t, "mahasiswa_pt"); break;
+                    case 5:     $ws->pddikti_injek($_t, "nilai_transfer"); break;
+                    case 6:     $ws->pddikti_injek($_t, "nilai krs"); break;
+                    case 7:     $ws->pddikti_injek($_t, "nilai update"); break;
+                    case 8:     $ws->pddikti_injek($_t, "kuliah_mahasiswa"); break;
+                    case 9:     $ws->pddikti_injek($_t, "mahasiswa_pt keluar"); break;
+                    case 10:    $ws->pddikti_injek($_t, "mahasiswa_pt lulus"); break;
+                    case 11:    $ws->pddikti_injek($_t, "kuliah_mahasiswa aktif"); break;
+                    case 12:    $ws->pddikti_injek($_t, "kuliah_mahasiswa aktif_update"); break;
+                    case 13:    $ws->pddikti_injek($_t, "aktivitas_mahasiswa tugasakhir");
+                                $ws->pddikti_injek($_t, "anggota_aktivitas_mahasiswa tugasakhir");
+                                $ws->pddikti_injek($_t, "bimbing_mahasiswa");
+                                $ws->pddikti_injek($_t, "uji_mahasiswa");
+                                break;
+                    default:    $ws->pddikti_injek($_t); break;
+                }
             }
             else
             {
@@ -42,7 +67,41 @@ switch ($_a)
     case 5: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
             if ($_t > 0)
             {
-                $ws->pddikti_injek($_t, "mahasiswa updatedata");
+                $_n     = filter_input(INPUT_GET, "n", FILTER_SANITIZE_NUMBER_INT);
+                $inject = array();
+                switch ($_n)
+                {
+                    case 1:     $inject = [ "mata_kuliah_kurikulum" => $mapdb->peta["inject"]["mata_kuliah_kurikulum"] ]; break;
+                    case 2:     $inject = [ "kelas_kuliah" => $mapdb->peta["inject"]["kelas_kuliah"] ]; break;
+                    case 3:     $inject = [ "mahasiswa" => $mapdb->peta["inject"]["mahasiswa"] ]; break;
+                    case 4:     $inject = [ "mahasiswa_pt" => $mapdb->peta["inject"]["mahasiswa_pt"] ]; break;
+                    case 5:     $inject = [ "nilai_transfer" => $mapdb->peta["inject"]["nilai_transfer"] ]; break;
+                    case 6:     $inject = [ "nilai krs" => $mapdb->peta["inject"]["nilai krs"] ]; break;
+                    case 7:     $inject = [ "nilai update" => $mapdb->peta["inject"]["nilai update"] ]; break;
+                    case 8:     $inject = [ "kuliah_mahasiswa" => $mapdb->peta["inject"]["kuliah_mahasiswa"] ]; break;
+                    case 9:     $inject = [ "mahasiswa_pt keluar" => $mapdb->peta["inject"]["mahasiswa_pt keluar"] ]; break;
+                    case 10:    $inject = [ "mahasiswa_pt lulus" => $mapdb->peta["inject"]["mahasiswa_pt lulus"] ]; break;
+                    case 11:    $inject = [ "kuliah_mahasiswa aktif" => $mapdb->peta["inject"]["kuliah_mahasiswa aktif"] ]; break;
+                    case 12:    $inject = [ "kuliah_mahasiswa aktif_update" => $mapdb->peta["inject"]["kuliah_mahasiswa aktif_update"] ]; break;
+                    case 13:    $inject = [ "aktivitas_mahasiswa tugasakhir" => $mapdb->peta["inject"]["aktivitas_mahasiswa tugasakhir"] ,
+                                            "anggota_aktivitas_mahasiswa tugasakhir" => $mapdb->peta["inject"]["anggota_aktivitas_mahasiswa tugasakhir"],
+                                            "bimbing_mahasiswa" => $mapdb->peta["inject"]["bimbing_mahasiswa"],
+                                            "uji_mahasiswa" => $mapdb->peta["inject"]["uji_mahasiswa"]
+                                          ];
+                                break;
+                    default:    break;
+                }
+                foreach ($inject as $tbl => $ij)
+                {
+                    if (array_key_exists("tahunakademik", $ij))
+                    {
+                        $ws->pddikti_sinkron_guid_filterinjek($tbl, $ij, $_t, $ws->tahunakademiksebelum($_t), "", 0);
+                    }
+                    else
+                    {
+                        $ws->pddikti_sinkron_guid($tabel, $filter="", $filterIns = "", 0);
+                    }
+                }
             }
             else
             {
@@ -52,7 +111,7 @@ switch ($_a)
     case 6: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
             if ($_t > 0)
             {
-                $ws->pddikti_injek($_t, "mahasiswa_pt updatedata");
+                $ws->pddikti_injek($_t, "mahasiswa updatedata");
             }
             else
             {
@@ -60,6 +119,16 @@ switch ($_a)
             }
             break;
     case 7: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
+            if ($_t > 0)
+            {
+                $ws->pddikti_injek($_t, "mahasiswa_pt updatedata");
+            }
+            else
+            {
+                echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
+            }
+            break;
+    case 8: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
             if ($_t > 0)
             {
                 $ws->pddikti_sinkron_guid("dosen");
@@ -70,7 +139,7 @@ switch ($_a)
                 echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
             }
             break;
-    case 8: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
+    case 9: $_t = filter_input(INPUT_GET, "t", FILTER_SANITIZE_NUMBER_INT);
             if ($_t > 0)
             {
                 $ws->pddikti_injek($_t, "ajar_dosen");
@@ -79,17 +148,21 @@ switch ($_a)
             {
                 echo "Mode ini mengharuskan adanya variabel GET t yang berisi Tahun Akademik";
             }
-            break;  
+            break;
+    case 10: $ws->visualisasi_pemetaan_injek();
+            break;
     default :   echo "<table border=1 cellspacing=2 cellpadding=2>"
                     . "       <tr><th>Kode</th><th>Aksi</th></tr>"
                     . "       <tr><td>?a=1</td><td>Cek data tabel referensi</td></tr>"
                     . "       <tr><td>?a=2</td><td>Sinkronisasi PT, Prodi, Kurikulum dan Matakuliah</td></tr>"
                     . "       <tr><td>?a=3</td><td>Lihat deskripsi</td></tr>"
-                    . "       <tr><td>?a=4&t=tahunakademik</td><td>Injek pada tahunakademik</td></tr>"
-                    . "       <tr><td>?a=5&t=tahunakademik</td><td>Update data personal pada tahunakademik</td></tr>"
-                    . "       <tr><td>?a=6&t=tahunakademik</td><td>Update data mahasiswa pada tahunakademik</td></tr>"
-                    . "       <tr><td>?a=7&t=tahunakademik</td><td>Mengupdate data NIDN/NUPN di tabel Institusi, memasukkan data dosen_pt dari PDDIKTI ke Institusi dan Cek penugasan dalam 1 tahun.</td></tr>"
-                    . "       <tr><td>?a=8&t=tahunakademik</td><td>Isi rekap mengajar dosen (penugasan harus sudah dilakukan). Awas!!! Per tahun akademik hanya dapat dilakukan satu kali karena modenya adalah sisip, tidak (belum) ada mode update.</td></tr>"
+                    . "       <tr><td>?a=4&t=tahunakademik<br/>&n=1<br/>&n=2<br/>&n=3<br/>&n=4<br/>&n=5<br/>&n=6<br/>&n=7<br/>&n=8<br/>&n=9<br/>&n=10<br/>&n=11<br/>&n=12<br/>&n=13</td><td>Injek pada tahunakademik<br/>mata_kuliah_kurikulum<br/>kelas_kuliah<br/>mahasiswa<br/>mahasiswa_pt<br/>nilai_transfer<br/>nilai krs<br/>nilai update<br/>kuliah_mahasiswa<br/>mahasiswa_pt keluar<br/>mahasiswa_pt lulus<br/>kuliah_mahasiswa aktif<br/>kuliah_mahasiswa aktif_update<br/>dosen_pembimbing, dosen penguji dan aktivitas_mahasiswa tugasakhir</td></tr>"
+                    . "       <tr><td>?a=5&t=tahunakademik<br/>&n=1<br/>&n=2<br/>&n=3<br/>&n=4<br/>&n=5<br/>&n=6<br/>&n=7<br/>&n=8<br/>&n=9<br/>&n=10<br/>&n=11<br/>&n=12<br/>&n=13</td><td>Sync pada tahunakademik<br/>mata_kuliah_kurikulum<br/>kelas_kuliah<br/>mahasiswa<br/>mahasiswa_pt<br/>nilai_transfer<br/>nilai krs<br/>nilai update<br/>kuliah_mahasiswa<br/>mahasiswa_pt keluar<br/>mahasiswa_pt lulus<br/>kuliah_mahasiswa aktif<br/>kuliah_mahasiswa aktif_update<br/>dosen_pembimbing, dosen penguji dan aktivitas_mahasiswa tugasakhir</td></tr>"
+                    . "       <tr><td>?a=6&t=tahunakademik</td><td>Update data personal pada tahunakademik</td></tr>"
+                    . "       <tr><td>?a=7&t=tahunakademik</td><td>Update data mahasiswa pada tahunakademik</td></tr>"
+                    . "       <tr><td>?a=8&t=tahunakademik</td><td>Mengupdate data NIDN/NUPN di tabel Institusi, memasukkan data dosen_pt dari PDDIKTI ke Institusi dan Cek penugasan dalam 1 tahun.</td></tr>"
+                    . "       <tr><td>?a=9&t=tahunakademik</td><td>Isi rekap mengajar dosen (penugasan harus sudah dilakukan). Awas!!! Per tahun akademik hanya dapat dilakukan satu kali karena modenya adalah sisip, tidak (belum) ada mode update.</td></tr>"
+                    . "       <tr><td>?a=10</td><td>Lihat pemetaan</td></tr>"
                     . "</table>";
                 break;
 }
