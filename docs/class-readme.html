@@ -95,7 +95,7 @@
 
 				<b>Author:</b>
 				Basit Adhi Prabowo, S.T. <a href="&#x6d;&#97;i&#x6c;&#116;&#111;&#x3a;&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d">&#98;&#97;&#x73;&#x69;&#116;&#x40;&#x75;&#110;i&#x73;&#97;&#121;&#x6f;&#103;&#121;&#x61;&#x2e;&#97;&#x63;&#x2e;&#105;d</a><br>
-			<b>Located at</b> <a href="source-class-readme.html#4-327" title="Go to source code">readme.info.php</a>
+			<b>Located at</b> <a href="source-class-readme.html#4-355" title="Go to source code">readme.info.php</a>
 		<br>
 	</div>
 
@@ -137,6 +137,96 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="_akanrilis" id="__akanrilis">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__akanrilis">#</a>
+		<code><a href="source-class-readme.html#29-32" title="Go to source code">_akanrilis</a>( )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="_20190126" id="__20190126">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#__20190126">#</a>
+		<code><a href="source-class-readme.html#34-55" title="Go to source code">_20190126</a>( )</code>
+
+		<div class="description short">
+			<ol>
+<li>BF Pada pddikti_injek(), sync update menggunakan $table, bukan $table_asli (sama dengan sync insert). Sinkronisasi juga dilakukan untuk MODE_INJECT_INDIVIDU. MODE_INJECT_GAGAL tidak ikut disinkron</li>
+<li>BF Cek Tabel ada yang hanya muncul 1 baris, padahal lebih dari satu baris. Tambah peringatan untuk menambah peringatan bahwa $this->peta["pk"] untuk tabel tersebut belum ada</li>
+<li>IM Tambahkan info [".$this->db["info"][$iddb]."] di semua query update/insert/delete (contoh hasil: [Rows matched: 1 Changed: 1 Warnings: 1]). Informasi update/insert/delete diletakkan setelah query (bukan sebelum query)</li>
+<li>IM Lengkapi informasi error pada update/insert/delete</li>
+<li>IM Perubahan pemetaan kuliah_mahasiswa menjadi "p.id_reg_pd,p.id_smt,p.id_stat_mhs" pada variabel PDDIKTI</li>
+<li>IM Menampilkan daftar perubahan/penambahan web service, agar programmer tidak buta perubahan</li>
+<li>IM Menampilkan daftar method webservice PDDIKTI</li>
+<li>IM Jika jumlah sync sama dengan jumlah injeksi, maka tidak perlu sync. Tambahkan parameter error di pddikti_sinkron_guid(), pddikti_sinkron_guid_filterinjek() dan pddikti_sinkron_guid_tunggal()</li>
+<li>IM Tambahkan data sms/prodi pada init.inc.php?a=1</li>
+<li>IM Tambahkan tabel non referensi ke cek tabel. Non referensi selain tambahan tidak perlu dicek</li>
+<li>IM Buat opsi baru di init.inc.php untuk menampilkan pemetaan secara visual. 1. Ubah fungsi cetak_tabel_parsial() agar dapat mencetak array dan indeksnya sebagai baris 2. Tambah fungsi cetak_tabel_sel() agar dapat mencetak string atau array 3. Tambah indeks ideksekusi di peta inject agar mudah dalam eksekusi
+<li>IM Tambahkan variabel issudahcekpenugasan agar cek penugasan dieksekusi sekali saja</li>
+<li>IM Perubahan struktur dosen pembimbing. Sekarang dipisah ke dalam beberapa tabel, menginduk ke kegiatan mahasiswa, cabangnya pembimbing, penguji, anggota.</li>
+</li>
+</ol>
+		</div>
+
+		<div class="description detailed hidden">
+			<ol>
+<li>BF Pada pddikti_injek(), sync update menggunakan $table, bukan $table_asli (sama dengan sync insert). Sinkronisasi juga dilakukan untuk MODE_INJECT_INDIVIDU. MODE_INJECT_GAGAL tidak ikut disinkron</li>
+<li>BF Cek Tabel ada yang hanya muncul 1 baris, padahal lebih dari satu baris. Tambah peringatan untuk menambah peringatan bahwa $this->peta["pk"] untuk tabel tersebut belum ada</li>
+<li>IM Tambahkan info [".$this->db["info"][$iddb]."] di semua query update/insert/delete (contoh hasil: [Rows matched: 1 Changed: 1 Warnings: 1]). Informasi update/insert/delete diletakkan setelah query (bukan sebelum query)</li>
+<li>IM Lengkapi informasi error pada update/insert/delete</li>
+<li>IM Perubahan pemetaan kuliah_mahasiswa menjadi "p.id_reg_pd,p.id_smt,p.id_stat_mhs" pada variabel PDDIKTI</li>
+<li>IM Menampilkan daftar perubahan/penambahan web service, agar programmer tidak buta perubahan</li>
+<li>IM Menampilkan daftar method webservice PDDIKTI</li>
+<li>IM Jika jumlah sync sama dengan jumlah injeksi, maka tidak perlu sync. Tambahkan parameter error di pddikti_sinkron_guid(), pddikti_sinkron_guid_filterinjek() dan pddikti_sinkron_guid_tunggal()</li>
+<li>IM Tambahkan data sms/prodi pada init.inc.php?a=1</li>
+<li>IM Tambahkan tabel non referensi ke cek tabel. Non referensi selain tambahan tidak perlu dicek</li>
+<li>IM Buat opsi baru di init.inc.php untuk menampilkan pemetaan secara visual. 1. Ubah fungsi cetak_tabel_parsial() agar dapat mencetak array dan indeksnya sebagai baris 2. Tambah fungsi cetak_tabel_sel() agar dapat mencetak string atau array 3. Tambah indeks ideksekusi di peta inject agar mudah dalam eksekusi
+<li>IM Tambahkan variabel issudahcekpenugasan agar cek penugasan dieksekusi sekali saja</li>
+<li>IM Perubahan struktur dosen pembimbing. Sekarang dipisah ke dalam beberapa tabel, menginduk ke kegiatan mahasiswa, cabangnya pembimbing, penguji, anggota.</li>
+</li>
+</ol>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="_20180331" id="__20180331">
 
 		<td class="attributes"><code>
@@ -149,35 +239,35 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__20180331">#</a>
-		<code><a href="source-class-readme.html#29-46" title="Go to source code">_20180331</a>( )</code>
+		<code><a href="source-class-readme.html#57-74" title="Go to source code">_20180331</a>( )</code>
 
 		<div class="description short">
 			<ol>
+<li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
+<li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
+<li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
+<li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
 <li>IM Menambahkan accordion, agar dapat memudahkan ketika melihat data (terutama jika ada yang sangat panjang datanya</li>
 <li>IM Cek keaktifan Laporan Tahun Akademik. Jika aktif maka lanjutkan proses injek, tidak non aktif maka by pass. Tambah fungsi is_tahunakademikaktif(). Diaplikasikan di pddikti_injek() untuk yang terpengaruh dengan tahunakademik.</li>
 <li>IM Tetapkan mode SQL setiap koneksi untuk menjamin stabilitas injeksi/sinkronisasi. Tambahkan di query("SET SESSION sql_mode='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'");</li>
 <li>IM Pembersihan warning pada source code (Netbeans)</li>
 <li>IM Adaptasi perubahan/penambahan fitur PDDIKTI: (1.) Mahasiswa (mahasiswa, mahasiswa_pt) tambah: NISN, NIK Ayah, NIK Ibu, NPWP, No BPJS (2.) Keaktifan Mahasiswa (kuliah_mahasiswa) sekarang hanya bisa untuk A, N, C; sedangkan L, K sudah tidak bisa lagi</li>
 <li>IM Menambah menu pada init.inc.php</li>
-<li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
-<li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
-<li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
-<li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
 </ol>
 		</div>
 
 		<div class="description detailed hidden">
 			<ol>
+<li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
+<li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
+<li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
+<li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
 <li>IM Menambahkan accordion, agar dapat memudahkan ketika melihat data (terutama jika ada yang sangat panjang datanya</li>
 <li>IM Cek keaktifan Laporan Tahun Akademik. Jika aktif maka lanjutkan proses injek, tidak non aktif maka by pass. Tambah fungsi is_tahunakademikaktif(). Diaplikasikan di pddikti_injek() untuk yang terpengaruh dengan tahunakademik.</li>
 <li>IM Tetapkan mode SQL setiap koneksi untuk menjamin stabilitas injeksi/sinkronisasi. Tambahkan di query("SET SESSION sql_mode='NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'");</li>
 <li>IM Pembersihan warning pada source code (Netbeans)</li>
 <li>IM Adaptasi perubahan/penambahan fitur PDDIKTI: (1.) Mahasiswa (mahasiswa, mahasiswa_pt) tambah: NISN, NIK Ayah, NIK Ibu, NPWP, No BPJS (2.) Keaktifan Mahasiswa (kuliah_mahasiswa) sekarang hanya bisa untuk A, N, C; sedangkan L, K sudah tidak bisa lagi</li>
 <li>IM Menambah menu pada init.inc.php</li>
-<li>BF Perbaikan peta peta_pk, pada pekerjaan</li>
-<li>BF Sync setelah injek gagal (tambahkan ignore_alias)</li>
-<li>BF Tidak diketahui apabila tidak error tetapi tidak ada data yang diproses ketika injek update</li>
-<li>BF Aktifkan cek penugasan untuk injeksi ajar_dosen. TIdak dilanjutkan apabila penugasan belum sempurna. id_ptk berubah menjadi id_sdm, sesuaikan pemetaan updatenidn. Ubah istahunakademikkrs menjadi true pada mapdb["extract"]. Tambahkan field id_thn_ajaran pada pemetaan extract di dosen_pt </li>
 </ol>
 
 
@@ -201,7 +291,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Mei04">#</a>
-		<code><a href="source-class-readme.html#48-57" title="Go to source code">_2017Mei04</a>( )</code>
+		<code><a href="source-class-readme.html#76-85" title="Go to source code">_2017Mei04</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -237,7 +327,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Mei02">#</a>
-		<code><a href="source-class-readme.html#59-69" title="Go to source code">_2017Mei02</a>( )</code>
+		<code><a href="source-class-readme.html#87-97" title="Go to source code">_2017Mei02</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -275,7 +365,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Apr27">#</a>
-		<code><a href="source-class-readme.html#71-90" title="Go to source code">_2017Apr27</a>( )</code>
+		<code><a href="source-class-readme.html#99-118" title="Go to source code">_2017Apr27</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -331,7 +421,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Mar03">#</a>
-		<code><a href="source-class-readme.html#92-102" title="Go to source code">_2017Mar03</a>( )</code>
+		<code><a href="source-class-readme.html#120-130" title="Go to source code">_2017Mar03</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -369,7 +459,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2017Mar01">#</a>
-		<code><a href="source-class-readme.html#104-116" title="Go to source code">_2017Mar01</a>( )</code>
+		<code><a href="source-class-readme.html#132-144" title="Go to source code">_2017Mar01</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -411,7 +501,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Mei21">#</a>
-		<code><a href="source-class-readme.html#118-126" title="Go to source code">_2016Mei21</a>( )</code>
+		<code><a href="source-class-readme.html#146-154" title="Go to source code">_2016Mei21</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -445,7 +535,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Mei20">#</a>
-		<code><a href="source-class-readme.html#128-142" title="Go to source code">_2016Mei20</a>( )</code>
+		<code><a href="source-class-readme.html#156-170" title="Go to source code">_2016Mei20</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -491,7 +581,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Apr04">#</a>
-		<code><a href="source-class-readme.html#144-153" title="Go to source code">_2016Apr04</a>( )</code>
+		<code><a href="source-class-readme.html#172-181" title="Go to source code">_2016Apr04</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -527,7 +617,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2016Jan28">#</a>
-		<code><a href="source-class-readme.html#155-163" title="Go to source code">_2016Jan28</a>( )</code>
+		<code><a href="source-class-readme.html#183-191" title="Go to source code">_2016Jan28</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -561,7 +651,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des29">#</a>
-		<code><a href="source-class-readme.html#165-175" title="Go to source code">_2015Des29</a>( )</code>
+		<code><a href="source-class-readme.html#193-203" title="Go to source code">_2015Des29</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -599,7 +689,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des28">#</a>
-		<code><a href="source-class-readme.html#177-185" title="Go to source code">_2015Des28</a>( )</code>
+		<code><a href="source-class-readme.html#205-213" title="Go to source code">_2015Des28</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -633,7 +723,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des13">#</a>
-		<code><a href="source-class-readme.html#187-198" title="Go to source code">_2015Des13</a>( )</code>
+		<code><a href="source-class-readme.html#215-226" title="Go to source code">_2015Des13</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -673,7 +763,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des12">#</a>
-		<code><a href="source-class-readme.html#200-209" title="Go to source code">_2015Des12</a>( )</code>
+		<code><a href="source-class-readme.html#228-237" title="Go to source code">_2015Des12</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -709,7 +799,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des11">#</a>
-		<code><a href="source-class-readme.html#211-221" title="Go to source code">_2015Des11</a>( )</code>
+		<code><a href="source-class-readme.html#239-249" title="Go to source code">_2015Des11</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -747,7 +837,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des10">#</a>
-		<code><a href="source-class-readme.html#223-235" title="Go to source code">_2015Des10</a>( )</code>
+		<code><a href="source-class-readme.html#251-263" title="Go to source code">_2015Des10</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -789,7 +879,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des08">#</a>
-		<code><a href="source-class-readme.html#237-247" title="Go to source code">_2015Des08</a>( )</code>
+		<code><a href="source-class-readme.html#265-275" title="Go to source code">_2015Des08</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -827,7 +917,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des07">#</a>
-		<code><a href="source-class-readme.html#249-260" title="Go to source code">_2015Des07</a>( )</code>
+		<code><a href="source-class-readme.html#277-288" title="Go to source code">_2015Des07</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -867,7 +957,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Des02">#</a>
-		<code><a href="source-class-readme.html#262-270" title="Go to source code">_2015Des02</a>( )</code>
+		<code><a href="source-class-readme.html#290-298" title="Go to source code">_2015Des02</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -901,7 +991,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Nov30">#</a>
-		<code><a href="source-class-readme.html#272-283" title="Go to source code">_2015Nov30</a>( )</code>
+		<code><a href="source-class-readme.html#300-311" title="Go to source code">_2015Nov30</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -941,7 +1031,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Nov26">#</a>
-		<code><a href="source-class-readme.html#285-315" title="Go to source code">_2015Nov26</a>( )</code>
+		<code><a href="source-class-readme.html#313-343" title="Go to source code">_2015Nov26</a>( )</code>
 
 		<div class="description short">
 			<ol>
@@ -1019,7 +1109,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#__2015Nov20">#</a>
-		<code><a href="source-class-readme.html#317-326" title="Go to source code">_2015Nov20</a>( )</code>
+		<code><a href="source-class-readme.html#345-354" title="Go to source code">_2015Nov20</a>( )</code>
 
 		<div class="description short">
 			<ol>
