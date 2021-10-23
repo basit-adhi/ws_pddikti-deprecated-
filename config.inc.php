@@ -40,7 +40,7 @@ $institusi["db"]["ssl"]["ca-cert"]      = "C:/ssl/ca.pem";
 $pddikti["ws"]["mode"]          = MODE_LIVE;
 $pddikti["ws"]["port"]          = 8082;
 $http = 'http' . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? 's' : '') . '://';
-$pddikti["ws"]["host"]          = $http."feeder.unisayogya.ac.id";
+$pddikti["ws"]["host"]          = $http."yourdomain_feeder";
 $pddikti["ws"]["url"]           = $pddikti["ws"]["host"].":".$pddikti["ws"]["port"]."/ws/".(($pddikti["ws"]["mode"]==MODE_SANDBOX)?"sandbox":"live").".php?wsdl";
 $pddikti["ws"]["expire"]        = 1800; /* dalam detik */
 /* berapa baris data yang diambil dalam satu waktu */
