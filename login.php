@@ -2,7 +2,7 @@
 require_once ("config.inc.php");
 $pasz = filter_input(INPUT_POST, "pass", FILTER_SANITIZE_STRING);
 echo $pasz;
-if ($pasz == "lokalfeederunisayogyakarta")
+if ($pasz == "yourpassword")
 {
     /* set the cache expire to 30 minutes */
     session_start();
