@@ -6,7 +6,7 @@
  * <br/> untuk mencatat catatan (termasuk perubahan-perubahan sistem)
  * <br/> profil  https://id.linkedin.com/in/basitadhi
  * <br/> buat    2017-04-27
- * <br/> rev     2018-03-27
+ * <br/> rev     2021-10-23
  * <br/> sifat   open source
  * <br/> catatan:
  * <br/> - Bugs Fix (BF) & Improvement (IM)
@@ -18,7 +18,8 @@ class readme
 {
     /**
      * <ol>
-     * <li>Mapping Aktivitas Mahasiswa</li>
+     * <li>Webservice V2</li>
+     * <li>Inject Merdeka Belajar</li>
      * </ol>
      */
     function TODO()
@@ -27,6 +28,18 @@ class readme
     }
     
     function _akanrilis()
+    {
+        
+    }
+    
+    /**
+     * <ol>
+     * <li>BF Tutup sesi jika tidak diperlukan (menyebabkan blocking)</li>
+     * <li>IM Tambahan info eksekusi ketika error</li>
+     * <li>IM Prestasi mahasiswa sekarang turut disertakan, termasuk merdeka belajar</li>
+     * </ol>
+     */
+    function _20211023()
     {
         
     }
@@ -46,7 +59,7 @@ class readme
      * <li>IM Buat opsi baru di init.inc.php untuk menampilkan pemetaan secara visual. 1. Ubah fungsi cetak_tabel_parsial() agar dapat mencetak array dan indeksnya sebagai baris 2. Tambah fungsi cetak_tabel_sel() agar dapat mencetak string atau array 3. Tambah indeks ideksekusi di peta inject agar mudah dalam eksekusi
      * <li>IM Tambahkan variabel issudahcekpenugasan agar cek penugasan dieksekusi sekali saja</li>
      * <li>IM Perubahan struktur dosen pembimbing. Sekarang dipisah ke dalam beberapa tabel, menginduk ke kegiatan mahasiswa, cabangnya pembimbing, penguji, anggota.</li>
-</li>
+     * <li>IM Group by pada sync</li>
      * </ol>
      */
     function _20190126()
