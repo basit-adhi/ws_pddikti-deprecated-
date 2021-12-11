@@ -1,5 +1,5 @@
 # DEPRECATED
-# Project ini sudah tidak dilanjutkan seiring dengan tidak dilanjutkannya lagi Web Service Versi 1.x Feeder PDDIKTI
+Project ini sudah tidak dilanjutkan seiring dengan tidak dilanjutkannya lagi Web Service Versi 1.x Feeder PDDIKTI
 
 # ws_pddikti
 Injector Feeder PDDIKTI - Basit Adhi Prabowo - Universitas 'Aisyiyah Yogyakarta
